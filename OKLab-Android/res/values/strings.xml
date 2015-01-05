@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, OkLab</string>
+    <string name="app_name">OkLab</string>
+    <string name="er_video_play">재생중에 오류가 발생하였습니다.</string>
+</resources>

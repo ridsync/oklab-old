@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.skt.myshop"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:splitMotionEvents="false" >
+    
+    <LinearLayout
+        android:id="@+id/LL_ORDER_LIST_SALE_MAIN"
+        android:layout_width="466dp"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_style_03"
+        android:padding="50dp"
+        android:orientation="horizontal"
+        android:splitMotionEvents="false" >
+
+        <RelativeLayout
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:clickable="false" >
+		    
+            <LinearLayout
+		        android:id="@+id/LL_ORDER_LIST_LINE_BG"
+		        android:layout_width="fill_parent"
+		        android:layout_height="297dp"
+		        android:orientation="vertical"
+		        android:splitMotionEvents="false" >
+		        
+                 </LinearLayout>
+            	
+                <ListView
+                    android:id="@+id/LV_ORDER_LIST"
+                    android:layout_width="fill_parent"
+                    android:layout_height="297dp"
+                    android:background="#00000000"
+                    android:scrollbars="none" />
+		</RelativeLayout>
+		
+   </LinearLayout>
+</LinearLayout>

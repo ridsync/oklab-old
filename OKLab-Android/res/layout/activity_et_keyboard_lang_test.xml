@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:splitMotionEvents="false" >
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:splitMotionEvents="false" >
+        <com.oklab.menutabs.GameTabView
+        	android:id="@+id/gtv"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:splitMotionEvents="false" >
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Hello Wolrd !!"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/ET_DEVICE_NUM"
+            android:layout_width="230dp"
+            android:layout_height="55dp"
+            android:hint="english"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/color_cabfba" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:splitMotionEvents="false" >
+
+        <EditText
+            android:id="@+id/ET_DEVICE_NUM_2"
+            android:layout_width="230dp"
+            android:layout_height="55dp"
+            android:hint="korean"
+            android:imeOptions="actionNext"
+            android:maxLength="20"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/color_cabfba" />
+
+        <EditText
+            android:id="@+id/ET_DEVICE_NUM_3"
+            android:layout_width="230dp"
+            android:layout_height="55dp"
+            android:hint="number"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="20"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/color_cabfba" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.oklab"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+	<uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.CLEAR_APP_CACHE"/>
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
+    <uses-sdk android:minSdkVersion="8" />
+    
+    <application
+        android:icon="@drawable/okt"
+        android:label="@string/app_name" >
+        <activity
+            android:name=".MainMenuActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name=".oktwitter.OKTwitterActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".oktwitter.LoginActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <data
+                    android:host="twitlecture.com"
+                    android:scheme="twit" >
+                </data>
+
+                <category android:name="android.intent.category.DEFAULT" >
+                </category>
+                <category android:name="android.intent.category.BROWSABLE" >
+                </category>
+            </intent-filter>
+        </activity>
+
+        <service android:name=".oktwitter.PollingService" >
+        </service>
+
+        <activity
+            android:name=".oktwitter.TestTwitter"
+            android:label="TestTwitter" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.oklab.framework.activitymanager.TaskManagement"
+            android:label="ActivityManager"
+            android:windowSoftInputMode="stateVisible" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.oklab.framework.activitymanager.PickMediaTestActivity"
+            android:label="PickMediaTestActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.oklab.framework.activitymanager.ActivityA"
+            android:label="ActivityA" >
+        </activity>
+        <activity
+            android:name="com.oklab.framework.activitymanager.ActivityB"
+            android:label="ActivityB" >
+        </activity>
+        <activity
+            android:name="com.oklab.framework.activitymanager.ActivityC"
+            android:label="ActivityC" >
+        </activity>
+          <activity
+            android:name="com.oklab.framework.activitymanager.SystemInfoAPI"
+            android:label="SystemInfoAPI" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.oklab.framework.fragment.MainFragmentActivity"
+            android:label="fragment.MainActivity"
+            android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".util.XMLParsing"
+            android:label="util-XMLParsing" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="com.oklab.framework.intents.IntentActivityA"
+            android:label="IntentActivityA" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="com.oklab.framework.intents.IntentActivityB"
+            android:label="IntentActivityB" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        
+        <!-- EVENTS -->
+        <activity
+            android:name=".events.TouchEventsTest"
+            android:label="TouchEventTest" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".events.GestureDetectorTest"
+            android:label="GestureDetectorTest" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+          <activity
+            android:name=".events.EventMoveOnSurfaceView"
+            android:label="EventMoveOnSurfaceView" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".events.TouchDelegateTest"
+            android:label="TouchDelegateTest" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+           <!-- Views -->
+        <activity
+            android:name="com.oklab.events.pinchtozoom.PinchToZoomViewTestAct"
+            android:label="PinchToZoomViewTestAct" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".views.ImageViewScaleTestActivity"
+            android:label="ImageViewScaleTestActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".views.ViewLogActivity"
+            android:label="ViewLogActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".views.ProgressBarCustomViewTest"
+            android:label="ProgressBarCustomViewTest" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        
+        <!-- WebView -->
+        <activity
+            android:name=".webview.shouldOverrideUrlLoadingOnWebView"
+            android:label="shouldOverrideUrlLoadingOnWebView" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".webview.FileUploadOnWebView"
+            android:label="FileUploadOnWebView" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".player.LearningViewActivity"
+            android:label="LearningViewActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".player.VideoPlayerActivity"
+            android:label="VideoPlayerActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".menutabs.GameTabViewActivity"
+            android:label="GameTabViewActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+         <activity
+            android:name=".myshoptest.ContentResolverNotherAppLauch"
+            android:label="ContentResolverNotherAppLauch" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+         <activity
+            android:name=".myshoptest.EditTextKeyboardLangTest"
+            android:label="EditTextKeyboardLangTest"
+            android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        
+          <activity
+            android:name=".util.EncryptionTest"
+            android:label="EncryptionTest"
+            android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        
+         <service android:name=".myshoptest.SoftKeyBoard"
+            android:permission="android.permission.BIND_INPUT_METHOD">
+            <intent-filter>
+                <action android:name="android.view.InputMethod" />
+            </intent-filter>
+            <meta-data android:name="android.view.im" android:resource="@xml/method" />
+        </service>
+         
+    </application>
+
+</manifest>

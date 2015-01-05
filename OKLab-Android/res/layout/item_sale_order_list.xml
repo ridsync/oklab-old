@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ListView의 행(Row)마다 적용될 layout -->
+<LinearLayout
+    android:id="@+id/ITEM_LAYOUT"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="visible" >
+ 
+    <LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="32dp"
+    android:background="@color/white"
+    android:orientation="horizontal" >
+    
+    <!-- 각 행(row)의 시작은 ImageView -->
+    <ImageView
+        android:id="@+id/icon"
+        android:src="@drawable/sale_menu_order_arrow_l_n"
+        android:layout_width="30dp"
+        android:layout_height="fill_parent"
+        android:gravity="center_vertical" />
+     
+    <!-- ImageView 오른편에 표시 될 Text -->
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_vertical"
+        android:text="test"
+        android:textSize="20sp" />
+    </LinearLayout>
+    
+    <ImageView
+        android:id="@+id/IV_LIST_LINE"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_e5e5e5" />
+</LinearLayout>

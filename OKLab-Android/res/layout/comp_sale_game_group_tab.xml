@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clickable="false" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="44dp"
+        android:background="#8b8a88"
+        android:splitMotionEvents="false" >
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:layout_gravity="top|left"
+            android:background="@color/color_252525" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="top|left"
+            android:background="@color/color_252525" />
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:layout_gravity="top|right"
+            android:background="@color/color_252525" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom|left"
+            android:background="@color/color_252525" />
+
+        <TextView
+            android:id="@+id/TV_CATEGORY_INFO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="15dp"
+            android:text="카테고리 선택하세요"
+            android:textColor="@color/color_white"
+            android:textSize="13dp" />
+
+        <RelativeLayout
+            android:id="@+id/LL_TWO_DEPTH_MENU_CATEGORY"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="left|center_vertical"
+            android:layout_margin="1dp"
+            android:background="#8b8a88"
+            android:splitMotionEvents="false"
+            android:visibility="visible" >
+
+            <LinearLayout
+                android:id="@+id/LL_TWO_CATEGORY_MIDDLE"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#8b8a88"
+                android:splitMotionEvents="false" >
+            </LinearLayout>
+            
+            <FrameLayout
+                android:id="@+id/FL_TWO_CATEGORY_LEFT"
+                android:layout_width="48dp"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:splitMotionEvents="false"
+                android:visibility="visible" >
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:background="@xml/selector_image_order_sub_menu_category_left"
+                    android:clickable="false"
+                    android:duplicateParentState="true" />
+
+                <LinearLayout
+                    android:id="@+id/LL_LINE"
+                    android:layout_width="2dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="right|center_vertical"
+                    android:splitMotionEvents="false" >
+
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="1dp"
+                        android:layout_height="fill_parent"
+                        android:background="#5c5b5b" />
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="1dp"
+                        android:layout_height="fill_parent"
+                        android:background="#acacac" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/FL_TWO_CATEGORY_RIGHT"
+                android:layout_width="48dp"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:splitMotionEvents="false"
+                android:visibility="visible" >
+
+                <LinearLayout
+                    android:id="@+id/LL_LINE"
+                    android:layout_width="2dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="left|center_vertical"
+                    android:splitMotionEvents="false" >
+
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="1dp"
+                        android:layout_height="fill_parent"
+                        android:background="#5c5b5b" />
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="1dp"
+                        android:layout_height="fill_parent"
+                        android:background="#acacac" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:background="@xml/selector_image_order_sub_menu_category_right"
+                    android:clickable="false"
+                    android:duplicateParentState="true" />
+            </FrameLayout>
+        </RelativeLayout>
+    </FrameLayout>
+
+</RelativeLayout>

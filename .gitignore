@@ -4,3 +4,5 @@
 /.idea/libraries
 .DS_Store
 /build
+/OKLab-Android/build
+/OKLab-Android/gradle

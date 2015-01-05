@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:id="@+id/FL_MENUSIZE"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:background="@xml/selector_color_menu_bg"
+        android:clickable="true"
+        android:splitMotionEvents="false" >
+
+        <TextView
+            android:id="@+id/TV_MENUSIZE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:duplicateParentState="true"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="아메리카노(특대)"
+            android:textColor="@xml/selector_txt_color_order_control_btn"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/IV_STROKE_RIGHT"
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:layout_gravity="top|right"
+            android:background="#cecece" />
+    </FrameLayout>
+
+</LinearLayout>

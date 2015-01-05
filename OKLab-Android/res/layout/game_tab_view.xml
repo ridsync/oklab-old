@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="368dp"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/GAME_TAB_LAYOUT"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/GAME_TAB_LEFT_ARROW"
+            android:layout_width="92dp"
+            android:layout_height="fill_parent"
+            android:background="@color/blue" />
+        <!-- 스크롤 탭뷰 -->
+
+        <com.oklab.menutabs.TabMenuScrollView
+            android:id="@+id/GAME_TAB_SCROLLVIEW"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:fadingEdge="none"
+            android:scrollbars="none" >
+
+            <LinearLayout
+                android:id="@+id/GAME_TAB_CONTAINER"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+              
+            </LinearLayout>
+        </com.oklab.menutabs.TabMenuScrollView>
+
+        <ImageView
+            android:id="@+id/GAME_TAB_RIGHT_ARROW"
+            android:layout_width="92dp"
+            android:layout_height="fill_parent"
+            android:background="@color/color_red" />
+    </LinearLayout>
+
+</LinearLayout>

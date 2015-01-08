@@ -248,7 +248,16 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        
+
+        <activity
+            android:name=".graphics.CanvasTestActivity"
+            android:label="EncryptionTest"
+            android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
          <service android:name=".myshoptest.SoftKeyBoard"
             android:permission="android.permission.BIND_INPUT_METHOD">
             <intent-filter>

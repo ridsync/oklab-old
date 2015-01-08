@@ -29,8 +29,8 @@ public class ViewLog extends View {
 		pnt.setTextSize(20);
 		Log.i(TAG, "Con() -> getMeasuredWidth() : " + getMeasuredWidth() + " , getMeasuredHeight() : "+ getMeasuredHeight());
 	}
-	
-	
+
+
 	@Override
 	protected void onDraw(Canvas canvas) {
 		// TODO Auto-generated method stub

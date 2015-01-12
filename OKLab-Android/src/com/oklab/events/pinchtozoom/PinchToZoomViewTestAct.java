@@ -32,8 +32,9 @@ public class PinchToZoomViewTestAct extends Activity {
 		imgView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 		
 		LinearLayout ll = new LinearLayout(this);
-		ll.addView(imgView, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
-		
+//		ll.addView(ptzView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+		ll.addView(imgView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
 		setContentView(ll);
 	}
 	

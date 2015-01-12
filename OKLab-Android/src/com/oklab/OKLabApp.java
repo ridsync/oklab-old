@@ -34,7 +34,7 @@ public class OKLabApp extends Application{
         }
         // 패널티 설정
         builder.penaltyLog();
-        // VmPolicy 설정
+        // VmPolicy 적용
         StrictMode.VmPolicy vmp = builder.build();
         StrictMode.setVmPolicy(vmp);
 

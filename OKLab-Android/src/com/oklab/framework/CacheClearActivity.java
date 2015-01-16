@@ -1,21 +1,23 @@
 package com.oklab.framework;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import android.content.pm.IPackageDataObserver;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.oklab.BaseActivity;
+import com.oklab.R;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
- * 기기내의 캐쉬 모두 삭제 구현  -- 테스트 안됨...
+ * 기기내의 캐쉬 모두 삭제 구현  -- 테스트 결과 잘됨 ...
  * ※ CachePackageDataObserver  AIDL 구현 및 Permission 등록한다.
  * 1. CACHE 일괄 삭제 방법  ??
  * 2. 기타 앱들의 기본정보(아이콘,이름,패키지,캐쉬용량등등) 알아내기 PackageManager 겟지 ?
- * @author okok
+ * @author ridsync
  *
  * http://stackoverflow.com/questions/17313721/how-to-delete-other-applications-cache-from-our-android-app
  */
@@ -28,14 +30,18 @@ public class CacheClearActivity extends BaseActivity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
-//		btnCache.setOnClickListener(new View.OnClickListener() {
-//
-//	        @Override
-//	        public void onClick(View v) {
-//	            clearCache();
-//	        }
-//	    });//End of btnCache Anonymous class
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_fragment);
+        Button btnCache = (Button)findViewById(R.id.bt_oneFragment) ;
+
+		btnCache.setOnClickListener(new View.OnClickListener() {
+
+	        @Override
+	        public void onClick(View v) {
+	            clearCache();
+	        }
+	    });//End of btnCache Anonymous class
 
 	}
 

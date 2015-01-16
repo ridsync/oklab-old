@@ -1,19 +1,22 @@
 package com.oklab.framework;
 
-import java.io.File;
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.oklab.BaseActivity;
+import com.oklab.R;
+
+import java.io.File;
+import java.util.List;
 
 /**
- * 기기내의 캐쉬 모두 삭제 구현 -- 테스트 안됨... 1. CACHE 일괄 삭제 방법 중 하나 테스트필요 ?
+ * 기기내의 캐쉬 모두 삭제 구현 -- 테스트 안됨... 1. Dir 관련 오류 있
  * 
  * @author okok
  * 
@@ -27,7 +30,18 @@ public class CopyOfCacheClearActivity2Test extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.activity_fragment);
+        Button btnCache = (Button)findViewById(R.id.bt_oneFragment) ;
+
+        btnCache.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                clearCache();
+            }
+        });//End of btnCache Anonymous class
 	}
 
 	void clearCache() 
@@ -66,14 +80,18 @@ public class CopyOfCacheClearActivity2Test extends BaseActivity {
 
 			File appDir = new File(cache.getParent());
 			if (appDir.exists()) {
+                Log.i("TAG", "appDir exists = "+ appDir.getName() + " / " + appDir.exists());
 				String[] children = appDir.list();
-				for (String s : children) {
-					if (!s.equals("lib")) {
-						deleteDir(new File(appDir, s));
-						Log.i("TAG", "File /data/data/APP_PACKAGE/" + s
-								+ " DELETED");
-					}
-				}
+                if (children != null){
+                    for (String s : children) {
+                        Log.i("TAG", "appDir s = "  + s);
+                        if (!s.equals("lib")) {
+                            deleteDir(new File(appDir, s));
+                            Log.i("TAG", "File /data/data/APP_PACKAGE/" + s
+                                    + " DELETED");
+                        }
+                    }
+                }
 			}
 		}
 	}

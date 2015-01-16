@@ -45,6 +45,7 @@ android {
         // Adding new build types or product flavors should be accompanied
         // by a similar customization.
         debug.setRoot('build-types/debug')
+
         release.setRoot('build-types/release')
     }
 }

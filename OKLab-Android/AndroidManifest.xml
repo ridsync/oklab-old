@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.CLEAR_APP_CACHE"/>
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-sdk android:minSdkVersion="8" />
     
     <application
@@ -276,7 +277,16 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".webview.StartAppURLScheme"
+            android:label="StartAppURLScheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="app" android:host="host.domain.com"/>
+            </intent-filter>
+        </activity>
 
          <service android:name=".myshoptest.SoftKeyBoard"
             android:permission="android.permission.BIND_INPUT_METHOD">

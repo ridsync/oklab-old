@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, user-scalable=no"/>
+	<title>Android Url Scheme</title>
+</head>
+<body>
+	<form action="app://host.domain.com" method="get" name="f">
+		<table style="width: 100%; border: 0px;">
+			<tr>
+				<td colspan="2" align="center">계산할 값과 연산자를 선택하세요.</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input name="param1" type="number" style="width: 100%;"/></td>
+			</tr>
+			<tr>
+				<td>
+					<select name="operator">
+						<option value="+">+</option>
+						<option value="-">-</option>
+						<option value="×">×</option>
+						<option value="÷">÷</option>
+						<option value="%">%</option>
+					</select>
+				</td>
+				<td><input name="param2" type="number" style="width: 100%;"/></td>
+			</tr>
+			<tr><td colspan="2" align="right"><input type="submit" value="계산하기"/></td></tr>
+		</table>
+	</form>
+
+    <br>
+    <a href=”app://host.domain.com?param1=1&param2=2″> ahref로 이동 </a>
+    <br><p>.</p><br><br>
+    <a id="applink" href="intent://host.domain.com#Intent;scheme=app;action=android.intent.action.VIEW;
+    category=android.intent.category.BROWSABLE;package=com.oklab;end">앱실행 또는 구글 플래이 다운로드 화면으로 이동</a>
+
+</body>
+</html>

@@ -21,6 +21,7 @@ import java.io.InputStream;
  * URI스키마 활용한 App Activity의 외부 Launch 제공
  * 카카오, 다음네이버등에서도 제공하는 Acitivty URIScheme가 있다.
  * Ref : http://developer.android.com/training/basics/intents/filters.html
+ * Ref : http://www.appurl.io/
  * Ref : http://nsinc.tistory.com/77
  * Ref : http://blog.daum.net/mailss/36
  * Ref : https://ch7895.wordpress.com/2013/01/15/android-url-scheme-%EC%A3%BC%EC%86%8C%EC%B0%BD%EC%97%90%EC%84%9C-%EC%95%B1%EC%8B%A4%ED%96%89/

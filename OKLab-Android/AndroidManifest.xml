@@ -278,7 +278,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".webview.StartAppURLScheme"
+            android:name=".webview.StartAppURIScheme"
             android:label="StartAppURLScheme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>

@@ -138,7 +138,7 @@ public class StartAppURIScheme extends BaseActivity implements View.OnClickListe
             // [앱에서 호출]
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse("app://host.domain.com?param1=test&param2=test2"));
+            intent.setData(Uri.parse("applink://host.domain.com?param1=test&param2=test2"));
             startActivity(intent);
         }
         finish();

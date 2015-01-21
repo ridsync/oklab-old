@@ -6,7 +6,7 @@
 	<title>Android Url Scheme</title>
 </head>
 <body>
-	<form action="app://host.domain.com" method="get" name="f">
+	<form action="applink://host.domain.com" method="get" name="f">
 		<table style="width: 100%; border: 0px;">
 			<tr>
 				<td colspan="2" align="center">계산할 값과 연산자를 선택하세요.</td>
@@ -32,10 +32,11 @@
 	</form>
 
     <br>
-    <a href="app://host.domain.com?param1=1&param2=2"> ahref로 이동 </a>
+    <a href="applink://host.domain.com?param1=1&param2=2"> ahref로 이동 </a>
     <br><p>.</p><br><br>
     <H2>
-    <a id="applink" href="intent://host.domain.com?param1=1&param2=2#Intent;scheme=app;action=android.intent.action.VIEW;
+    이건 왜 안되지 ?
+    <a id="applink" href="intent://host.domain.com/#Intent;scheme=applink;action=android.intent.action.VIEW;
     category=android.intent.category.BROWSABLE;package=com.oklab;end">앱실행 또는 구글 플래이 다운로드 화면으로 이동</a>
     </H2>
 </body>

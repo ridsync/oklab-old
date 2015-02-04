@@ -59,16 +59,14 @@ public class FloatingViewAttachOnWindow extends BaseActivity {
                         mViewY = mParams.y;
                         break;
                     case MotionEvent.ACTION_MOVE:
+                        int x = (int) (event.getRawX() - mTouchX);
+                        int y = (int) (event.getRawY() - mTouchY);
 
+                        mParams.x = mViewX + x;
+                        mParams.y = mViewY + y;
+                        mManager.updateViewLayout(mView, mParams);
                         break;
                 }
-                int x = (int) (event.getRawX() - mTouchX);
-                int y = (int) (event.getRawY() - mTouchY);
-
-                mParams.x = mViewX + x;
-                mParams.y = mViewY + y;
-                mManager.updateViewLayout(mView, mParams);
-
                 return false;
             }
         });

@@ -21,6 +21,7 @@ import java.util.Date;
  * NTP서버 를 통해서 시간정보를 얻어오는 SntpClient 클래스 테스트 화면
  * adb shell root유저에선 date 명령이 먹지만... 앱내에선 su 사용이 되지않으면 date 명령어로 시간 못바꿈...
  * 기타 AlaramManger , SystemClock API 역시 권한 문제로 안됨 ㅡㅡ;
+ * 시스템 App등록되지거나 , shell상의 커맨드 su 일반App pid에서도 쓸수있게 제공되야함...
  * http://prasans.info/2014/02/utc-time-android-device-ntp-server-sync/
  * @author ojungwon
  *

@@ -12,5 +12,5 @@ package com.oklab.events;
  */
 public class DragNDropViewTest {
 
-
+// OOP  Class, Enheritence , Polymorphism , Abstraction , Encapsulation ,
 }

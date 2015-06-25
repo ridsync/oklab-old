@@ -10,6 +10,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import java.util.ArrayList;
+
 public class BaseActivity extends Activity {
 
 public static final String TAG = "BaseActivity";
@@ -25,7 +27,6 @@ public static final String TAG = "BaseActivity";
 		Log.i(TAG +"/"+ this.getClass().getSimpleName(), "onCreate()");
 		super.onCreate(savedInstanceState);
 	}
-	
 	// Standard implementation of onCreateView(View, String, Context, AttributeSet) used when inflating with the LayoutInflater returned by getSystemService(String).
 	// This implementation handles tags to embed fragments inside of the activity.
 //	@Override

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+
+    <item
+        android:drawable="@drawable/ani_32_01"
+        android:duration="50" />
+
+    <item
+        android:drawable="@drawable/ani_32_02"
+        android:duration="50" />
+
+    <item
+        android:drawable="@drawable/ani_32_03"
+        android:duration="50" />
+
+    <item
+        android:drawable="@drawable/ani_32_04"
+        android:duration="50" />
+
+    <item
+        android:drawable="@drawable/ani_32_05"
+        android:duration="50" />
+
+    <item
+        android:drawable="@drawable/ani_32_06"
+        android:duration="50" />
+
+    <item
+        android:drawable="@drawable/ani_32_07"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/ani_32_08"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/ani_33_01"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/ani_33_02"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/ani_33_03"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/ani_33_04"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/ani_33_05"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/ani_33_06"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/ani_33_07"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/ani_33_08"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/ani_44_02"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/ani_46_05"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/ani_46_06"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/ani_46_07"
+        android:duration="50" />
+</animation-list>

@@ -29,23 +29,24 @@ public class TouchDelegateTest extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_touch_delegate);
 
+		final ImageButton mTutorialButton = (ImageButton) findViewById(R.id.title);
+		mTutorialButton.setEnabled(true);
+		mTutorialButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				Toast.makeText(TouchDelegateTest.this, "Test TouchDelegate", Toast.LENGTH_SHORT).show();
+			}
+		});
+
 		View mParent = findViewById(R.id.FrameContainer);
 		mParent.post(new Runnable() {
 		    @Override
 		    public void run() {
-		        Rect delegateArea = new Rect();
-		        ImageButton mTutorialButton = (ImageButton) findViewById(R.id.title);
-		        mTutorialButton.setEnabled(true);
-		        mTutorialButton.setOnClickListener(new View.OnClickListener() {
-		            public void onClick(View view) {
-		                Toast.makeText(TouchDelegateTest.this, "Test TouchDelegate", Toast.LENGTH_SHORT).show();
-		            }
-		        });
-		 
+
+				Rect delegateArea = new Rect();
 		        mTutorialButton.getHitRect(delegateArea);
-//		        bounds.top -= 200; // 뷰 영역 확장할 영역 및 SIZE
-//		        bounds.bottom += 200; // 뷰 영역 확장할 영역 및 SIZE
-//		        bounds.left -= 200; // 뷰 영역 확장할 영역 및 SIZE
+				delegateArea.top -= 200; // 뷰 영역 확장할 영역 및 SIZE
+//		        delegateArea.bottom += 200; // 뷰 영역 확장할 영역 및 SIZE
+				delegateArea.left -= 200; // 뷰 영역 확장할 영역 및 SIZE
                 delegateArea.right += 200; // 뷰 영역 확장할 영역 및 SIZE
 		        TouchDelegate touchDelegate = new TouchDelegate(delegateArea, mTutorialButton);
 		 

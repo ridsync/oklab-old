@@ -1,15 +1,21 @@
 package com.oklab.framework.activitymanager;
 
+import java.lang.reflect.InvocationTargetException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
+import java.util.Locale;
 import java.util.UUID;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.graphics.Point;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -18,12 +24,19 @@ import android.os.Debug;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
+import android.view.KeyCharacterMap;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewConfiguration;
+import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.oklab.BaseActivity;
 import com.oklab.R;
+import com.oklab.util.Logger;
 
 public class SystemInfoAPI extends BaseActivity{
 
@@ -39,11 +52,13 @@ public class SystemInfoAPI extends BaseActivity{
 		setContentView(R.layout.activity_a);
 
 		getMemoryInfo();
-		
-		getResolution();
-		
+
 		getDensity();
-		
+
+		getResolution();
+
+		getAppUsableScreenNEachBarHeight();
+
 		getBuildInfos();
 		
 		getNetworkInfos();
@@ -53,8 +68,9 @@ public class SystemInfoAPI extends BaseActivity{
 		getAccountOnDevice();
 		
 		getDeviceUniqUUID();
-		
-		
+
+		getLocaleInfos();
+
 		findViewById(R.id.title).setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -82,13 +98,135 @@ public class SystemInfoAPI extends BaseActivity{
 		getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 		int pxWidth  = displayMetrics.widthPixels;
 		int pxHeight = displayMetrics.heightPixels;
-		Log.d(TAG, String.format("Display width : %d , Display height : %d",
+		Log.d(TAG, String.format("DisplayMetrics : Display width : %d , Display height : %d",
 				pxWidth, pxHeight));
 		Toast.makeText(this,String.format("width:%d , height: %d",
 				pxWidth, pxHeight), Toast.LENGTH_LONG).show();
 		//--- displayMetrics.density : density / 160, 0.75 (ldpi), 1.0 (mdpi), 1.5 (hdpi)
 //		int dipWidth  = displayMetrics.widthPixels  / displayMetrics.density;
-//		int dipHeight = displayMetrics.heightPixels / displayMetrics.density;	
+//		int dipHeight = displayMetrics.heightPixels / displayMetrics.density;
+
+		float density = 0.0f;
+		density = getResources().getDisplayMetrics().density;
+		float densityDpi = getResources().getDisplayMetrics().densityDpi;
+		Log.d(TAG, "DisplayMetrics : density = " + density + " densityDpi = " + densityDpi);
+	}
+
+	/**
+	 * 실제 사용할수있는 (AppUsableScreen) 은 NavigtaionBar Statubar의 사용가능여부에 따라 달라짐.
+	 *  버젼별 단말별로 달라질 수있다.
+	 */
+	private void getAppUsableScreenNEachBarHeight() {
+		Log.i(TAG, "++++++++++++++ [ getAppUsableScreenNEachBarHeight ] ++++++++++++++ :  ");
+//		DisplayMetrics displaymetrics = new DisplayMetrics();
+//		getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+//		int width = displaymetrics.widthPixels;
+//		int height = displaymetrics.heightPixels;
+//		Log.d(TAG, "DisplayMetrics : width = " + width + "height = " + height);
+
+		Point point2 = getRealScreenSize(getApplicationContext());
+		Point point = getAppUsableScreenSize(getApplicationContext());
+		Log.d(TAG, "getRealScreenSize = width = " + point2.x + " / height = " + point2.y);
+		Log.d(TAG, "getStatusBarHeight height =  " + getStatusBarHeight());
+		Log.d(TAG, "getNavBarHeight =  " + getNavBarHeight(getApplicationContext()));
+		Log.d(TAG, "getNavigationSize height =  " + getNavigationSize(getApplicationContext()));
+		Log.d(TAG, "getAppUsableScreenSize = width = " + point.x + " / height = " + point.y);
+
+		// 메인 레이아웃의 view로부터 width height 직접 구하기.
+		findViewById(R.id.main_bg).post(new Runnable() {
+			@Override
+			public void run() {
+				int width = findViewById(R.id.main_bg).getWidth();
+				int height = findViewById(R.id.main_bg).getHeight();
+				Log.d(TAG, "MainLayout : width = " + width + "height = " + height);
+			}
+		});
+	}
+
+	/**
+	 *  네비게이션 사용여부 체크하여 크기 구하기.
+	 * @param c
+	 * @return
+	 */
+	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+	public int getNavBarHeight(Context c) {
+		int result = 0;
+		boolean hasMenuKey = ViewConfiguration.get(c).hasPermanentMenuKey();
+		boolean hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
+
+		if(!hasMenuKey && !hasBackKey) {
+			//The device has a navigation bar
+			Resources resources = c.getResources();
+
+			int orientation = getResources().getConfiguration().orientation;
+			int resourceId;
+			if (isTablet(c)){
+				resourceId = resources.getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
+			}  else {
+				resourceId = resources.getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_width", "dimen", "android");
+			}
+
+			if (resourceId > 0) {
+				return getResources().getDimensionPixelSize(resourceId);
+			}
+		}
+		return result;
+	}
+
+	private boolean isTablet(Context c) {
+		return (c.getResources().getConfiguration().screenLayout
+				& Configuration.SCREENLAYOUT_SIZE_MASK)
+				>= Configuration.SCREENLAYOUT_SIZE_LARGE;
+	}
+
+	/**
+	 *  무조건 resource를 이용해 가져오기때문에 Navigation이 없어도 갑이 나온다??
+	 * @param context
+	 * @return
+	 */
+	public static int getNavigationSize(Context context) {
+		Resources resources = context.getResources();
+		int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+		if (resourceId > 0) {
+			return resources.getDimensionPixelSize(resourceId);
+		}
+		return 0;
+	}
+
+
+	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+	public static Point getAppUsableScreenSize(Context context) {
+		WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		Display display = windowManager.getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		return size;
+	}
+
+	public int getStatusBarHeight() {
+		int result = 0;
+		int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+		if (resourceId > 0) {
+			result = getResources().getDimensionPixelSize(resourceId);
+		}
+		return result;
+	}
+
+	public static Point getRealScreenSize(Context context) {
+		WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		Display display = windowManager.getDefaultDisplay();
+		Point size = new Point();
+
+		if (Build.VERSION.SDK_INT >= 17) {
+			display.getRealSize(size);
+		} else if (Build.VERSION.SDK_INT >= 14) {
+			try {
+				size.x = (Integer) Display.class.getMethod("getRawWidth").invoke(display);
+				size.y = (Integer) Display.class.getMethod("getRawHeight").invoke(display);
+			} catch (IllegalAccessException e) {} catch (InvocationTargetException e) {} catch (NoSuchMethodException e) {}
+		}
+
+		return size;
 	}
 
 	private void getMemoryInfo() {
@@ -121,6 +259,7 @@ public class SystemInfoAPI extends BaseActivity{
 	     getWindowManager().getDefaultDisplay().getMetrics(dm);
 	     
 	     Log.d(TAG, "density : " + dm.density);
+	     Log.d(TAG, "densityDpi : " + dm.densityDpi);
 	     Log.d(TAG, "heigth : " + dm.heightPixels);
 	     Log.d(TAG, "width : " + dm.widthPixels);
 	}
@@ -132,12 +271,12 @@ public class SystemInfoAPI extends BaseActivity{
 	  Log.d(TAG,"BRAND :  : " + Build.BRAND);
 	  Log.d(TAG,"CPU_ABI : " + Build.CPU_ABI);
 	  Log.d(TAG,"DEVICE : " + Build.DEVICE);
-	  Log.d(TAG,"DISPLAY : " + Build.DISPLAY);
-	  Log.d(TAG,"FINGERPRINT : " + Build.FINGERPRINT);
+	  Log.d(TAG, "DISPLAY : " + Build.DISPLAY);
+	  Log.d(TAG, "FINGERPRINT : " + Build.FINGERPRINT);
 	  Log.d(TAG,"HOST : " + Build.HOST);
 	  Log.d(TAG,"ID : " + Build.ID);
-	  Log.d(TAG,"MANUFACTURER : " + Build.MANUFACTURER);
-	  Log.d(TAG,"MODEL : " + Build.MODEL);
+	  Log.d(TAG, "MANUFACTURER : " + Build.MANUFACTURER);
+	  Log.d(TAG, "MODEL : " + Build.MODEL);
 	  Log.d(TAG,"PRODUCT : " + Build.PRODUCT);
 	  Log.d(TAG,"TAGS : " + Build.TAGS);
 	  Log.d(TAG,"TYPE : " + Build.TYPE);
@@ -148,9 +287,9 @@ public class SystemInfoAPI extends BaseActivity{
 	public void getNetworkInfos() {
 		// Mac Address by Wifi
 		Log.i(TAG, "++++++++++++++ [ NetworkInfos ] ++++++++++++++ :  ");
-		Log.d(TAG, String.format("MacAddress : %s", getMacAddress(this) ) ) ;
-		Log.d(TAG, String.format("getMacAddressByWifi : %s", getMacAddressByWifi(this) ) ) ;
-		Log.d(TAG, String.format("MacAddress 2 : %s", getLocalIpAddress() ) ) ;
+		Log.d(TAG, String.format("MacAddress : %s", getMacAddress(this)));
+		Log.d(TAG, String.format("getMacAddressByWifi : %s", getMacAddressByWifi(this)));
+		Log.d(TAG, String.format("MacAddress 2 : %s", getLocalIpAddress())) ;
 	}
 	
 	private String getMacAddress(Context context) {
@@ -283,5 +422,26 @@ public class SystemInfoAPI extends BaseActivity{
 				+" / getTmDeviceId = "+ tmDevice
 				+" / getTmSimSerialNumber = "+ tmSerial +" )");
 	}
-	
+
+	private void getLocaleInfos(){
+		Locale[] locales = Locale.getAvailableLocales();
+//        for( int i=0; i < locales.length; i++ ){
+//            Logger.d("LocaleTest", locales[i].getLanguage() + " / " + locales[i].getDisplayCountry() + " / " + locales[i].getDisplayName() + " / " + locales[i].getDisplayLanguage()
+//            );
+//        }
+		Log.d("LocaleTest", "locales length = " +  locales.length);
+		Log.d("LocaleTest", "getDefault() = " +   Locale.getDefault());
+		Log.d("LocaleTest", "getDefault()getLanguage = " + Locale.getDefault().getLanguage());
+		Log.d("LocaleTest", "getDefault()getCountry = " +   Locale.getDefault().getCountry());
+		Log.d("LocaleTest", "getDefault()getDisplayName = " +   Locale.getDefault().getDisplayName());
+		Log.d("LocaleTest", "getISOCountries = " +   Locale.getISOCountries().toString());
+		Log.d("LocaleTest", "getISOLanguages = " + Locale.getISOLanguages().toString());
+		Log.d("LocaleTest", "getISOLanguages = " + Locale.getISOLanguages().toString());
+		Log.d("LocaleTest", "getResources().getConfiguration().locale.getLanguage = " + getResources().getConfiguration().locale.getLanguage());
+
+//        String[] sysLocales = Resources.getSystem().getAssets().getLocales();
+//        for( int i=0; i < sysLocales.length; i++ ){
+//            Log.d("LocaleTest",sysLocales[i]  );
+//        }
+	}
 }

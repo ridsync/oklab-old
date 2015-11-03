@@ -25,6 +25,7 @@ public static final String TAG = "BaseActivity";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		Log.i(TAG +"/"+ this.getClass().getSimpleName(), "onCreate()");
+		Log.i(TAG +"/"+ this.getClass().getSimpleName(),"" + getPackageName());
 		super.onCreate(savedInstanceState);
 	}
 	// Standard implementation of onCreateView(View, String, Context, AttributeSet) used when inflating with the LayoutInflater returned by getSystemService(String).

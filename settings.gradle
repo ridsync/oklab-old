@@ -1,1 +1,2 @@
+include ':javatest'
 include 'OKLab-Android'

@@ -51,7 +51,7 @@ public class FullScreenModeTest extends BaseActivity{
             layout.setGravity(Gravity.CENTER);
 
             EditText child = new EditText(this);
-            child.setText("Å×½ºÆ®");
+            child.setText("í…ŒìŠ¤íŠ¸");
             child.setInputType(InputType.TYPE_CLASS_PHONE);
             child.setTextColor(Color.RED);
             child.setTextSize(20);
@@ -65,7 +65,7 @@ public class FullScreenModeTest extends BaseActivity{
             layout.addView(child, params);
 
             Button child2 = new Button(this);
-            child2.setText("´ÙÀ½È­¸é");
+            child2.setText("ë‹¤ìŒí™”ë©´");
             child2.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -79,7 +79,7 @@ public class FullScreenModeTest extends BaseActivity{
 
             layout.addView(child2, params);
 
-            // Ã³À½¿¡ Å°º¸µå¸¦ ³ª¿ÀÁö ¾Ê°Ô ÇØÁØ´Ù.
+            // ì²˜ìŒì— í‚¤ë³´ë“œë¥¼ ë‚˜ì˜¤ì§€ ì•Šê²Œ í•´ì¤€ë‹¤.
             this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 //		checkProcess();
 //		appLockthread();
@@ -156,7 +156,7 @@ public class FullScreenModeTest extends BaseActivity{
 
 
 
-    // ÇöÀç È­¸é¿¡ º¸ÀÌ°íÀÖ´Â ¿¢Æ¼ºñÆ¼ Å¬·¡½º¸í ±¸ÇÏ±â
+    // í˜„ì¬ í™”ë©´ì— ë³´ì´ê³ ìˆëŠ” ì—‘í‹°ë¹„í‹° í´ë˜ìŠ¤ëª… êµ¬í•˜ê¸°
         public boolean getIsPlayingVideo(Context context){
             boolean isVideoPlaying = false;
 
@@ -217,15 +217,15 @@ public class FullScreenModeTest extends BaseActivity{
             super.onPause();
 
 	    /*
-	     * È¨¹öÆ°À» ´­·¶À» ¶§ byebye¸¦ ³¯¸°´Ù
+	     * í™ˆë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ byebyeë¥¼ ë‚ ë¦°ë‹¤
 	     */
             if (!isForegrdound())
                 Log.e(TAG, "onPause() : by Home Button Pressed?");
         }
 
         /**
-         * ÇÁ·Î¼¼½º°¡ ÃÖ»óÀ§·Î ½ÇÇàÁßÀÎÁö °Ë»çÇÑ´Ù.
-         * @return true=ÃÖ»óÀ§
+         * í”„ë¡œì„¸ìŠ¤ê°€ ìµœìƒìœ„ë¡œ ì‹¤í–‰ì¤‘ì¸ì§€ ê²€ì‚¬í•œë‹¤.
+         * @return true=ìµœìƒìœ„
          */
         public boolean isForegrdound()
         {
@@ -245,14 +245,14 @@ public class FullScreenModeTest extends BaseActivity{
 ////	        // lock screen
 ////	    	startActivity(new Intent(TaskManagement.this,LoginActivity.class));
 ////	    } else {
-////	        // lock screen ÀÌ ¾Æ´Ô
-////	    	Log.i(TAG, "lock screen ÀÌ ¾Æ´Ô");
+////	        // lock screen ì´ ì•„ë‹˜
+////	    	Log.i(TAG, "lock screen ì´ ì•„ë‹˜");
 ////	    }
 //		PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 //		if ( pm.isScreenOn() ){
-//			Log.i(TAG, "½ºÅ©¸°¿Â»óÅÂ");
+//			Log.i(TAG, "ìŠ¤í¬ë¦°ì˜¨ìƒíƒœ");
 //		}else{
-//			Log.i(TAG, "½ºÅ©¸°¿Â ¾Æ´Ô");
+//			Log.i(TAG, "ìŠ¤í¬ë¦°ì˜¨ ì•„ë‹˜");
 //			goToLockScreen();
 //		}
 //		super.onPause();
@@ -295,22 +295,22 @@ public class FullScreenModeTest extends BaseActivity{
         }
 
         private void checkProcess() {
-            // 1. ÃÖ±ÙÅ×½ºÅ©¸ñ·Ï ºñ±³
+            // 1. ìµœê·¼í…ŒìŠ¤í¬ëª©ë¡ ë¹„êµ
             Context mContext = getApplicationContext();
             // ActivityManager am =
             // (ActivityManager)mContext.getSystemService(Context.ACTIVITY_SERVICE);
-            // // context´Â ÀÌ¿ÕÀÌ¸é applicationÀÇ context¾²±â 2. ½ÇÇàÁßÀÎ ÅÂ½ºÅ© ¸ñ·Ï °¡Á®¿Í¼­ ÇöÀç ¾îÇÃÅÂ½ºÅ©¿Í
-            // ºñ±³
+            // // contextëŠ” ì´ì™•ì´ë©´ applicationì˜ contextì“°ê¸° 2. ì‹¤í–‰ì¤‘ì¸ íƒœìŠ¤í¬ ëª©ë¡ ê°€ì ¸ì™€ì„œ í˜„ì¬ ì–´í”ŒíƒœìŠ¤í¬ì™€
+            // ë¹„êµ
             //
             // List<RunningTaskInfo> task = am.getRunningTasks(1);
             //
             // if(!task.isEmpty()) {
             //
-            // ComponentName topActivity = task.get(0).topActivity; // ÇöÀç ÅÂ½ºÅ© Á¤º¸
+            // ComponentName topActivity = task.get(0).topActivity; // í˜„ì¬ íƒœìŠ¤í¬ ì •ë³´
             // Log.i(TAG, "topActivity.getClassName = "+
             // topActivity.getClassName());
             // if(!topActivity.getPackageName().equals(mContext.getPackageName())) {
-            // // ÇöÀç ÅÂ½ºÅ©¿Í ³» ¾îÇÃÀ» ºñ±³
+            // // í˜„ì¬ íƒœìŠ¤í¬ì™€ ë‚´ ì–´í”Œì„ ë¹„êµ
             //
             // Log.i(TAG, "Background !!");
             // Intent inte = new Intent(TaskManagement.this, LoginActivity.class);
@@ -345,7 +345,7 @@ public class FullScreenModeTest extends BaseActivity{
                 }
 
             }
-            // 2. ÇÁ·Î¼¼½ºÈ®ÀÎ ¿ª½Ã ¾²·¹µå·ÎÈ®ÀÎ
+            // 2. í”„ë¡œì„¸ìŠ¤í™•ì¸ ì—­ì‹œ ì“°ë ˆë“œë¡œí™•ì¸
             // ActivityManager am = (ActivityManager)
             // getSystemService(Context.ACTIVITY_SERVICE);
             // List<ActivityManager.RunningAppProcessInfo>appList =
@@ -354,14 +354,14 @@ public class FullScreenModeTest extends BaseActivity{
             // {
             // if ("com.academy.coupling".equals(app.processName))
             // {
-            // // [Bug_052] [°áÇÔ³»¿ë]: ½º¸¶Æ®ÆùÁöÅ´ÀÌ ºñ¹Ğ¹øÈ£ ¼³Á¤ÇÑ »óÅÂ¿¡¼­ HomeÅ°·Î ³ª°¬´Ù°¡ ½º¸¶Æ®Æù ÁöÅ´ÀÌ Àç ½ÇÇà½Ã
-            // ¹Ù·Î app ½ÇÇàµÇ´Â ¹®Á¦
+            // // [Bug_052] [ê²°í•¨ë‚´ìš©]: ìŠ¤ë§ˆíŠ¸í°ì§€í‚´ì´ ë¹„ë°€ë²ˆí˜¸ ì„¤ì •í•œ ìƒíƒœì—ì„œ Homeí‚¤ë¡œ ë‚˜ê°”ë‹¤ê°€ ìŠ¤ë§ˆíŠ¸í° ì§€í‚´ì´ ì¬ ì‹¤í–‰ì‹œ
+            // ë°”ë¡œ app ì‹¤í–‰ë˜ëŠ” ë¬¸ì œ
             // if ( app.importance ==
-            // ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND ) // ´Ù¸¥
-            // ÀÛ¾÷¶§¹®¿¡ À§ÇØ resume¸¦ ±â´Ù¸®´Â °æ¿ì´Â Á¦¿Ü(ex. ÆĞÅ°Áö ÀÎ½ºÅç·¯ È£Ãâ½Ã)
+            // ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND ) // ë‹¤ë¥¸
+            // ì‘ì—…ë•Œë¬¸ì— ìœ„í•´ resumeë¥¼ ê¸°ë‹¤ë¦¬ëŠ” ê²½ìš°ëŠ” ì œì™¸(ex. íŒ¨í‚¤ì§€ ì¸ìŠ¤í†¨ëŸ¬ í˜¸ì¶œì‹œ)
             // {
-            // // ÁöÅ´ÀÌ ¾îÇÃ Process importance¸¦ ¸ğ´ÏÅÍ ÇÏ¿©, ÁöÅ´ÀÌ ¾îÇÃ ¹é±×¶ó¿îµå µ¿ÀÛ½Ã ¸ğµç Activity
-            // Á¾·á½ÃÅ°°í ¸ğµç ¼­ºñ½º Àç±¸µ¿ ÇÏµµ·Ï Ã³¸®
+            // // ì§€í‚´ì´ ì–´í”Œ Process importanceë¥¼ ëª¨ë‹ˆí„° í•˜ì—¬, ì§€í‚´ì´ ì–´í”Œ ë°±ê·¸ë¼ìš´ë“œ ë™ì‘ì‹œ ëª¨ë“  Activity
+            // ì¢…ë£Œì‹œí‚¤ê³  ëª¨ë“  ì„œë¹„ìŠ¤ ì¬êµ¬ë™ í•˜ë„ë¡ ì²˜ë¦¬
             // Log.i(TAG,
             // "com.academy.coupling goes with a IMPORTANCE_FOREGROUND !");
             // }
@@ -372,7 +372,7 @@ public class FullScreenModeTest extends BaseActivity{
             // break;
             // }
         }
-        // 3. ¾²·¹µå
+        // 3. ì“°ë ˆë“œ
         private void appLockthread() {
             Log.i(TAG, "appLockthread() ");
             th = new Thread(new Runnable() {
@@ -400,15 +400,15 @@ public class FullScreenModeTest extends BaseActivity{
 
         public boolean checkInstallDate() {
             boolean result = false;
-            // Android 2.3 ÀÌ»ó¿¡¼­ »ç¿ë °¡´ÉÇÑ ¹æ½Ä.
+            // Android 2.3 ì´ìƒì—ì„œ ì‚¬ìš© ê°€ëŠ¥í•œ ë°©ì‹.
             long installed;
             try {
                 PackageManager packageManager = this.getPackageManager();
                 installed = packageManager.getPackageInfo(getPackageName(), 0)
                         .firstInstallTime;
                 long a = 0;
-                //Á¾·á³¯Â¥¿Í ½ÃÀÛ³¯Â¥ÀÇ Â÷¸¦ ±¸ÇÕ´Ï´Ù.
-                //µÎ³¯Â¥°£ÀÇ Â÷¸¦ ¾òÀ¸·Á¸é getTimeMills()¸¦ ÀÌ¿ëÇÏ¿© ÃµºĞÀÇ 1ÃÊ ´ÜÀ§·Î º¯È¯ÇÏ¿©¾ß ÇÕ´Ï´Ù.
+                //ì¢…ë£Œë‚ ì§œì™€ ì‹œì‘ë‚ ì§œì˜ ì°¨ë¥¼ êµ¬í•©ë‹ˆë‹¤.
+                //ë‘ë‚ ì§œê°„ì˜ ì°¨ë¥¼ ì–»ìœ¼ë ¤ë©´ getTimeMills()ë¥¼ ì´ìš©í•˜ì—¬ ì²œë¶„ì˜ 1ì´ˆ ë‹¨ìœ„ë¡œ ë³€í™˜í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.
                 long b = (Calendar.getInstance().getTimeInMillis() - installed) /1000;
 
                 a = b/(60*60*24);
@@ -426,7 +426,7 @@ public class FullScreenModeTest extends BaseActivity{
             return result;
         }
         /**
-         * Android ¼³Ä¡µÈ ¾îÇÃ Á¤º¸¸®½ºÆ® °¡Á®¿À±â
+         * Android ì„¤ì¹˜ëœ ì–´í”Œ ì •ë³´ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
          */
         private void showShareAvailableApps() {
             final PackageManager packageManager = this.getApplicationContext().getPackageManager();

@@ -16,9 +16,9 @@ public class AnimationTest extends BaseActivity {
 
     ImageView img;
 
-    //FrameAnimation¿¡ ÀÇÇØ AnimationÀ» ½ÇÇàÇÒ
-    //Animation Drawable °´Ã¼ ÂüÁ¶º¯¼ö
-    //Áï, Frame ´ÜÀ§·Î ÀÌ¹ÌÁö¸¦ ¹Ù²ã¼­ ±×·ÁÁÖ´Â Drawable °´Ã¼
+    //FrameAnimationì— ì˜í•´ Animationì„ ì‹¤í–‰í• 
+    //Animation Drawable ê°ì²´ ì°¸ì¡°ë³€ìˆ˜
+    //ì¦‰, Frame ë‹¨ìœ„ë¡œ ì´ë¯¸ì§€ë¥¼ ë°”ê¿”ì„œ ê·¸ë ¤ì£¼ëŠ” Drawable ê°ì²´
 
     AnimationDrawable ani;
 
@@ -27,20 +27,20 @@ public class AnimationTest extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_animation);
 
-        //ImageView °´Ã¼ ÂüÁ¶
+        //ImageView ê°ì²´ ì°¸ì¡°
         img = (ImageView) findViewById(R.id.img);
 
-        //ImageView¿¡ src ¼Ó¼ºÀ¸·Î ¼³Á¤µÈ pink_runÀÌ¹ÌÁö¸¦ Drawable °´Ã¼·Î ¾ò¾î¿À±â.
-        //Frame AniamtionÀº DrawableÀÇ ÀÏÁ¾ÀÌÀ¸·Î Çüº¯È¯ °¡´É
+        //ImageViewì— src ì†ì„±ìœ¼ë¡œ ì„¤ì •ëœ pink_runì´ë¯¸ì§€ë¥¼ Drawable ê°ì²´ë¡œ ì–»ì–´ì˜¤ê¸°.
+        //Frame Aniamtionì€ Drawableì˜ ì¼ì¢…ì´ìœ¼ë¡œ í˜•ë³€í™˜ ê°€ëŠ¥
         ani = (AnimationDrawable) img.getDrawable();
 
-        //Ã³À½ ½ÃÀÛÇÏ¸é Run ¾Ö´Ï¸ŞÀÌ¼Ç ½ÇÇà
+        //ì²˜ìŒ ì‹œì‘í•˜ë©´ Run ì• ë‹ˆë©”ì´ì…˜ ì‹¤í–‰
 
-        //pink_run.xml ¸®¼Ò½º´Â oneshotÀÌ ¾Æ´Ï¹Ç·Î °è¼Ó ¹İº¹µÊ.
+        //pink_run.xml ë¦¬ì†ŒìŠ¤ëŠ” oneshotì´ ì•„ë‹ˆë¯€ë¡œ ê³„ì† ë°˜ë³µë¨.
         ani.start();
     }
 
-    //onClick ¼Ó¼ºÀÌ ÁöÁ¤µÈ View°¡ Å¬¸¯µÇ¾úÀ» ¶§ ÀÚµ¿À¸·Î È£ÃâµÇ´Â Äİ¹é¸Ş¼Òµå
+    //onClick ì†ì„±ì´ ì§€ì •ëœ Viewê°€ í´ë¦­ë˜ì—ˆì„ ë•Œ ìë™ìœ¼ë¡œ í˜¸ì¶œë˜ëŠ” ì½œë°±ë©”ì†Œë“œ
 
     public void mOnClick(View v) {
 
@@ -48,23 +48,23 @@ public class AnimationTest extends BaseActivity {
 
             case R.id.btn_run:
 
-                //'RUN START' ¹öÆ°À» ´­·¶À» ¶§ ÀÌÀü Frame AnimationÀÌ ÁøÇàÁßÀÌ¸é Á¤Áö
-                //Frame AnimationÀº ÇÑ¹ø start()ÇØÁÖ¸é °è¼Ó Running »óÅÂÀÓ.
-                //Frame AnimationÀ» OneShotÀ¸·Î ÇÏ°í ´Ù½Ã ½ÃÀÛÇÏ°Ô ÇÏ°í ½Í´Ù¸é
-                //ÀÌÀü Frame AnimationÀ» 'stop'½ÃÄÑ¾ß ÇÔ.
+                //'RUN START' ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ ì´ì „ Frame Animationì´ ì§„í–‰ì¤‘ì´ë©´ ì •ì§€
+                //Frame Animationì€ í•œë²ˆ start()í•´ì£¼ë©´ ê³„ì† Running ìƒíƒœì„.
+                //Frame Animationì„ OneShotìœ¼ë¡œ í•˜ê³  ë‹¤ì‹œ ì‹œì‘í•˜ê²Œ í•˜ê³  ì‹¶ë‹¤ë©´
+                //ì´ì „ Frame Animationì„ 'stop'ì‹œì¼œì•¼ í•¨.
 
                 if (ani.isRunning()) ani.stop();
 
-                //ImageView¿¡ pink_run.xml Drawable ¸®¼Ò½ºÆÄÀÏ ¼¼ÆÃ
+                //ImageViewì— pink_run.xml Drawable ë¦¬ì†ŒìŠ¤íŒŒì¼ ì„¸íŒ…
 
                 img.setImageResource(R.drawable.frame_ani_sample);
 
-                //ImageView´Â ¼³Á¤µÈ xml ¸®¼Ò½º ÆÄÀÏÀ» Drawable °´Ã¼·Î °¡Áö°í ÀÖÀ¸¹Ç·Î
-                //ÀÌ¸¦ ´Ù½Ã ¾ò¾î¿È.
+                //ImageViewëŠ” ì„¤ì •ëœ xml ë¦¬ì†ŒìŠ¤ íŒŒì¼ì„ Drawable ê°ì²´ë¡œ ê°€ì§€ê³  ìˆìœ¼ë¯€ë¡œ
+                //ì´ë¥¼ ë‹¤ì‹œ ì–»ì–´ì˜´.
                 ani = (AnimationDrawable) img.getDrawable();
 
-                //AnimationDrawable °´Ã¼¿¡°Ô
-                //Frame º¯°æÀ» ½ÃÀÛÇÏµµ·Ï ÇÔ.
+                //AnimationDrawable ê°ì²´ì—ê²Œ
+                //Frame ë³€ê²½ì„ ì‹œì‘í•˜ë„ë¡ í•¨.
 
                 ani.start();
                 break;

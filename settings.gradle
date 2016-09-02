@@ -1,2 +1,2 @@
-include ':javatest'
+include ':OKLab-Android2', ':fablibrary'
 include 'OKLab-Android'

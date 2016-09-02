@@ -3,8 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/OKLab-Android/OKLab-Android.iml" filepath="$PROJECT_DIR$/OKLab-Android/OKLab-Android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/javatest/javatest.iml" filepath="$PROJECT_DIR$/javatest/javatest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/oklab-git.iml" filepath="$PROJECT_DIR$/oklab-git.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OKLab-Android2/OKLab-Android2.iml" filepath="$PROJECT_DIR$/OKLab-Android2/OKLab-Android2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OKLab-Java/OKLab-Java.iml" filepath="$PROJECT_DIR$/OKLab-Java/OKLab-Java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fablibrary/fablibrary.iml" filepath="$PROJECT_DIR$/fablibrary/fablibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OKLab-Java/javatest.iml" filepath="$PROJECT_DIR$/OKLab-Java/javatest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oklab.iml" filepath="$PROJECT_DIR$/oklab.iml" />
     </modules>
   </component>
 </project>

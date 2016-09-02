@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">OKTest</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3 SwipeRefreshLayout</string>
+    <string name="title_section4">Section 4 ViewPager</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_example_main">Example Main</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_drawer">Drawer</string>
+    <string name="pref_dream_text_key">pref_dream_text</string>
+    <string name="pref_dream_text_default">zzzZZZzzz</string>
+    <string name="title_tab1">Tab 1</string>
+    <string name="title_tab2">Tab 2</string>
+    <string name="title_tab3">Tab 3</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="tab1_button">Button in First Tab</string>
+    <string name="tab2_text">HomePage : https://whdghks913.tistory.com</string>
+    <string name="example">Example Source</string>
+    <string name="Scrollview_Text_1">FadingActionBar is a library which implements the cool fading action bar effect that can be seen in the new Play Music app.
+\n
+\nThis library uses the techniques outlined by Cyril Mottier in a popular blog post.
+\n
+\nThe three most commonly used action bar implementations are supported: stock (API 11+), ActionBarCompat and ActionBarSherlock.</string>
+    <string name="Scrollview_Text_2">FadingActionBar 사용방법
+\n
+\n
+\nFadingActionBarHelper helper = new FadingActionBarHelper()
+\n                .actionBarBackground(R.drawable.ab_background)
+\n                .headerLayout(R.layout.header)
+\n                .contentLayout(R.layout.activity_main);
+\n        setContentView(helper.createView(this));
+\n        helper.initActionBar(this);</string>
+    <string name="desc_list_item_icon">Item Icon</string>
+
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_menu_items">
+        <item>AutoScrollListViewFragment</item>
+        <item>Scalablelayout</item>
+        <item>SwipeRereshFragment</item>
+        <item>PinnedSectionListView</item>
+        <item>ViewPager+FixedTabsSwipe</item>
+        <item>AndroidImageLoaderLibs</item>
+        <item>PrelollipopTransition</item>
+        <item>NestedScrollTest</item>
+    </string-array>
+
+    <!-- Nav Drawer List Item Icons -->
+    <!-- Keep them in order as the titles are in -->
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_people</item>
+        <item>@drawable/ic_photos</item>
+        <item>@drawable/ic_communities</item>
+        <item>@drawable/ic_pages</item>
+        <item>@drawable/ic_whats_hot</item>
+        <item>@drawable/ic_pages</item>
+    </array>
+
+    <string name="empty">No items found!</string>
+
+    <string-array name="kings">
+        <item>Henry IV</item>
+        <item>Henry V</item>
+        <item> Henry VIII"</item>
+        <item>Richard II</item>
+        <item>Richard III</item>
+        <item>Richard IIII</item>
+        <item>Richard IIIII</item>
+        <item>Richard IIIIII</item>
+        <item>Richard IIIIIII</item>
+        <item>Richard IIIIIIII</item>
+        <item>Richard IIIIIIIII</item>
+        <item>Richard IIIIIIIIII</item>
+        <item>Richard IIIIIIIIIII</item>
+        <item>okdfsdf II </item>
+        <item>dfsvcdvd II </item>
+        <item>aaaaaaa </item>
+        <item>bfasdfdx </item>
+        <item>Childse </item>
+        <item>Cheese </item>
+        <item>Kingdom </item>
+    </string-array>
+
+    <string name="pinned_name">Pinned Section Demo</string>
+    <string name="action_fastscroll">Fast scroll</string>
+    <string name="action_addpadding">Add padding</string>
+    <string name="action_showShadow">Show shadow</string>
+    <string name="action_showHeaderAndFooter">Show Header &amp; Footer</string>
+    <string name="action_updateDataset">Update dataset</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ac_name_image_list">Image List Example</string>
+
+    <!-- Content descriptions -->
+    <string name="descr_image">Image</string>
+
+
+    <string name="scanning">Scanning...</string>
+    <string name="menu_standard">Standard</string>
+    <string name="menu_metric">Metric</string>
+</resources>

@@ -1,6 +1,7 @@
 package com.example.unitTest;
 
 import com.example.test.oktest.CalendarTest;
+import com.example.test.oktest.RegExpression;
 
 import org.junit.Test;
 
@@ -12,6 +13,6 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+        RegExpression.main(null);
     }
 }

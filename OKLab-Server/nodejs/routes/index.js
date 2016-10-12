@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
+module.exports = function(express){
+  var conn = require('../config/mysql/db')();
+  var route =  require('express').Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
-module.exports = router;
+  route.get('/', function(req, res, next) {
+    res.render('index', { title: 'OK Express Test' });
+  });
+  return route;
+}

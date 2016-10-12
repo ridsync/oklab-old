@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <ul id="account">
+      <li><a href="/auth/register">Register</a></li>
+      <li><a href="/auth/login">Login</a></li>
+    </ul>
+    <h1><a href="/topic">Server Side JavaScript</a></h1>
+
+    <form action="/auth/login" method="post">
+      <p>
+        <input type="text" name="username" placeholder="username">
+      </p>
+      <p>
+        <input type="password" name="password" placeholder="password">
+      </p>
+      <p>
+        <input type="submit">
+      </p>
+    </form><a href="/auth/facebook">facebook</a>
+
+    <ul id="accountslist">
+      <%for (var topic in topics){%>
+        <li><a href="/auth/register">user = <%=topic.title%></a></li>
+      <%}%>
+    </ul>
+  </body>
+</html>

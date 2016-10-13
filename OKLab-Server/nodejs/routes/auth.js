@@ -23,7 +23,7 @@ module.exports = function(passport){
           } else {
             req.login(user, function(err){
               req.session.save(function(){
-                res.redirect('/welcome');
+                res.redirect('/auth/welcome');
               });
             });
           }
@@ -55,9 +55,9 @@ module.exports = function(passport){
   });
 
   route.get('/login', function(req, res){
-    var sql = 'SELECT id,title FROM topic';
-    conn.query(sql, function(err, topics, fields){
-      res.render('auth/login', {topics:topics});
+    var sql = 'SELECT username FROM users';
+    conn.query(sql, function(err, users, fields){
+      res.render('auth/login', {users:users});
     });
   });
   route.post(
@@ -65,7 +65,7 @@ module.exports = function(passport){
     passport.authenticate(
       'local',
       {
-        successRedirect: '/topic',
+        successRedirect: '/board',
         failureRedirect: '/auth/login',
         failureFlash: false
       }
@@ -74,7 +74,7 @@ module.exports = function(passport){
   route.get('/logout', function(req, res){
     req.logout();
     req.session.save(function(){
-      res.redirect('/topic');
+      res.redirect('/auth/login');
     });
   });
   return route;

@@ -5,10 +5,9 @@
   </head>
   <body>
     <ul id="account">
-      <li><a href="/auth/register">Register</a></li>
-      <li><a href="/auth/login">Login</a></li>
+
     </ul>
-    <h1><a href="/topic">Server Side JavaScript</a></h1>
+    <h1><a href="/auth/login">OK Server Login Page</a></h1>
 
     <form action="/auth/login" method="post">
       <p>
@@ -23,9 +22,10 @@
     </form><a href="/auth/facebook">facebook</a>
 
     <ul id="accountslist">
-      <%for (var topic in topics){%>
-        <li><a href="/auth/register">user = <%=topic.title%></a></li>
-      <%}%>
+      <% users.forEach(function(user) { %>
+        <li><a href="/auth/register">user = <%= user.username %></a></li>
+      <% }); %>
+
     </ul>
   </body>
 </html>

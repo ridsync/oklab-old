@@ -3,10 +3,12 @@ var passport = require('./config/mysql/passport')(app);
 
 var index = require('./routes/index')();
 var auth = require('./routes/auth')(passport);
+var board = require('./routes/board')();
 
 // default routes
 app.use('/', index);
 app.use('/auth', auth);
+app.use('/board', board);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

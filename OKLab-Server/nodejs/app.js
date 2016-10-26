@@ -4,11 +4,13 @@ var passport = require('./config/mysql/passport')(app);
 var index = require('./routes/index')();
 var auth = require('./routes/auth')(passport);
 var board = require('./routes/board')();
+var upload = require('./routes/upload')();
 
 // default routes
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/board', board);
+app.use('/upload', upload);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

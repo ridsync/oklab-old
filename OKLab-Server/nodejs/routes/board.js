@@ -1,15 +1,6 @@
 module.exports = function(){
   var route = require('express').Router();
   var conn = require('../config/mysql/db')();
-  var uploader = require('../config/mysql/uploader')();
-
-  route.get('/upload', function(req, res){
-    res.render('board/upload');
-  });
-  route.post('/upload', uploader.single('userfile'), function(req, res){
-    console.log(req.file)
-    res.send('Uploaded : '+req.file);
-  });
 
   route.get('/add', function(req, res){
     var sql = 'SELECT id,title FROM topic';

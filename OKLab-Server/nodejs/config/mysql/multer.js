@@ -5,10 +5,15 @@ module.exports = function(){
       cb(null, 'uploads/')
     },
     filename: function (req, file, cb) {
-      console.log(req);
+      console.log(file);
       cb(null, file.originalname + "_" + new Date().toDateString());
     }
   })
-  var upload = multer({ storage: _storage })
+ //  var maxSize = 2 * 1000 * 1000;
+ //  var upload = multer({
+ //    storage: _storage ,
+ //    limits: { fileSize: maxSize }
+ // })
+ var upload = multer({ storage: _storage })
   return upload;
 }

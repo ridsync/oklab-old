@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta chartset="utf-8">
+    <style>
+      body { padding: 30px }
+      form { display: block; margin: 20px auto; background: #eee; border-radius: 10px; padding: 15px }
+      .progress { position:relative; width:400px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
+      .bar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
+      .percent { position:absolute; display:inline-block; top:3px; left:48%; }
+    </style>
+  </head>
+  <body>
+    <h1> OK Nodejs File I/O Test </h1>
+    <br>
+    <h2> Multer Module Test </h2>
+    <form action="/upload/multer" method="post" enctype="multipart/form-data">
+      <input type="file" name="userfile">
+      <input type="submit"value="파일 업로드">
+    </form>
+    <br>
+    <h2> MultiFiles Upload </h2>
+    <form action="/upload/multifiles" method="post" enctype="multipart/form-data">
+      <input type="file" name="userfile">
+      <input type="submit"value="파일 업로드">
+    </form>
+    <br>
+    <h2> Upload ProgressBar </h2> <!-- ajax로 구현시 status에 결과표시. -->
+    <form action="/upload/progress" method="post" enctype="multipart/form-data">
+      <input type="file" name="userfile">
+      <input type="submit" value="파일 업로드">
+    </form>
+    <div class="progress">
+       <div class="bar"></div >
+       <div class="percent">0%</div >
+   </div>
+    <div id="status">result : </div>
+   <br>
+    <h2> File Download </h2>
+    <a href="/upload/download/hyuna.jpg">현아사진 다운로드 </a>
+    <form action="/upload/download/byuna.jpg" method="get" enctype="multipart/form-data">
+      <input type="text" name="downfile">
+      <input type="button" value="파일 다운로드">
+    </form>
+  </body>
+</html>

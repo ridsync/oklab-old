@@ -1,16 +1,21 @@
-var app = require('./config/mysql/express')();
-var passport = require('./config/mysql/passport')(app);
-
-var index = require('./routes/index')();
-var auth = require('./routes/auth')(passport);
-var board = require('./routes/board')();
-var upload = require('./routes/upload')();
+var app = require('./config/mongodb/express')();
+var passport = require('./config/mongodb/passport')(app);
+// var app = require('./config/mysql/express')();
+// var passport = require('./config/mysql/passport')(app);
 
 // default routes
-app.use('/', index);
+var main = require('./routes/main')();
+var auth = require('./routes/auth')(passport);
+var board = require('./routes/board')();
+// var index = require('./routes/mysql/index')();
+// var auth = require('./routes/mysql/auth')(passport);
+// var board = require('./routes/mysql/board')();
+// var upload = require('./routes/mysql/upload')();
+
+app.use('/', main);
 app.use('/auth', auth);
 app.use('/board', board);
-app.use('/upload', upload);
+// app.use('/upload', upload);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

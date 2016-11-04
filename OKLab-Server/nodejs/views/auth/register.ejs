@@ -1,31 +1,254 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-  </head>
-  <body>
-    <ul id="account">
-      <li><a href="/auth/register">Register</a></li>
-      <li><a href="/auth/login">Login</a></li>
-    </ul>
-    <h1><a href="/board">OK Nodejs Register Page</a></h1>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="/stylesheets/responsive-menu.css">
+    <link rel="stylesheet" href="/stylesheets/basic.css">
+    <title><%= title %></title>
+</head>
 
-    <form action="/auth/register" method="post">
-      <p>
-        <input type="text" name="username" placeholder="username">
-      </p>
-      <p>
-        <input type="password" name="password" placeholder="password">
-      </p>
-      <p>
-        <input type="text" name="displayName" placeholder="displayName">
-      </p>
-      <p>
-        <input type="text" name="email" placeholder="email">
-      </p>
-      <p>
-        <input type="submit">
-      </p>
-    </form>
-  </body>
-</html>
+<body>
+  <header>
+    <% include ../partials/header %>
+  </header>
+
+
+    <div id="container">
+        <!-- content condition -->
+
+
+
+        <!-- content with side -->
+
+        <div id="content" class="pure-g">
+            <div class="pure-u-1">
+
+    <style>
+        #messages { font:9pt 돋움, Arial;  }
+        .redspan { color: red }
+        .greenspan { color: darkgreen }
+    </style>
+<div style="width:320px; margin:0 auto;">
+    <h3 style="padding-bottom:25px"><p class="text-center">Create Account</p></h3>
+<form class="form-horizontal" action="" method="post" id="form_join">
+    <style scoped>
+        span { font:8pt 돋움, Arial; display: block; height:7px; letter-spacing:-1px;  }
+    </style>
+    <div class="form-group">
+        <label for="inputID" class="col-sm-4 control-label">ID</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" name="user[userId]" id="id" placeholder="아이디" onblur="isValidId()"/>
+            <span id="message-id"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword" class="col-sm-4 control-label">Password</label>
+        <div class="col-sm-8">
+            <input type="password" class="form-control" id="pw" name="user[password]" placeholder="비밀번호" onblur="isValidPw()" />
+            <span id="message-pw"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword2" class="col-sm-4 control-label">PW again</label>
+        <div class="col-sm-8">
+            <input type="password" class="form-control" id="pw_second" name="user[pass_second]" placeholder="비밀번호 재확인" onblur="isValidPwSecond()" />
+            <span id="message-pw2"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputEmail" class="col-sm-4 control-label">Email</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="email" name="user[email]" placeholder="이메일 주소" onblur="isValidEmail()"/>
+            <span id="message-email"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputUsername" class="col-sm-4 control-label">Username</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="username" name="user[userName]" placeholder="이름" onblur="isValidUsername()"/>
+            <span id="message-username"></span>
+        </div>
+    </div>
+    <!--<div class="form-group">-->
+        <!--<label for="inputMobile" class="col-sm-4 control-label">Mobile</label>-->
+        <!--<div class="col-sm-8">-->
+            <!--<input type="text" class="form-control" name="mobile" placeholder="휴대전화" onkeyup="this.value=filterLetters(this.value);"/>-->
+            <!--<span id="message-mobile"></span>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div class="form-group">
+            <p class="text-center"><button id="btn_submit" type="submit" class="btn btn-primary">Create Account</button></p>
+    </div>
+</form>
+</div>
+
+
+
+<script>
+    // 전역 변수 선언
+    var isId = null;
+    var isPw = null;
+    var isPw2 = null;
+    var isEmail = null;
+    var isUsername = null;
+
+    // 유효성 검사 참고 링크 : http://www.sitepoint.com/jquery-basic-regex-selector-examples/
+
+    // 아이디 유효성 검사
+    function isValidId(){
+        var usernameRegex = /^[a-z0-9_-]{4,16}$/;
+        if  ($('#id').val() !== ''){
+            if (!usernameRegex.test($('#id').val())){
+                $('#message-id').html('<span class="redspan">4~15자의 영문 소문자, 숫자, _- 만 사용 가능합니다.</span>');
+                isId = false;
+            } else {
+                console.log('ajax 로 중복 아이디 검사...')
+                $.ajax({
+                    type: 'POST',
+                    url: location.href + '/validate/id',
+                    data: {id: $('#id').val()},
+                    success: function (data) {
+                        if (data == 'duplicate') {
+                            $('#message-id').html('<span class="redspan">이미 사용중인 아이디입니다.</span>');
+                            isId = false;
+                        }
+                        else {
+                            $('#message-id').html('<span class="greenspan">사용 가능한 아이디입니다.</span>');
+                            isId = true;
+                        }
+                    }
+                });
+            }
+        } else isId = false;
+    }
+
+    // 비밀번호 유효성 검사
+    function isValidPw(){
+        var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+        if ($('#pw').val() !== ''){
+            if (!passwordRegex.test($('#pw').val())){
+                $('#message-pw').html('<span class="redspan">비밀번호는 6자 이상, 숫자를 포함해야 합니다.</span>');
+                isPw = false;
+            } else {
+                if ( $('#pw').val() !== $('#pw_second').val() && $('#pw_second').val() !== '' ) {
+                    $('#message-pw').html('<span class="redspan">입력한 비밀번호가 일치하지 않습니다.</span>');
+                    isPw = false;
+                }else {
+                    $('#message-pw').html('<span class="greenspan">사용 가능한 비밀번호입니다.</span>');
+                    isPw = true;
+                }
+            }
+        } else isPw = false;
+    }
+
+    // 두 번째 비밀번호 유효성 검사
+    function isValidPwSecond(){
+        if ($('#pw').val() !== $('#pw_second').val()){
+            if ($('#pw').val() == ''){
+                $('#message-pw2').html('<span class="redspan">첫 번째 비밀번호부터 올바르게 입력하여 주세요.</span>');
+                isPw2 = false;
+            } else {
+                $('#message-pw2').html('<span class="redspan">입력한 비밀번호가 일치하지 않습니다.</span>');
+                $('#pw_second').val('');
+                isPw2 = false;
+            }
+        } else {
+            if ($('#pw').val() !== ''){
+                if(isPw){
+                    $('#message-pw2').html('<span class="greenspan">비밀번호가 일치합니다.</span>');
+                    isPw2 = true;
+                } else {
+                    isPw2 = false;
+                }
+            }
+        }
+    }
+
+    // 이메일 주소 유효성 검사
+    function isValidEmail(){
+        var emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/;
+        if ($('#email').val() !== ('')){
+            if (!emailRegex.test($('#email').val())){
+                $('#message-email').html('<span class="redspan">올바른 이메일 주소가 아닙니다.</span>');
+                isEmail = false;
+            } else {
+                // ajax 중복 검사
+                $.ajax({
+                    type: 'POST',
+                    url: location.href + '/validate/email',
+                    data: {email: $('#email').val()},
+                    success: function (data) {
+                        if (data == 'duplicate') {
+                            $('#message-email').html('<span class="redspan">이미 사용중인 이메일 주소입니다.</span>');
+                            isEmail = false;
+                        }
+                        else {
+                            $('#message-email').html('<span class="greenspan">사용 가능한 이메일 주소입니다.</span>');
+                            isEmail = true;
+                        }
+                    }
+                });
+            }
+        }
+    }
+
+    // 사용자 이름 유효성 검사
+    function isValidUsername(){
+        console.log('user name length : '+$('#username').length);
+        if($('#username').val().length < 2 || $('#username').val().length > 10 ){
+            if($('#username').val() !== ''){
+                $('#message-username').html('<span class="redspan">이름이 너무 짧거나 깁니다.</span>');
+                isUsername = false;
+            }
+        } else {
+            $('#message-username').html('<span class="greenspan">사용할 수 있는 이름입니다.</span>');
+            isUsername = true;
+        }
+    }
+
+    // 휴대전화 번호 문자열 필터링
+    function filterLetters(input){
+        return input.replace(/[^0-9]/gi, '');
+    }
+
+
+    $('#btn_submit').click(function(){
+
+        $('#btn_submit').attr('disabled', true);
+        if(isId && isPw && isPw2 && isEmail && isUsername){
+            $('#form_join').submit();
+            return true;
+        }else {
+            alert('올바르게 입력되지 않은 정보가 있습니다.');
+            $('#btn_submit').attr('disabled', false);
+            return false;
+        }
+
+    });
+
+</script>
+
+
+            </div>
+        </div>
+
+
+    </div>
+    <!-- end of set layout style-->
+
+    <footer>
+      <% include ../partials/footer %>
+    </footer>
+
+</body>
+
+<script src="/javascripts/responsive-menu.js"></script>

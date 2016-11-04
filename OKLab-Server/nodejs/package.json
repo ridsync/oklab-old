@@ -6,13 +6,18 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "async": "^2.1.2",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.15.1",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "ejs": "~2.4.1",
     "express": "~4.13.4",
     "express-mysql-session": "^1.2.0",
     "express-session": "^1.14.1",
+    "mongoose": "^4.1.7",
+    "mongoose-express-session": "^0.0.5",
     "morgan": "~1.7.0",
     "multer": "^1.2.0",
     "mysql": "^2.11.1",

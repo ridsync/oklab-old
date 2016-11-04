@@ -1,21 +1,73 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="/stylesheets/responsive-menu.css">
+    <link rel="stylesheet" href="/stylesheets/basic.css">
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+</head>
 
-    <ul id="account">
-      <li><a href="/auth/register">Register</a></li>
-      <li><a href="/auth/login">Login</a></li>
-      <li><a href="/board/list">Board</a></li>
-    </ul>
+<body>
+  <header>
+    <% include partials/header %>
+  </header>
 
-    <li><a href="/files/nebular.jpg">Nebular.jpg</a></li>
-    <li><a href="/images/hyuna.jpg">Hyuna.jpg</a></li>
+<div id="container">
+    <style scoped>
+        @media only screen and (max-width: 640px) {
+            #container { padding: 0 0 !important; }
+        }
+    </style>
+<style scoped>
+    @media only screen and (max-width: 640px) {
+        #features { padding: 10px 15px !important;  }
+    }
+</style>
 
-  </body>
-</html>
+<div id="promo">
+    <p class="heading">OK MEAN STACK Project</p>
+    <p class="subheading">Fast, Easily Managed, Intuitive <mark>Content Management System</mark> based on Node.js</p>
+
+    <a href="/about" class="pure-button pure-button-primary" style="font-size:120%; margin-top:100px; padding: 10px 20px !important;">Overview</a>
+</div>
+
+<div id="features">
+    <div class="row">
+        <div class="col-md-3">
+            <h4>Fullstack JavaScript</h4>
+            <em>Tinypress built with Node.js, MongoDB, and Express.js. You can easily customize, grasp codes with just one language. </em>
+        </div>
+        <div class="col-md-3">
+            <h4>Modular Structure</h4>
+            <em>Inspired with <a href="https://vimeo.com/56166857">TJ's idea</a>, Tinypress has MVC pattern and its modular structure enables you to easily manage data model, client view, and internal controller.</em>
+        </div>
+        <div class="col-md-3">
+            <h4>Ready for Publish</h4>
+            <em>Tinpyress has essential modules to publish website such as joining, finding a password, editing profile, writing article, and admin handling.
+            click <a href="/all">here</a> for more information.</em>
+        </div>
+        <div class="col-md-3">
+            <h4>REST API</h4>
+            <em>Bindng CRUD to HTTP verbs Intuitively, Tinypress has REST api that relies upon the HTTP standard.</em>
+        </div>
+    </div>
+</div>
+
+    </div>
+
+    <!-- end of set layout style-->
+  <footer>
+    <% include partials/footer %>
+  </footer>
+</body>
+
+<script src="/javascripts/responsive-menu.js"></script>

@@ -8,21 +8,20 @@ module.exports = function(app){
   app.use(passport.session());
   passport.serializeUser(function(user, done) {
     console.log('serializeUser', user);
-    done(null, user.userId);
+    done(null, user);
   });
   passport.deserializeUser(function(user, done) {
     console.log('deserializeUser', user);
-    User.findOne({
-        where: {
-            userId: user.userId
-        }
-    }).then(function( user ){
-        done(null, user);
-    }).catch(function( err ){
-        done(err);
-    });
-    // User.findById(id, function(err, user) {
-    //   done(err, user);
+    done(null, user);
+    // User.findOne({
+    //     where: {
+    //         userId: user.userId
+    //     }
+    // }).then(function( user ){
+    //   console.log('deserializeUser findOne  user = ' + user);
+    //     done(null, user);
+    // }).catch(function( err ){
+    //     done(err);
     // });
   });
   passport.use('local-login',
@@ -31,7 +30,7 @@ module.exports = function(app){
         passwordField : 'password',
         passReqToCallback : true
       },
-      function(req, id, password, done) {
+      function(req, userId, password, done) {
         User.findOne({ 'userId' :  userId }, function(err, user) {
           if (err) return done(err);
 
@@ -43,6 +42,7 @@ module.exports = function(app){
               req.flash("userId", req.body.userId);
               return done(null, false, req.flash('loginError', 'Password does not Match.'));
           }
+          console.log('User Login Success  user = ' + user.userId);
           req.flash('postsMessage', 'Welcome '+user.userName+'!');
           return done(null, user);
         });

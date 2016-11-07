@@ -54,48 +54,57 @@ module.exports = function(passport){
   });
 
   route.post('/register', function(req, res){
-    var newUser = req.params.user;
-    // 왜 user가 안넘어오지 jquery문제 ?
-    console.log('[register] newUser = ' + newUser);
-    console.log('[register] newUser = ' + req.params.user.email);
-    newUser.userLevel = 1;
+    var newUser = req.body.user;
+    newUser.userLevel = 1; // 회원가입 기본레벨 부여
     User.create(newUser, function (err,user) {
       if(err) return res.json({success:false, message:err});
       req.flash("loginMessage","Thank you for registration!");
       // create에 성공하면 welcome
       // 페이지로 이동 redirct  유저정보 로그인상태로
-      res.redirect('/welcome');
+      res.redirect('/auth/welcome');
     });
   }); // user create
 
-  route.get('/welcome', function(req, res){
-    if(req.user && req.user.userId) {
-      res.send(`
-        <h1>Hello, ${req.user.userId}</h1>
-        <a href="/auth/logout">logout</a>
-      `);
+  route.post('/welcome',
+     passport.authenticate(
+      'local-login',
+      {
+        successRedirect: '/auth/welcome',
+        failureRedirect: '/auth/login',
+        failureFlash: true
+      }
+    ));
+
+    route.get('/welcome',  function(req, res){
+      var user = req.user;
+      console.log('[welcome] user = ' + user);
+      // req.flash('userId',user.userId);
+      // req.flash('email',user.email);
+        res.render('auth/welcome', {title: 'Welcome Page' , user:'fdafsd'});
+    });
+
+    route.get('/login', function(req, res){
+      res.render('auth/login',{title: 'Login Page', userId:req.flash("userId")[0]});
+    });
+
+  route.get('/loginResult', function(req, res){
+    var loginError = req.flash('loginError');
+    if(req.user){
+      console.log('[login] login success userId = ' + req.flash("userId")[0]);
+      res.send(null);
     } else {
-      res.send(`
-        <h1>Welcome</h1>
-        <ul>
-          <li><a href="/auth/login">Login</a></li>
-          <li><a href="/auth/register">Register</a></li>
-        </ul>
-      `);
+      console.log('[login] login failed loginError = ' + loginError);
+      res.send(loginError);
+      req.flash('loginError',null);
     }
   });
 
-  route.get('/login', function(req, res){
-    res.render('login/login',{userId:req.flash("userId")[0],email:req.flash("email")[0], loginError:req.flash('loginError'), loginMessage:req.flash('loginMessage')});
-  });
-
-  route.post(
-    '/login',
+  route.post('/login',
     passport.authenticate(
       'local-login',
       {
-        successRedirect: '/board',
-        failureRedirect: '/auth/login',
+        successRedirect: '/auth/loginResult',
+        failureRedirect: '/auth/loginResult',
         failureFlash: true
       }
     )

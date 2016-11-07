@@ -21,9 +21,13 @@
         <div class="pure-u-1 pure-u-md-6-24">
             <div class="pure-menu pure-menu-horizontal custom-menu-3 custom-can-transform">
                 <ul class="pure-menu-list">
-
-                    <li class="pure-menu-item"><a href="/auth/login">로그인</a></li>
-                    <li class="pure-menu-item"><a href="/auth/register">회원가입</a></li>
+                    <% if( user ){ %>
+                      <li class="pure-menu-item"><a href="/auth/profile"><%= user %></a></li>
+                      <li class="pure-menu-item"><a href="/auth/logout">로그아웃</a></li>
+                    <% } else { %>
+                      <li class="pure-menu-item"><a href="/auth/login">로그인</a></li>
+                      <li class="pure-menu-item"><a href="/auth/register">회원가입</a></li>
+                    <% } %>
 
                 </ul>
             </div>

@@ -3,6 +3,14 @@ var passport = require('./config/mongodb/passport')(app);
 // var app = require('./config/mysql/express')();
 // var passport = require('./config/mysql/passport')(app);
 
+// res initialize
+app.use(function(req, res, next) {
+  console.log('append to locals user = ' + req.user);
+  res.locals.user = req.user;
+  res.locals.title = 'OK MEAN Stack: Project';
+  next();
+});
+
 // default routes
 var main = require('./routes/main')();
 var auth = require('./routes/auth')(passport);
@@ -21,8 +29,9 @@ app.use('/board', board);
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
-  next(err);
-});
+  // next(err);
+  res.render('error404');
+})
 
 // error handlers
 

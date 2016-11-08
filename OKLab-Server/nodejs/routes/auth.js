@@ -76,20 +76,27 @@ module.exports = function(passport){
     ));
 
     route.get('/welcome',  function(req, res){
-      var user = req.user;
-      console.log('[welcome] user = ' + user);
+      // console.log('[welcome] user = ' + user);
       // req.flash('userId',user.userId);
       // req.flash('email',user.email);
-        res.render('auth/welcome', {title: 'Welcome Page' , user:'fdafsd'});
+      if(isLoggedIn(req ,res)){
+        res.redirect('/');
+      } else {
+        res.render('auth/welcome', {title: 'Welcome Page'});
+      }
     });
 
     route.get('/login', function(req, res){
-      res.render('auth/login',{title: 'Login Page', userId:req.flash("userId")[0]});
+      if(isLoggedIn(req ,res)){
+        res.redirect('/');
+      } else {
+        res.render('auth/login',{title: 'Login Page', userId:req.flash("userId")[0]});
+      }
     });
 
   route.get('/loginResult', function(req, res){
     var loginError = req.flash('loginError');
-    if(req.user){
+    if(isLoggedIn(req, res)){
       console.log('[login] login success userId = ' + req.flash("userId")[0]);
       res.send(null);
     } else {
@@ -114,8 +121,16 @@ module.exports = function(passport){
     req.logout();
     req.flash("postsMessage", "Good-bye, have a nice day!");
     req.session.save(function(){
-      res.redirect('/auth/login');
+      res.redirect('back');
     });
   });
+
+  function isLoggedIn(req, res) {
+    if (req.isAuthenticated()){
+      return true;
+    }
+    return false
+  }
+
   return route;
 }

@@ -125,6 +125,10 @@ module.exports = function(passport){
     });
   });
 
+  route.get('/notlogged', function(req, res, next) {
+    res.send(' not logged  please login !!!!');
+  });
+
   function isLoggedIn(req, res) {
     if (req.isAuthenticated()){
       return true;

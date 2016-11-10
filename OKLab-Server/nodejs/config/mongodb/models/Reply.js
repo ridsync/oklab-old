@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var replySchema = mongoose.Schema({
   // replySeq: {type:Number, required:true},
-  body: {type:String, required:true},
+  content: {type:String, required:true},
   author: {type:mongoose.Schema.Types.ObjectId, ref:'user', required:true},
   createdAt: {type:Date, default:Date.now},
   updatedAt: Date ,

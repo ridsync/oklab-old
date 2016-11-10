@@ -2,13 +2,14 @@ var mongoose = require('mongoose');
 
 var postSchema = mongoose.Schema({
   postType: {type:String, required:true}, // notice , normal , gallery
-  title: {type:String, required:true},
-  body: {type:String, required:true},
-  imgPath: String ,
+  subject: {type:String, required:true},
+  content: {type:String, required:true},
+  tags: String ,
+  // imgPath: String ,
   author: {type:mongoose.Schema.Types.ObjectId, ref:'user', required:true},
   createdAt: {type:Date, default:Date.now},
   updatedAt: Date ,
-  hits: {type:Number, required:true},
+  hits: {type:Number, default:0},
   comments: [{type:mongoose.Schema.Types.ObjectId, ref:'reply'}]
 });
 

@@ -1,25 +1,39 @@
 module.exports = function(){
   var route = require('express').Router();
-  var conn = require('../config/mysql/db')();
+  var Post = require('../config/mongodb/models/Post');
 
-  route.get(['/', '/:id'], function(req, res){
-    var sql = 'SELECT id,title FROM topic';
-    conn.query(sql, function(err, topics, fields){
-      var id = req.params.id;
-      if(id){
-        var sql = 'SELECT * FROM topic WHERE id=?';
-        conn.query(sql, [id], function(err, topic, fields){
-          if(err){
-            console.log(err);
-            res.status(500).send('Internal Server Error');
-          } else {
-            res.render('board/list', {topics:topics, topic:topic[0], user:req.user});
-          }
-        });
-      } else {
-        res.render('board/list', {topics:topics, user:req.user});
-      }
-    });
+  // board main
+  route.get('/', function(req, res){
+    res.render('board/list');
+  });
+
+  // board post add view
+  route.get('/add' , isLoggedIn , function(req, res, next){
+      res.render('board/add');
+  });
+// board post add
+  route.post('/add' , isLoggedIn , function(req, res){
+      req.body.post.postType = 'pt1';
+      req.body.post.author = req.user._id;
+      req.body.post.hits = 0;
+      console.log("add/ new post data =  "+ req.body.post);
+      Post.create(req.body.post, function (err,post) {
+        if(err) return res.json({success:false, message:err});
+        res.redirect('/board');
+      });
+  });
+
+  route.put('/edit/:postId' , function(req, res){
+      console.log("add - "+req.params);
+  });
+
+  route.delete('/delete/:postId' , function(req, res){
+      console.log("add - "+req.params);
+  });
+
+  // board post detail
+  route.get('/:postId' , function(req, res){
+      console.log("readPost - "+req.params);
   });
 
   function isLoggedIn(req, res, next) {
@@ -27,7 +41,7 @@ module.exports = function(){
       return next();
     }
     req.flash("postsMessage","Please login first.");
-    res.redirect('/');
+    res.redirect('/auth/notlogged');
   }
   return route;
 }

@@ -26,13 +26,14 @@ module.exports = function(){
   app.use(cookieParser());
   app.use(express.static('public'));
   app.use(require('stylus').middleware('public'));
-  app.use('/files',express.static('uploads'));
   app.use(flash());
   app.use(session({
     secret: '1234DSFs@adf1234!@#$asd',
     resave: false,
     saveUninitialized: true,
-    store:new MongooseStore({connection: mongooseCon})
+    store:new MongooseStore({connection: mongooseCon}),
+    cookie: { maxAge: 10 * 60 * 1000 }
+    // cookie: { expires: new Date(Date.now() + 5 * 60 * 1000), maxAge: 5 * 60 * 1000 }
   }));
   return app;
 }

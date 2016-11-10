@@ -5,7 +5,8 @@ var passport = require('./config/mongodb/passport')(app);
 
 // res initialize
 app.use(function(req, res, next) {
-  console.log('append to locals user = ' + req.user);
+  // console.log('[api common] :: params  = ' + JSON.stringify(req.params) );
+  console.log('[api common] :: locals user = ' + req.user);
   res.locals.user = req.user;
   res.locals.title = 'OK MEAN Stack: Project';
   next();
@@ -15,15 +16,15 @@ app.use(function(req, res, next) {
 var main = require('./routes/main')();
 var auth = require('./routes/auth')(passport);
 var board = require('./routes/board')();
+var file = require('./routes/file')();
 // var index = require('./routes/mysql/index')();
 // var auth = require('./routes/mysql/auth')(passport);
 // var board = require('./routes/mysql/board')();
-// var upload = require('./routes/mysql/upload')();
 
 app.use('/', main);
 app.use('/auth', auth);
 app.use('/board', board);
-// app.use('/upload', upload);
+app.use('/file', file);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

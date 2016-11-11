@@ -4,7 +4,9 @@ module.exports = function(){
 
   // board main
   route.get('/', function(req, res){
-    res.render('board/list');
+    console.log("login/ session =  "+ JSON.stringify(req.session) );
+    res.render('board/list', {sesssionTime:req.session.cookie.expires ,
+       userTime:req.session.passport.user.expireAt});
   });
 
   // board post add view
@@ -41,7 +43,7 @@ module.exports = function(){
       return next();
     }
     req.flash("postsMessage","Please login first.");
-    res.redirect('/auth/notlogged');
+    res.redirect('/auth/notAuth');
   }
   return route;
 }

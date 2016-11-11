@@ -125,8 +125,8 @@ module.exports = function(passport){
     });
   });
 
-  route.get('/notlogged', function(req, res, next) {
-    res.send(' not logged  please login !!!!');
+  route.get('/notAuth', function(req, res, next) {
+    res.send(' you are not authorized to view this page !!!!');
   });
 
   function isLoggedIn(req, res) {

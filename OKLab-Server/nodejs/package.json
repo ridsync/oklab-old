@@ -17,6 +17,7 @@
     "express": "~4.13.4",
     "express-mysql-session": "^1.2.0",
     "express-session": "^1.14.1",
+    "moment": "^2.16.0",
     "mongoose": "^4.1.7",
     "mongoose-express-session": "^0.0.5",
     "morgan": "~1.7.0",

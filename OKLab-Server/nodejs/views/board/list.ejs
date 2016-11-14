@@ -7,33 +7,160 @@
     <% include ../partials/header %>
   </header>
 
+
   <div id="container">
-       <!-- content condition -->
+      <!-- content condition -->
 
-       <!-- content with side -->
-
-       <div id="content" class="pure-g">
-           <div class="pure-u-1">
-
-
-        <div style="min-height:400px;">
-           <div style="margin:0 auto; text-align:center">
-               <p class="text-center"><h1><i class="fa fa-smile-o fa-4x"></i></h1></p>
-               <p class="text-center"><h2> 게시판 준비중. </h2></p>
-               <p class="text-center"><h2> 아직 멀었네요 .</h2></p>
-               <br/><br/>
-               <p class="text-center"><h4>유저생성시간 : <%= userTime %></h4></p>
-               <p class="text-center"><h4>세션종료시간 : <%= sesssionTime %></h4></p>
-               <br/>
-               <p class="text-left">
-                 <!-- 회원 정보 표시  ? -->
-               </p>
-           </div>
-        </div>
-                   </div>
+      <div id="content-header">
+          자유롭게 소통할 수 있는 공간입니다.
       </div>
-  </div>
-    <!-- end of set layout style-->
+
+
+
+      <!-- content with side -->
+
+      <div id="content" class="pure-g">
+          <div class="pure-u-1 pure-u-md-1-5 region">
+              <div class="list-group list-special" style="border:1px solid #ddd;">
+
+                  <a href="/board" class="list-group-item active">일반 타입</a>
+              </div>
+          </div>
+          <div class="pure-u-1 pure-u-md-4-5 region">
+
+        <link rel="stylesheet" href="/stylesheets/board.view.list.css">
+
+        <table id="table-typical" class="table table-horizontal">
+            <thead>
+                <tr>
+                    <th width="10%">번호</th>
+                    <th>제목</th>
+                    <th width="10%">글쓴이</th>
+                    <th width="15%">작성일</th>
+                    <th width="10%" class="center">조회</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% if(notices) { %>
+              <% notices.forEach(function(post){ %>
+                <tr style="font-weight:600;" class="info">
+                    <td>공지</td>
+                    <td><a href="board/<%= post._id %>?page=<%= page %>" class="article">
+                            <%= post.subject %>
+                            <% if(post.comments.length > 0) { %>
+                            <span id="comment_count">[ <%= post.comments.length %> ]</span>
+                            <% } %>
+                        </a>
+                    </td>
+                    <td><%= post.author.userName %></td>
+                    <td><%= moment(post.createdAt).format('YYYY-MM-DD hh:mm:ss'); %></td>
+                    <td class="center"><%= post.hits %></td>
+                </tr>
+              <% }) %>
+            <% } %>
+
+            <% var i = 0; %>
+            <% posts.forEach(function(post){ %>
+              <tr id="<%= post._id%>">
+                  <td><%= totalCount - ((page-1) * 10) - i %></td>
+                  <td><a href="board/<%= post._id %>?page=<%= page %>" class="article">
+                          <span style="padding-right:50px !important;"><%= post.subject %>
+                          <% if(post.comments.length > 0) { %>
+                          <span id="comment_count">[ <%= post.comments.length %> ]</span>
+                          <% } %>
+                          </span></a>
+                  </td>
+                  <td><%= post.author.userName %></td>
+                  <td><%= moment(post.createdAt).format('YYYY-MM-DD hh:mm:ss'); %></td>
+                  <td class="center"><%= post.hits %></td>
+              </tr>
+              <% i++ %>
+            <% }) %>
+
+            </tbody>
+        </table>
+
+        <nav style="text-align: center">
+            <ul class="pagination pagination-sm">
+                <li>
+                    <a href="/board?page=1" aria-label="Previous">
+                       처음
+                    </a>
+                </li>
+                <% for(i=0 ; i < maxPage ; i++) { %>
+                  <% if(page == i + 1 ){ %>
+                    <li class=active>
+                  <% } else { %>
+                    <li >
+                  <% } %><a href="/board?page=<%= i + 1 %>"><%= i + 1 %></a></li>
+                <% } %>
+
+                <li>
+                    <a href="/board?page=<%= maxPage %>" aria-label="Next">
+                        끝
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <form id="search_form" action="/board/search" method="get">
+                    <div class="input-group" style="width:350px;">
+                        <span class="input-group-addon">
+                            <select name="where">
+                                <option value="subject">제목</option>
+                                <option value="content">내용</option>
+                                <option value="subject_or_content">제목+내용</option>
+                                <option value="writer_name">이름</option>
+                                <option value="writer_id">아이디</option>
+                                <option value="tags">태그</option>
+                            </select>
+                        </span>
+                        <input class="form-control" type="text" id="keyword" name="keyword" />
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default btn-alt"><i class="fa fa-search"></i> 검색</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <p class="text-right">
+                 <button id="btn_write_document" class="btn btn-primary btn-alt"><i class="fa fa-pencil"></i> 글쓰기</button>
+                </p>
+            </div>
+        </div>
+
+
+        <script type="text/javascript">
+
+            // 현재 문서의 하이라이팅
+
+
+            // 글쓰기 버튼 클릭 시
+            $('#btn_write_document').click(function(){
+
+              // var url = location.host;
+              // $(location).attr('href',url + '/board/add');
+                    location.href = location.href+'/add';
+
+
+            });
+
+            $('.article').on('click', function(){
+
+            });
+
+        </script>
+
+              </div>
+          </div>
+          <!-- content with no side -->
+
+
+      </div>
+      <!-- end of set layout style-->
 
     <footer>
       <% include ../partials/footer %>

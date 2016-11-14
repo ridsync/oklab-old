@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var postSchema = mongoose.Schema({
-  postType: {type:String, required:true}, // notice , normal , gallery
+  postType: {type:String, required:true}, // notice , normal
   subject: {type:String, required:true},
   content: {type:String, required:true},
   tags: String ,

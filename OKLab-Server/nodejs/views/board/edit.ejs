@@ -1,28 +1,138 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-  </head>
-  <body>
-    <header>
-    <%- include header %>
-    </header>
-    <artcle>
-      <form action="/board/<%=topic.id%>/edit" method="post">
-        <p>
-          <input type="text" name="title" value="<%=topic.title%>" placeholder="title"/>
-        </p>
-        <p>
-          <textarea name="description" placeholder="description"><%=topic.description%>
-          </textarea>
-        </p>
-        <p>
-          <input type="text" name="author" value="<%=topic.author%>" placeholder="author"/>
-        </p>
-        <p>
-          <input type="submit"/>
-        </p>
-      </form>
-    </artcle>
-  </body>
+<%include ../partials/head %>
+<body>
+  <header>
+    <% include ../partials/header %>
+  </header>
+
+  <div id="container">
+      <!-- content condition -->
+
+
+
+      <!-- content with side -->
+
+      <div id="content" class="pure-g">
+          <div class="pure-u-1">
+
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector: "#form-content",
+        plugins: ["image"],
+        toolbar1: 'styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | mybutton',
+        menubar: false,
+        // 파일 찾기 버튼을 눌렀을 때
+        file_browser_callback: function(field_name, url, type, win) {
+            if(type=='image') $('#my_form input').click();
+        },
+        relative_urls : true,
+        remove_script_host : true,
+        convert_urls : false,
+        content_css : '/editor/style.css',
+        extended_valid_elements : "span[!class]",
+        setup: function(editor) {
+            editor.addButton('mybutton', {
+                text: "이미지 삽입",
+                icon: false,
+                onclick: function (e) {
+                    $('#my_form input').click();
+                }
+            })
+            editor.on('change', function () {
+                editor.save();
+            });
+        }
+    });
+</script>
+
+<form action="/board/edit/post" method="post" id="document_write_form">
+    <input class="form-control" type="text" id="subject" name="post[subject]" style="margin-bottom:10px;"
+           value="<%= post.subject %>" placeholder="여기에 제목을 입력합니다">
+    <textarea class="form-control" id="form-content" name="post[content]" rows="20">
+      <%- post.content %>
+    </textarea>
+    <input id="uploads" name="uploads" type="hidden" value=""/>
+
+    <div class="checkbox" style="margin: 15px 5px;">
+
+        <input type="text" name="post[tags]" value="<%= post.tags %>" class="form-control"
+               placeholder="태그: 여러 개의 태그는 쉼표(,)로 구분하세요" style="width:300px" title="Tag" />
+        </label>
+    </div>
+    <input id="postId" name="post[postId]" type="hidden" value="<%= post._id %>"/>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">수정완료</button>
+
+</form>
+
+<iframe id="form_target" name="form_target" style="display:none"></iframe>
+<form id="my_form" action="/file/upImage" target="form_target" method="post" enctype="multipart/form-data"
+      style="width:0; height:0; overflow:hidden">
+    <input type="file" id="pic" name="imgFile" accept="image/*" onchange="$('#my_form').submit(); this.value='';">
+</form>
+
+<script>
+
+    // Unbind beforeunload, unload events when submit
+    $('#document_write_form').submit(function(){
+        $(window).unbind('beforeunload');
+        // $(window).unbind('unload');
+    })
+
+    // textarea 에 내용이 있을 때 경고 메시지 출력
+    $(window).on('beforeunload', function(){
+        if ($('#form-content').val().length > 10){
+            return "작성중인 내용이 사라집니다. 계속 하시겠습니까?";
+        }
+    });
+
+    // 이미지를 삽입하고 글쓰기를 취소한 경우 첨부된 이미지 삭제
+    // $(window).on('unload', function(){
+    //     console.log('how many : '+$('#uploads').val().length);
+    //     if($('#uploads').val().length > 1) {
+    //         $.ajax({
+    //             type: "DELETE",
+    //             url: "/file/delete",
+    //             data: { uploads : $('#uploads').val()},
+    //             success: function(result){
+    //                 alert(result);
+    //             }
+    //         });
+    //     }
+    // });
+
+    $("#my_form").submit(function(e) {
+        var formData = new FormData($(this)[0]);
+
+        $.ajax({
+            url: "/file/upImage",
+            type: "POST",
+            data: formData,
+            success: function (msg) {
+                tinymce.activeEditor.insertContent('<a class="mg-popup-img" href="/uploads/'+msg+'"><img class="pop" src="/uploads/'+msg+'" style="max-width:100%; max-height:100%;" /></a>');
+                if($('#uploads').val().length > 1){
+                    $('#uploads').val($('#uploads').val()+','+msg);
+                } else $('#uploads').val(msg);
+
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+        e.preventDefault();
+    });
+
+</script>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- end of set layout style-->
+
+    <%include ../partials/footer %>
+
+</body>
+
+<script src="/javascripts/responsive-menu.js"></script>
 </html>

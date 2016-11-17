@@ -32,8 +32,8 @@ module.exports = function(){
     resave: false,
     saveUninitialized: true,
     store:new MongooseStore({connection: mongooseCon}),
-    cookie: { maxAge: 10 * 60 * 1000 }
-    // cookie: { expires: new Date(Date.now() + 5 * 60 * 1000), maxAge: 5 * 60 * 1000 }
+    // cookie: { maxAge: 10 * 60 * 1000 }
+    cookie: { expires: new Date(Date.now() + 5 * 60 * 1000), maxAge: 5 * 60 * 1000 }
   }));
   return app;
 }

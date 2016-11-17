@@ -1,0 +1,33 @@
+.document_wrapper { padding: 10px 0; background-color:#fff; }
+.document_header { padding: 20px 0; border-bottom: 1px solid #ddd; }
+.document_header span { padding-left: 15px; }
+.document_subject { display:block; font: 15pt 돋움, Arial; font-weight: 600; padding:3px 0; }
+.document_regdate { display:block; font: 11pt Helvetica Neue, Arial; padding:2px 0; }
+.document_writer { display:block; font: 11pt Helvetica Neue, Arial; color: dodgerblue;}
+.document_content { padding: 30px 15px; font: 11pt 돋움, Arial; }
+.document_content .tags { display:block; bottom:0; left:0; font: 10pt Helvetica Neue; color:#666; }
+.document_footer { padding:10px 10px; border-top: 1px solid #ddd; height:50px;  }
+
+.comment_wrapper { margin-top:20px; background-color:#fff; margin-bottom:20px;}
+.comment_header { padding: 20px 0; border-bottom: 1px solid #ddd; }
+.comment_header span { padding-left: 15px; font: 15pt 돋움, Arial; }
+
+.comment { border-bottom:1px dotted #ddd;  }
+.comment_info { font:10pt 돋움, Arial; padding:30px 20px; }
+.comment_info .writer { display: block;  }
+.comment_info .created_at { color: #888; font:9pt 돋움 }
+.comment_content_box { padding:30px 10px 35px 10px; min-height:60px; }
+.comment_content { font:11pt 돋움, Arial; line-height:20px; word-wrap: break-word;
+white-space: pre-wrap; }
+.comment_footer { position:absolute; display:inline-block; bottom: 2px; right:10px; }
+.comment_write_form { margin-top: 10px; padding: 15px 15px; padding-top:0; }
+
+.mobileOnly { display: none; }
+
+@media only screen and (max-width: 640px) {
+    .comment_info { display: none; }
+    .mobileOnly { display: block; margin-top:30px; text-align: right; }
+    .comment_content { font: 10pt 돋움; line-height:16px; }
+    .comment_footer { padding-top:10px; }
+    .btn { font-size: 70%; }
+}

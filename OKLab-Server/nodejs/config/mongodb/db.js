@@ -1,14 +1,11 @@
 
 module.exports = function(){
 
-  // var host = process.env.MONGO_DB;
-  // var host = process.env.USER;
-  // var host = process.env.PASSWORD;
-  // var host = process.env.INSTANCE;
-
+var gConst = require('../gconst');
 var mongoose = require('mongoose');
+
 // database
-mongoose.connect('mongodb://10.23.51.124:27017/oklab_nodejs_board');
+mongoose.connect(gConst.MONGODB_ADDR);
 // mongoose.connect(process.env.MONGO_DB);
 var db = mongoose.connection;
 db.once("open",function () {

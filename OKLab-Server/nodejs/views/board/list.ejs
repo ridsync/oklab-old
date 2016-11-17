@@ -45,7 +45,7 @@
               <% notices.forEach(function(post){ %>
                 <tr style="font-weight:600;" class="info">
                     <td>공지</td>
-                    <td><a href="board/<%= post._id %>?page=<%= page %>" class="article">
+                    <td><a href="board/<%= post._id %>/<%= page %>" class="article">
                             <%= post.subject %>
                             <% if(post.comments.length > 0) { %>
                             <span id="comment_count">[ <%= post.comments.length %> ]</span>
@@ -59,24 +59,25 @@
               <% }) %>
             <% } %>
 
-            <% var i = 0; %>
-            <% posts.forEach(function(post){ %>
-              <tr id="<%= post._id%>">
-                  <td><%= totalCount - ((page-1) * 10) - i %></td>
-                  <td><a href="board/<%= post._id %>?page=<%= page %>" class="article">
-                          <span style="padding-right:50px !important;"><%= post.subject %>
-                          <% if(post.comments.length > 0) { %>
-                          <span id="comment_count">[ <%= post.comments.length %> ]</span>
-                          <% } %>
-                          </span></a>
-                  </td>
-                  <td><%= post.author.userName %></td>
-                  <td><%= moment(post.createdAt).format('YYYY-MM-DD hh:mm:ss'); %></td>
-                  <td class="center"><%= post.hits %></td>
-              </tr>
-              <% i++ %>
-            <% }) %>
-
+            <% if(posts) { %>
+              <% var i = 0; %>
+              <% posts.forEach(function(post){ %>
+                <tr id="<%= post._id%>">
+                    <td><%= totalCount - ((page-1) * 10) - i %></td>
+                    <td><a href="board/<%= post._id %>/<%= page %>" class="article">
+                            <span style="padding-right:50px !important;"><%= post.subject %>
+                            <% if(post.comments.length > 0) { %>
+                            <span id="comment_count">[ <%= post.comments.length %> ]</span>
+                            <% } %>
+                            </span></a>
+                    </td>
+                    <td><%= post.author.userName %></td>
+                    <td><%= moment(post.createdAt).format('YYYY-MM-DD hh:mm:ss') %></td>
+                    <td class="center"><%= post.hits %></td>
+                </tr>
+                <% i++ %>
+              <% }) %>
+            <% } %>
             </tbody>
         </table>
 
@@ -143,7 +144,7 @@
 
               // var url = location.host;
               // $(location).attr('href',url + '/board/add');
-                    location.href = location.href+'/add';
+                    location.href = location.href+'/add/post';
 
 
             });

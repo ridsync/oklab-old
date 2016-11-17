@@ -10,7 +10,7 @@ var postSchema = mongoose.Schema({
   createdAt: {type:Date, default:Date.now},
   updatedAt: Date ,
   hits: {type:Number, required:true},
-  comments: [{type:mongoose.Schema.Types.ObjectId, ref:'reply'}]
+  comments: [{type:mongoose.Schema.Types.ObjectId, ref:'comment'}]
 });
 
 postSchema.methods.getCreatedDate = function () {

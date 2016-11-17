@@ -21,5 +21,5 @@ replySchema.methods.getCreatedTime = function () {
 function get2digits(num){
   return ("0" + num).slice(-2);
 }
-var Post = mongoose.model('reply',replySchema);
-module.exports = Post;
+var Comment = mongoose.model('comment',replySchema);
+module.exports = Comment;

@@ -46,7 +46,7 @@
     });
 </script>
 
-<form action="/board/edit/post" method="post" id="document_write_form">
+<form action="/board/edit/post?page=<%= page %>" method="post" id="document_write_form">
     <input class="form-control" type="text" id="subject" name="post[subject]" style="margin-bottom:10px;"
            value="<%= post.subject %>" placeholder="여기에 제목을 입력합니다">
     <textarea class="form-control" id="form-content" name="post[content]" rows="20">

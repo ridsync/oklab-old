@@ -10,32 +10,7 @@ module.exports = function(){
   route.get('/', function(req, res){
     console.log("[board] session =  "+ JSON.stringify(req.session) );
 
-    var page = Math.max(1,req.query.page)>1? parseInt(req.query.page):1;
-    var limit = Math.max(1,req.query.limit)>1?parseInt(req.query.limit):10;
-
-    async.waterfall([function(callback){ // notices
-        Post.find({postType:"notice"}).populate("author").exec(function (err,notices) {
-          if(err) callback(err);
-          callback(null, notices);
-        });
-      },function(notices, callback){ // paging
-        Post.count({postType:"normal"},function(err,count){
-          if(err) callback(err);
-          skip = (page-1)*limit;
-          maxPage = Math.ceil(count/limit);
-          callback(null, skip, maxPage, count, notices);
-        });
-      }, function (skip, maxPage, count, notices, callback) { // posts
-        Post.find({postType:"normal"}).populate("author").sort('-createdAt').skip(skip).limit(limit).exec(function (err,posts) {
-          if(err) callback(err);
-          return res.render('board/list',{moment:moment, notices:notices, posts:posts,
-            user:req.user, page:page, maxPage:maxPage, totalCount:count,
-            urlQuery:req._parsedUrl.query, postsMessage:req.flash("postsMessage")[0]
-          });
-        });
-      }],function(err){
-        if(err) return res.json({success:false, message:err});
-      })
+    renderPostsList(req, res, false)
   });
 
   // Search
@@ -43,8 +18,8 @@ module.exports = function(){
       var where = req.query.where;
       var keyword = req.query.keyword;
       console.log("[board] search keyword =  "+ keyword);
-      var page = Math.max(1,req.query.page)>1? parseInt(req.query.page):1;
-      var limit = Math.max(1,req.query.limit)>1?parseInt(req.query.limit):10;
+      var page = Math.max(1,req.query.page)>0? parseInt(req.query.page):1;
+      var limit = Math.max(1,req.query.limit)>0?parseInt(req.query.limit):10;
 
       var queryKey = {};
       if(where === 'subject_or_content'){
@@ -76,9 +51,9 @@ module.exports = function(){
             .sort('-createdAt').skip(skip).limit(limit)
             .exec(function (err,posts) {
               if(err) callback(err);
-              return res.render('board/list',{moment:moment,notices:null, posts:posts,
-                user:req.user, page:page, maxPage:maxPage, totalCount:count,
-                urlQuery:req._parsedUrl.query, postsMessage:req.flash("postsMessage")[0]
+              return res.render('board/list',{notices:null, posts:posts,
+                page:page, maxPage:maxPage, totalCount:count,
+                moment:moment ,user:req.user, urlQuery:req._parsedUrl.query, postsMessage:req.flash("postsMessage")[0]
               });
             });
         }],function(err){
@@ -96,7 +71,6 @@ module.exports = function(){
   route.post('/add/post' , isLoggedIn , function(req, res){
       req.body.post.postType = 'normal';
       req.body.post.author = req.user._id;
-      req.body.post.hits = 0;
       console.log("add/post new post data =  "+ req.body.post);
       Post.create(req.body.post, function (err,post) {
         if(err) return res.json({success:false, message:err});
@@ -105,24 +79,31 @@ module.exports = function(){
   });
 
   // 글상세 post detail
-  route.get('/:postId/:page' , function(req, res){
+  route.get('/detail/:postId' , function(req, res){
     var postId = req.params.postId;
-    var page = req.params.page;
+    var isFocusComment = req.query.isFocusComment;
 
-    Post.findOne({_id:postId}).populate('author').exec(function (err,post) {
+    // hits 조회수증가여부 쿠키 postId 체크.
+    var incHitsCount = 1;
+    var hitIds = req.cookies.hitIds;
+    if(hitIds) incHitsCount = hitIds.indexOf(postId) >= 0 ? 0 : 1;
+
+    // 글정보 조회 및 hit 증가
+    Post.findOneAndUpdate({ _id: postId }, {$inc: {hits:incHitsCount}},{ new: true })
+      .populate('author').exec(function (err,post) {
       if(err) return res.json({success:false, message:err});
 
+      // hits 조회한 postId 쿠키저장.
+      var arHitIds = [];
+      if(hitIds) arHitIds = arHitIds.concat(hitIds);
+      if(incHitsCount == 1) arHitIds.push(postId);
+      res.cookie('hitIds', arHitIds, { maxAge: 10 * 60 * 1000 , httpOnly: true});
+
+      // 댓글리스트 조회
       Comment.find({_id: { $in : post.comments } }).populate('author').exec(function (err,comments) {
             if(err) return res.json({success:false, message:err});
-            if(!comments) return res.json({success:false, message:'comments null'});
 
-            var commentCount = post.comments.length;
-
-            return res.render("board/detail",{post:post,comments:comments, commentCount:commentCount,
-              isFocusComment:false,notices:null,posts:null, maxPage:0, page:page,
-              moment:moment, user:req.user, postsMessage:req.flash("postsMessage")[0]
-            });
-
+            renderPostsList(req, res , true , post, comments ,isFocusComment)
         });
     });
   });
@@ -130,12 +111,13 @@ module.exports = function(){
   //글수정,삭제  //TODO isLoggedIn <- 자신의 글만 허용되도록하느것도 필요하다
   route.get('/edit/post/:postId' , isLoggedIn, function(req, res){
     var postId = req.params.postId;
+    var page = req.query.page;
 
     Post.findOne({_id:postId}).populate('author').exec(function (err,post) {
       if(err) return res.json({success:false, message:err});
       console.log("detail post =  "+ post);
 
-      return res.render("board/edit",{post:post,
+      return res.render("board/edit",{post:post,page:page,
         moment:moment, user:req.user, postsMessage:req.flash("postsMessage")[0]
       });
     });
@@ -151,10 +133,7 @@ module.exports = function(){
         .populate('author').exec(function(err,post){
         if (err) return res.json({success:false, message:err});
 
-        var commentCount = post.comments.length;
-        res.render('board/detail', {post:post, commentCount:commentCount,notices:null,posts:null, maxPage:0, page:1,
-          moment:moment, user:req.user, postsMessage:req.flash("postsMessage")[0]
-        });
+          return res.redirect('/board/detail/'+ postId + '?page='+ req.query.page);
       });
   });
 
@@ -174,8 +153,8 @@ module.exports = function(){
   // 댓글 추가 , 수정 , 삭제
   route.post('/add/comment/:postId' , isLoggedIn , function(req, res){
       var postId = req.params.postId;
+      var page = req.query.page;
       req.body.comment.author = req.user._id;
-      req.body.comment.hits = 0;
       Comment.create(req.body.comment, function (err,comment) {
         if(err) return res.json({success:false, message:err});
 
@@ -184,7 +163,7 @@ module.exports = function(){
           if (err) return res.json({success:false, message:err});
 
           var commentCount = post.comments.length;
-          res.redirect('/board/'+postId +'/'+ 1)
+          res.redirect('/board/detail/'+postId + '?page='+ page  + '&isFocusComment=true');
         });
 
       });
@@ -194,6 +173,7 @@ module.exports = function(){
     var commentId = req.params.commentId;
     var postId = req.body.postId;
     var newContent = req.body.comment_content;
+    var page = req.query.page;
     console.log('commentId - ' + commentId);
     console.log('postId - ' + postId);
     console.log('newContent - ' + newContent);
@@ -201,7 +181,7 @@ module.exports = function(){
       .populate('author').exec(function(err,comment){
       if (err) return res.json({success:false, message:err});
 
-      res.redirect('/board/'+postId +'/'+ 1);
+      res.redirect('/board/detail/'+postId + '?isFocusComment=true' +'&page='+ page);
 
       // Post.findOne({ _id: postId }).exec(function(error, post) {
       //     res.render('board/detail', {isFocusComment:true, post:post, commentCount:commentCount,notices:null,posts:null, maxPage:0, page:1,
@@ -212,6 +192,7 @@ module.exports = function(){
     });
   });
 
+  // for ajax
   route.delete('/delete/comment/:commentId' , isLoggedIn, function(req, res){
     var postId = req.body.postId;
     var commentId = req.params.commentId;
@@ -237,5 +218,43 @@ module.exports = function(){
     req.flash("postsMessage","Please login first.");
     res.redirect('/auth/notAuth');
   }
+
+  function renderPostsList(req , res , isDetailView, post , comments , isFocusComment){
+
+    var page = Math.max(1,req.query.page)>0?parseInt(req.query.page):1;
+    var limit = Math.max(1,req.query.limit)>0?parseInt(req.query.limit):10;
+
+    async.waterfall([function(callback){ // notices
+        Post.find({postType:"notice"}).populate("author").exec(function (err,notices) {
+          if(err) callback(err);
+          callback(null, notices);
+        });
+      },function(notices, callback){ // paging
+        Post.count({postType:"normal"},function(err,count){
+          if(err) callback(err);
+          skip = (page-1)*limit;
+          maxPage = Math.ceil(count/limit);
+          callback(null, skip, maxPage, count, notices);
+        });
+      }, function (skip, maxPage, count, notices, callback) { // posts
+        Post.find({postType:"normal"}).populate("author").sort('-createdAt').skip(skip).limit(limit).exec(function (err,posts) {
+          if(err) callback(err);
+          if(isDetailView){ // 디테일 화면용 render
+            return res.render("board/detail",{post:post,comments:comments,isFocusComment:isFocusComment,
+              notices:notices,posts:posts, maxPage:maxPage, page:page,totalCount:count,
+              moment:moment, user:req.user, postsMessage:req.flash("postsMessage")[0]
+            });
+          } else {
+            return res.render('board/list',{notices:notices, posts:posts, page:page, maxPage:maxPage, totalCount:count,
+              moment:moment, user:req.user, urlQuery:req._parsedUrl.query, postsMessage:req.flash("postsMessage")[0]
+            });
+          }
+
+        });
+      }],function(err){
+        if(err) return res.json({success:false, message:err});
+      })
+  }
+
   return route;
 }

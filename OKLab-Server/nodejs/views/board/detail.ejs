@@ -32,9 +32,10 @@
     <div class="document_content mg-popup-gallery">
         <%- post.content %>
 
-        <span class="tags">
-            <%= post.tags %>
-        </span>
+        <br>
+        <div >
+        <span class="tags"> <%= post.tags %> </span>
+        </div>
 
     </div>
 
@@ -43,7 +44,7 @@
       <% if( user && user.userId === post.author.userId) { %>
       <button id="btn_document_delete" class="btn btn-danger btn-alt" style="float:right; margin-left:5px;" onclick="deleteDocumentAlert('board','<%= post._id %>')">
                   삭제</button>
-              <a href="/board/edit/post/<%= post._id %>" class="btn btn-default btn-alt" id="btn_document_edit"
+              <a href="/board/edit/post/<%= post._id %>?page=<%= page %>" class="btn btn-default btn-alt" id="btn_document_edit"
               style="float:right;">수정</a>
       <% } %>
         <a class="btn btn-default btn-alt" href="/board" style="float:left;">목록</a>
@@ -69,7 +70,7 @@
                 <span class="mobileOnly">    <strong><em><%= comment.author %></em></strong> 님이 <%= moment(post.createdAt).format('YYYY-MM-DD hh:mm:ss'); %> 에 작성 </span>
                 <div class="comment_footer">
                   <% if( user && user.userId == comment.author.userId) { %>
-                  <button id="btn_comment_edit_<%= comment._id %>" class="btn_comment_edit btn btn-default btn-sm" onclick=editButtonClicked('<%= comment._id %>','<%= post._id %>')>수정</button>
+                  <button id="btn_comment_edit_<%= comment._id %>" class="btn_comment_edit btn btn-default btn-sm" onclick=editButtonClicked('<%= comment._id %>','<%= post._id %>,<%= page %>')>수정</button>
                   <button id="editmode_<%= comment._id %>" class="editmode btn btn-primary btn-sm">수정 완료</button>
                   <button class="btn_comment_delete btn btn-default btn-sm" onclick=deleteCommentAlert('board','<%= post._id %>','<%= comment._id %>')>삭제</button>
                   <% } %>
@@ -81,7 +82,7 @@
     <% } %>
 
     <div class="comment_write_form">
-        <form class="form-horizontal" action="/board/add/comment/<%= post._id %>" id=form_insertComment method="POST">
+        <form class="form-horizontal" action="/board/add/comment/<%= post._id %>?page=<%= page %>" id=form_insertComment method="POST">
 
             <% if( user && user.userId) { %>
             <textarea class="form-control" rows="3" id="input_insertComment" name="comment[content]" placeholder="이곳에 댓글을 입력합니다." ></textarea>
@@ -121,10 +122,17 @@
 <script>
 
     <% if( isFocusComment ) { %>
-      // 댓글 등록 시 오토스크롤
-      $('html, body').animate({
-              scrollTop: $("#comment_<%= comments[comments.length - 1 ]._id %>").offset().top - 100
-          }, 500);
+        <% if( comments.length > 0 ) { %>
+          // 댓글 등록 시 오토스크롤
+          $('html, body').animate({
+                  scrollTop: $("#comment_<%= comments[comments.length - 1 ]._id %>").offset().top - 100
+              }, 500);
+        <% } else { %>
+          // 댓글 등록 시 오토스크롤
+          $('html, body').animate({
+                  scrollTop: $("#document_footer").offset().top
+              }, 500);
+        <% } %>
     <% } %>
     // 폼이 제출될 때 beforeunload, unload 에 bind 되어 있는 이벤트 제거
     $('#form_insertComment').submit(function(){
@@ -155,13 +163,17 @@
 
     function submitFormAndPreventDuplication(obj){
         obj.disabled = true;
-        $('#form_insertComment').submit();
+
+        var content_data = $('#input_insertComment').val();
+        if(content_data.length > 0 ){
+             $('#form_insertComment').submit();
+        }
     }
 
     $('.editmode').hide();
 
     // 댓글 수정 버튼 클릭 시
-    function editButtonClicked(comment_id, postId) {
+    function editButtonClicked(comment_id, postId, page) {
 
         $('#btn_insertComment').attr('disabled', true);
 
@@ -185,9 +197,12 @@
         $('#editmode_'+comment_id).click(function () {
 
             var content_data = $('#content_edited_comment').val();
+
+            if(content_data.length <= 0 ) return;
+
             $.ajax({
                 type: 'PUT',
-                url: '/board/edit/comment/' + comment_id,
+                url: '/board/edit/comment/' + comment_id + '?page='+page,
                 data: {postId:postId, comment_content: content_data},
                 success: function (data) {
                     $('#content_edited_comment').replaceWith("<span class='comment_content' id=comment_"+comment_id+">" + content_data + "</span>");
@@ -249,8 +264,7 @@
 </script>
 
 
-<link rel="stylesheet" href="/javascripts/board.view.list.css">
-
+<link rel="stylesheet" href="/stylesheets/board.view.list.css">
 
 <table id="table-typical" class="table table-horizontal">
     <thead>
@@ -267,12 +281,18 @@
       <% notices.forEach(function(post){ %>
         <tr style="font-weight:600;" class="info">
             <td>공지</td>
-            <td><a href="board/<%= post._id %>/<%= page %>" class="article">
-                    <%= post.subject %>
+            <td><a href="/board/detail/<%= post._id %>?page=<%= page %>" class="article">
+                  <span style="padding-right:50px !important;"><%= post.subject %>
                     <% if(post.comments.length > 0) { %>
-                    <span id="comment_count">[ <%= post.comments.length %> ]</span>
+                      <span id="comment_count">[ <%= post.comments.length %> ]</span>
                     <% } %>
-                </a>
+                    <% if( post.content && post.content.search('img class=') >= 0 ) { %>
+                      <i class="fa fa-picture-o" style="margin-left:2px; color:#666;"></i>
+                    <% } %>
+                    <% if( post.as ) { %>
+                       <span class="label label-danger" style="margin-left:5px; padding: 2px 4px; font:5pt Tahoma arial;">new</span>
+                    <% } %>
+                  </span></a>
             </td>
             <td><%= post.author.userName %></td>
             <td><%= moment(post.createdAt).format('YYYY-MM-DD hh:mm:ss'); %></td>
@@ -286,12 +306,18 @@
       <% posts.forEach(function(post){ %>
         <tr id="<%= post._id%>">
             <td><%= totalCount - ((page-1) * 10) - i %></td>
-            <td><a href="board/<%= post._id %>/<%= page %>" class="article">
-                    <span style="padding-right:50px !important;"><%= post.subject %>
-                    <% if(post.comments.length > 0) { %>
+            <td><a href="/board/detail/<%= post._id %>?page=<%= page %>" class="article">
+                <span style="padding-right:50px !important;"><%= post.subject %>
+                  <% if(post.comments.length > 0) { %>
                     <span id="comment_count">[ <%= post.comments.length %> ]</span>
-                    <% } %>
-                    </span></a>
+                  <% } %>
+                  <% if( post.content && post.content.search('img class=') >= 0 ) { %>
+                    <i class="fa fa-picture-o" style="margin-left:2px; color:#666;"></i>
+                  <% } %>
+                  <% if( post.as ) { %>
+                     <span class="label label-danger" style="margin-left:5px; padding: 2px 4px; font:5pt Tahoma arial;">new</span>
+                  <% } %>
+                </span></a>
             </td>
             <td><%= post.author.userName %></td>
             <td><%= moment(post.createdAt).format('YYYY-MM-DD hh:mm:ss') %></td>
@@ -364,7 +390,7 @@
     $('#btn_write_document').click(function(){
 
 
-            location.href = '/board/write';
+            location.href = '/board/add/post';
 
 
     });

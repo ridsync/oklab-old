@@ -6,7 +6,7 @@ var replySchema = mongoose.Schema({
   author: {type:mongoose.Schema.Types.ObjectId, ref:'user', required:true},
   createdAt: {type:Date, default:Date.now},
   updatedAt: Date ,
-  hits: {type:Number, required:true}
+  hits: {type:Number, default: 0}
 });
 
 replySchema.methods.getCreatedDate = function () {

@@ -5,7 +5,7 @@
 .document_regdate { display:block; font: 11pt Helvetica Neue, Arial; padding:2px 0; }
 .document_writer { display:block; font: 11pt Helvetica Neue, Arial; color: dodgerblue;}
 .document_content { padding: 30px 15px; font: 11pt 돋움, Arial; }
-.document_content .tags { display:block; bottom:0; left:0; font: 10pt Helvetica Neue; color:#666; }
+.document_content .tags { display:block; bottom:0; left:0; font: 10pt Helvetica Neue; color:#39f; }
 .document_footer { padding:10px 10px; border-top: 1px solid #ddd; height:50px;  }
 
 .comment_wrapper { margin-top:20px; background-color:#fff; margin-bottom:20px;}

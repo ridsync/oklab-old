@@ -45,15 +45,21 @@
               <% notices.forEach(function(post){ %>
                 <tr style="font-weight:600;" class="info">
                     <td>공지</td>
-                    <td><a href="board/<%= post._id %>/<%= page %>" class="article">
-                            <%= post.subject %>
-                            <% if(post.comments.length > 0) { %>
-                            <span id="comment_count">[ <%= post.comments.length %> ]</span>
-                            <% } %>
-                        </a>
+                    <td><a href="/board/detail/<%= post._id %>?page=<%= page %>" class="article">
+                            <span style="padding-right:50px !important;"><%= post.subject %>
+                              <% if(post.comments.length > 0) { %>
+                                <span id="comment_count">[ <%= post.comments.length %> ]</span>
+                              <% } %>
+                              <% if( post.content && post.content.search('img class=') >= 0 ) { %>
+                                <i class="fa-file-image-o" style="margin-left:2px; color:#666;"></i>
+                              <% } %>
+                              <% if( post.as ) { %>
+                                 <span class="label label-danger" style="margin-left:5px; padding: 2px 4px; font:5pt Tahoma arial;">new</span>
+                              <% } %>
+                            </span></a>
                     </td>
                     <td><%= post.author.userName %></td>
-                    <td><%= moment(post.createdAt).format('YYYY-MM-DD hh:mm:ss'); %></td>
+                    <td><%= moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss'); %></td>
                     <td class="center"><%= post.hits %></td>
                 </tr>
               <% }) %>
@@ -64,15 +70,21 @@
               <% posts.forEach(function(post){ %>
                 <tr id="<%= post._id%>">
                     <td><%= totalCount - ((page-1) * 10) - i %></td>
-                    <td><a href="board/<%= post._id %>/<%= page %>" class="article">
+                    <td><a href="/board/detail/<%= post._id %>?page=<%= page %>" class="article">
                             <span style="padding-right:50px !important;"><%= post.subject %>
-                            <% if(post.comments.length > 0) { %>
-                            <span id="comment_count">[ <%= post.comments.length %> ]</span>
-                            <% } %>
+                              <% if(post.comments.length > 0) { %>
+                                <span id="comment_count">[ <%= post.comments.length %> ]</span>
+                              <% } %>
+                              <% if( post.content && post.content.search('img class=') >= 0 ) { %>
+                                <i class="fa fa-picture-o" style="margin-left:2px; color:#931;"></i>
+                              <% } %>
+                              <% if( post.as ) { %>
+                                 <span class="label label-danger" style="margin-left:5px; padding: 2px 4px; font:5pt Tahoma arial;">new</span>
+                              <% } %>
                             </span></a>
                     </td>
                     <td><%= post.author.userName %></td>
-                    <td><%= moment(post.createdAt).format('YYYY-MM-DD hh:mm:ss') %></td>
+                    <td><%= moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss') %></td>
                     <td class="center"><%= post.hits %></td>
                 </tr>
                 <% i++ %>
@@ -144,7 +156,7 @@
 
               // var url = location.host;
               // $(location).attr('href',url + '/board/add');
-                    location.href = location.href+'/add/post';
+                    location.href = '/board/add/post';
 
 
             });

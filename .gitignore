@@ -6,4 +6,4 @@
 /build
 /OKLab-Android/build
 /OKLab-Android/gradle
-OKLab-Server/nodejs/node_modules/
+OKLab-Server/nodejs/node_modules/*

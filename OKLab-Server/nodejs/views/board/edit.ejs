@@ -61,7 +61,7 @@
         </label>
     </div>
     <input id="postId" name="post[postId]" type="hidden" value="<%= post._id %>"/>
-        <button class="btn btn-primary btn-lg btn-block" type="submit">수정완료</button>
+        <button id='btn_submit' class="btn btn-primary btn-lg btn-block" type="submit">수정완료</button>
 
 </form>
 
@@ -121,6 +121,30 @@
         });
         e.preventDefault();
     });
+
+    $('#btn_submit').click(function(){
+
+        if(isValidContentsLength()){
+            $('#form_join').submit();
+            return true;
+        }else {
+            return false;
+        }
+
+    });
+
+    // 컨텐츠 블랭크 검사
+    function isValidContentsLength(){
+        if ($('#subject').val() == ''){
+            alert('제목을 입력하세요 꼭!');
+            return false;
+        } else if($('#form-content').val() == ''){
+            alert('내용을 입력하세요 반드시!');
+            return false;
+        } else {
+          return true;
+        }
+    }
 
 </script>
             </div>

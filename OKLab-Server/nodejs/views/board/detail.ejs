@@ -25,7 +25,7 @@
 <div class="document_wrapper">
     <div class="document_header">
         <span class="document_subject"><%= post.subject %></span>
-        <span class="document_regdate"><%= moment(post.createdAt).format('YYYY-MM-DD hh:mm:ss') %> 조회 <em><%= post.hits %></em></span>
+        <span class="document_regdate"><%= moment(post.createdAt).format('YYYY-MM-DD a hh:mm:ss') %> 조회 <em><%= post.hits %></em></span>
         <span class="document_writer"><%= post.author.userName %></span>
     </div>
 
@@ -86,10 +86,10 @@
 
             <% if( user && user.userId) { %>
             <textarea class="form-control" rows="3" id="input_insertComment" name="comment[content]" placeholder="이곳에 댓글을 입력합니다." ></textarea>
-            <button style="margin-top:5px;" class="btn btn-primary btn-sm btn-block" id="btn_insertComment" onclick='submitFormAndPreventDuplication(this)'/>댓글 등록</button>
+            <button style="margin-top:5px;" class="btn btn-primary btn-sm btn-block" id="btn_insertComment" />댓글 등록</button>
             <% }  else { %>
               <textarea class="form-control" rows="3" id="input_insertComment" name="comment[content]" placeholder="로그인 후 댓글을 입력 할 수있습니다." disabled></textarea>
-              <button style="margin-top:5px;" class="btn btn-primary btn-sm btn-block" id="btn_insertComment" disabled onclick='submitFormAndPreventDuplication(this)'/>댓글 등록</button>
+              <button style="margin-top:5px;" class="btn btn-primary btn-sm btn-block" id="btn_insertComment" disabled />댓글 등록</button>
             <% } %>
         </form>
     </div>
@@ -161,14 +161,18 @@
     //     }
     // });
 
-    function submitFormAndPreventDuplication(obj){
-        obj.disabled = true;
-
+    $('#btn_insertComment').click(function (){
         var content_data = $('#input_insertComment').val();
         if(content_data.length > 0 ){
-             $('#form_insertComment').submit();
+           $('#btn_insertComment').attr('disabled', true);
+           $('#form_insertComment').submit();
+           return true;
+        } else {
+          alert('댓글을 입력하세요 응?!');
+          $('#input_insertComment').focus();
+          return false;
         }
-    }
+    });
 
     $('.editmode').hide();
 
@@ -198,7 +202,11 @@
 
             var content_data = $('#content_edited_comment').val();
 
-            if(content_data.length <= 0 ) return;
+            if(content_data.length<= 0 ){
+              alert('댓글을 입력하세요 응?!');
+              $('#content_edited_comment').focus();
+              return false;
+            }
 
             $.ajax({
                 type: 'PUT',
@@ -295,7 +303,7 @@
                   </span></a>
             </td>
             <td><%= post.author.userName %></td>
-            <td><%= moment(post.createdAt).format('YYYY-MM-DD hh:mm:ss'); %></td>
+            <td><%= moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss'); %></td>
             <td class="center"><%= post.hits %></td>
         </tr>
       <% }) %>
@@ -320,7 +328,7 @@
                 </span></a>
             </td>
             <td><%= post.author.userName %></td>
-            <td><%= moment(post.createdAt).format('YYYY-MM-DD hh:mm:ss') %></td>
+            <td><%= moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss') %></td>
             <td class="center"><%= post.hits %></td>
         </tr>
         <% i++ %>
@@ -369,7 +377,7 @@
                 </span>
                 <input class="form-control" type="text" id="keyword" name="keyword" />
                 <span class="input-group-btn">
-                    <button type="submit" class="btn btn-default btn-alt"><i class="fa fa-search"></i> 검색</button>
+                    <button id='btn_search' type="submit" class="btn btn-default btn-alt"><i class="fa fa-search"></i> 검색</button>
                 </span>
             </div>
         </form>
@@ -397,6 +405,17 @@
 
     $('.article').on('click', function(){
 
+    });
+
+    $('#btn_search').click(function(){
+      var keyword = $('#keyword').val();
+
+      if(keyword.length > 0) {
+        $('search_form').submit();
+        return true;
+      } else {
+        return false;
+      }
     });
 
 </script>

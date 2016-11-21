@@ -58,7 +58,7 @@
                placeholder="태그: 여러 개의 태그는 쉼표(,)로 구분하세요" style="width:300px" title="Tag" />
         </label>
     </div>
-        <button class="btn btn-primary btn-lg btn-block" type="submit">등록</button>
+        <button id="btn_submit" class="btn btn-primary btn-lg btn-block" type="submit">등록</button>
 
 </form>
 
@@ -118,6 +118,30 @@
         });
         e.preventDefault();
     });
+
+    $('#btn_submit').click(function(){
+
+        if(isValidContentsLength()){
+            $('#form_join').submit();
+            return true;
+        }else {
+            return false;
+        }
+
+    });
+
+    // 컨텐츠 블랭크 검사
+    function isValidContentsLength(){
+        if ($('#subject').val() == ''){
+            alert('제목을 입력하세요 꼭!');
+            return false;
+        } else if($('#form-content').val() == ''){
+            alert('내용을 입력하세요 반드시!');
+            return false;
+        } else {
+          return true;
+        }
+    }
 
 </script>
             </div>

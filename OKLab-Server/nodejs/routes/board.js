@@ -21,24 +21,43 @@ module.exports = function(){
       var page = Math.max(1,req.query.page)>0? parseInt(req.query.page):1;
       var limit = Math.max(1,req.query.limit)>0?parseInt(req.query.limit):10;
 
-      var queryKey = {};
+      var pQuery = {};
       if(where === 'subject_or_content'){
-        queryKey = {$or : [{subject:{'$regex': keyword}}, {content:{'$regex': keyword}}]};
+        pQuery = {$or : [{subject:{'$regex': keyword}}, {content:{'$regex': keyword}}]};
       } else if(where === 'content'){
-        queryKey = {content:{'$regex': keyword}};
+        pQuery = {content:{'$regex': keyword}};
       } else if(where === 'subject'){
-        queryKey = {subject:{'$regex': keyword}};
+        pQuery = {subject:{'$regex': keyword}};
       } else if(where === 'writer_name'){ // TODO 이름 아이디검색어렵네
-        queryKey = {userName:keyword};
       } else if(where === 'writer_id'){
-        queryKey = {userId:keyword};
-        // queryKey = {author:{$elemMatch: {useId:{'$regex': keyword}}}};
       } else {
-        queryKey = {tags:{'$regex': keyword}};
+        pQuery = {tags:{'$regex': keyword}};
       }
-          console.log("[board] search queryKey =  "+ JSON.stringify(queryKey) );
-      async.waterfall([function(callback){ // paging
-          Post.count(queryKey,function(err,count){
+
+      async.waterfall([function(callback){
+          var uQuery;
+          if(where === 'writer_name' || where === 'writer_id'){
+            if(where === 'writer_name'){
+              uQuery = {userName:{'$regex': keyword}};
+             } else if(where === 'writer_id'){
+              uQuery = {userId:{'$regex': keyword}};
+             }
+
+             User.find(uQuery).exec(function(err,users){
+                 if (err) return console.log(err);
+                 var userIds = [];
+                 users.forEach(function(user){
+                   userIds.push(user._id);
+                 });
+                 console.log('userIds = ' + userIds);
+                 pQuery = {author: {"$in" :userIds} };
+                 callback(null);
+             });
+          } else {
+            callback(null);
+          }
+        }, function(callback){ // paging
+          Post.count(pQuery,function(err,count){
             console.log("[board] search count =  "+ count);
             if(err) callback(err);
             skip = (page-1)*limit;
@@ -46,7 +65,8 @@ module.exports = function(){
             callback(null, skip, maxPage, count);
           });
         }, function (skip, maxPage, count, callback) { // posts
-          Post.find(queryKey)
+          console.log("[board] search pQuery =  "+ JSON.stringify(pQuery) );
+          Post.find(pQuery)
             .populate('author')
             .sort('-createdAt').skip(skip).limit(limit)
             .exec(function (err,posts) {
@@ -129,7 +149,7 @@ module.exports = function(){
       var content = req.body.post.content;
       var tags = req.body.post.tags;
 
-      Post.findOneAndUpdate({ _id: postId }, { $set: { subject: subject , content: content, tags: tags }},{ new: true })
+      Post.findOneAndUpdate({ _id: postId }, { $set: { subject: subject , content: content, tags: tags , updatedAt: new Date()}},{ new: true })
         .populate('author').exec(function(err,post){
         if (err) return res.json({success:false, message:err});
 
@@ -177,7 +197,7 @@ module.exports = function(){
     console.log('commentId - ' + commentId);
     console.log('postId - ' + postId);
     console.log('newContent - ' + newContent);
-    Comment.findOneAndUpdate({ _id: commentId }, { $set: { content: newContent }},{ new: true })
+    Comment.findOneAndUpdate({ _id: commentId }, { $set: { content: newContent , updatedAt: new Date() }},{ new: true })
       .populate('author').exec(function(err,comment){
       if (err) return res.json({success:false, message:err});
 

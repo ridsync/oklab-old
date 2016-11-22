@@ -8,78 +8,12 @@ module.exports = function(){
 
   // board main
   route.get('/', function(req, res){
-    console.log("[board] session =  "+ JSON.stringify(req.session) );
-
-    renderPostsList(req, res, false)
+    renderPostsList(req, res);
   });
 
   // Search
   route.get('/search' , function(req, res){
-      var where = req.query.where;
-      var keyword = req.query.keyword;
-      console.log("[board] search keyword =  "+ keyword);
-      var page = Math.max(1,req.query.page)>0? parseInt(req.query.page):1;
-      var limit = Math.max(1,req.query.limit)>0?parseInt(req.query.limit):10;
-
-      var pQuery = {};
-      if(where === 'subject_or_content'){
-        pQuery = {$or : [{subject:{'$regex': keyword}}, {content:{'$regex': keyword}}]};
-      } else if(where === 'content'){
-        pQuery = {content:{'$regex': keyword}};
-      } else if(where === 'subject'){
-        pQuery = {subject:{'$regex': keyword}};
-      } else if(where === 'writer_name'){ // TODO 이름 아이디검색어렵네
-      } else if(where === 'writer_id'){
-      } else {
-        pQuery = {tags:{'$regex': keyword}};
-      }
-
-      async.waterfall([function(callback){
-          var uQuery;
-          if(where === 'writer_name' || where === 'writer_id'){
-            if(where === 'writer_name'){
-              uQuery = {userName:{'$regex': keyword}};
-             } else if(where === 'writer_id'){
-              uQuery = {userId:{'$regex': keyword}};
-             }
-
-             User.find(uQuery).exec(function(err,users){
-                 if (err) return console.log(err);
-                 var userIds = [];
-                 users.forEach(function(user){
-                   userIds.push(user._id);
-                 });
-                 console.log('userIds = ' + userIds);
-                 pQuery = {author: {"$in" :userIds} };
-                 callback(null);
-             });
-          } else {
-            callback(null);
-          }
-        }, function(callback){ // paging
-          Post.count(pQuery,function(err,count){
-            console.log("[board] search count =  "+ count);
-            if(err) callback(err);
-            skip = (page-1)*limit;
-            maxPage = Math.ceil(count/limit);
-            callback(null, skip, maxPage, count);
-          });
-        }, function (skip, maxPage, count, callback) { // posts
-          console.log("[board] search pQuery =  "+ JSON.stringify(pQuery) );
-          Post.find(pQuery)
-            .populate('author')
-            .sort('-createdAt').skip(skip).limit(limit)
-            .exec(function (err,posts) {
-              if(err) callback(err);
-              return res.render('board/list',{notices:null, posts:posts,
-                page:page, maxPage:maxPage, totalCount:count,
-                moment:moment ,user:req.user, urlQuery:req._parsedUrl.query, postsMessage:req.flash("postsMessage")[0]
-              });
-            });
-        }],function(err){
-          if(err) return res.json({success:false, message:err});
-        })
-
+      renderPostsList(req, res);
   });
 
   // board post add view
@@ -123,7 +57,7 @@ module.exports = function(){
       Comment.find({_id: { $in : post.comments } }).populate('author').exec(function (err,comments) {
             if(err) return res.json({success:false, message:err});
 
-            renderPostsList(req, res , true , post, comments ,isFocusComment)
+            renderPostsList(req, res, post, comments ,isFocusComment)
         });
     });
   });
@@ -239,33 +173,76 @@ module.exports = function(){
     res.redirect('/auth/notAuth');
   }
 
-  function renderPostsList(req , res , isDetailView, post , comments , isFocusComment){
-
+  function renderPostsList(req , res , post , comments , isFocusComment){
+    var reqPath = req.path; // CAUTION 렌더링 구분위한 API 경로
     var page = Math.max(1,req.query.page)>0?parseInt(req.query.page):1;
     var limit = Math.max(1,req.query.limit)>0?parseInt(req.query.limit):10;
+    var where = req.query.where;
+    var keyword = req.query.keyword;
 
-    async.waterfall([function(callback){ // notices
-        Post.find({postType:"notice"}).populate("author").exec(function (err,notices) {
-          if(err) callback(err);
-          callback(null, notices);
-        });
+    console.log("[board] renderPostsList : path = "+ reqPath + " / keyword = " + keyword );
+
+    var pQuery = {postType:"normal"};
+
+    async.waterfall([function(callback){ // notices or search by keword
+        if(keyword){ // 1) 검색어로 부분 조회 -> paging
+          if(where === 'subject_or_content'){
+            pQuery = {$and: [ {postType:"normal"} , {$or : [{subject:{'$regex': keyword}}, {content:{'$regex': keyword}}]} ]};
+          } else if(where === 'content'){
+            pQuery = {$and: [ {postType:"normal"} , {content:{'$regex': keyword}} ]};
+          } else if(where === 'subject'){
+            pQuery = {$and: [ {postType:"normal"} , {subject:{'$regex': keyword}} ]};
+          } else if(where === 'tags'){
+            pQuery = {$and: [ {postType:"normal"} , {tags:{'$regex': keyword}} ]};
+          }
+
+          var uQuery;
+          if(where === 'writer_name' || where === 'writer_id'){// 이름,아이디검색
+            if(where === 'writer_name'){
+              uQuery = {$and: [ {postType:"normal"} , {userName:{'$regex': keyword}} ]};
+             } else if(where === 'writer_id'){
+              uQuery = {$and: [ {postType:"normal"} , {userId:{'$regex': keyword}} ]};
+             }
+
+             User.find(uQuery).exec(function(err,users){
+                 if (err) return console.log(err);
+                 var userIds = [];
+                 users.forEach(function(user){
+                   userIds.push(user._id);
+                 });
+                 console.log('userIds = ' + userIds);
+                 pQuery = {$and: [ {postType:"normal"} , {author: {"$in" :userIds}} ]};
+                 callback(null, null);
+             });
+          } else { // 모든 검색 조건 (이름,아이디 제외 )
+            callback(null, null);
+          }
+        } else { // 2) 리스트 전체 조회 -> paging
+          Post.find({postType:"notice"}).populate("author").exec(function (err,notices) {
+            if(err) callback(err);
+            callback(null, notices);
+          });
+        }
       },function(notices, callback){ // paging
-        Post.count({postType:"normal"},function(err,count){
+        Post.count(pQuery,function(err,count){
           if(err) callback(err);
           skip = (page-1)*limit;
           maxPage = Math.ceil(count/limit);
           callback(null, skip, maxPage, count, notices);
         });
       }, function (skip, maxPage, count, notices, callback) { // posts
-        Post.find({postType:"normal"}).populate("author").sort('-createdAt').skip(skip).limit(limit).exec(function (err,posts) {
+        console.log("[board] renderPostsList : pQuery = " + pQuery);
+        Post.find(pQuery).populate("author").sort('-createdAt').skip(skip).limit(limit).exec(function (err,posts) {
           if(err) callback(err);
-          if(isDetailView){ // 디테일 화면용 render
+          if( reqPath.includes('detail') ){ // 디테일 화면용 render
             return res.render("board/detail",{post:post,comments:comments,isFocusComment:isFocusComment,
-              notices:notices,posts:posts, maxPage:maxPage, page:page,totalCount:count,
+              notices:notices,posts:posts,
+              keyword:keyword, where:where, maxPage:maxPage, page:page, totalCount:count,
               moment:moment, user:req.user, postsMessage:req.flash("postsMessage")[0]
             });
           } else {
-            return res.render('board/list',{notices:notices, posts:posts, page:page, maxPage:maxPage, totalCount:count,
+            return res.render('board/list',{notices:notices, posts:posts,
+              keyword:keyword, where:where, page:page, maxPage:maxPage, totalCount:count,
               moment:moment, user:req.user, urlQuery:req._parsedUrl.query, postsMessage:req.flash("postsMessage")[0]
             });
           }

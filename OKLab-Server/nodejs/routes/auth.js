@@ -126,7 +126,8 @@ module.exports = function(passport){
   });
 
   route.get('/notAuth', function(req, res, next) {
-    res.render('auth/notauth');
+    // res.render('auth/notauth');
+    res.redirect('/auth/login');
   });
 
   function isLoggedIn(req, res) {

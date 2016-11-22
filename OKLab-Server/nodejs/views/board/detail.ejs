@@ -47,7 +47,7 @@
               <a href="/board/edit/post/<%= post._id %>?page=<%= page %>" class="btn btn-default btn-alt" id="btn_document_edit"
               style="float:right;">수정</a>
       <% } %>
-        <a class="btn btn-default btn-alt" href="/board" style="float:left;">목록</a>
+        <a class="btn btn-default btn-alt" href="/board?page=<%= page %>&keyword=<%= keyword %>&where=<%= where %>" style="float:left;">목록</a>
     </div>
 </div>
 
@@ -289,7 +289,7 @@
       <% notices.forEach(function(post){ %>
         <tr style="font-weight:600;" class="info">
             <td>공지</td>
-            <td><a href="/board/detail/<%= post._id %>?page=<%= page %>" class="article">
+            <td><a href="/board/detail/<%= post._id %>?page=<%= page %>&keyword=<%= keyword %>&where=<%= where %>" class="article">
                   <span style="padding-right:50px !important;"><%= post.subject %>
                     <% if(post.comments.length > 0) { %>
                       <span id="comment_count">[ <%= post.comments.length %> ]</span>
@@ -314,7 +314,7 @@
       <% posts.forEach(function(post){ %>
         <tr id="<%= post._id%>">
             <td><%= totalCount - ((page-1) * 10) - i %></td>
-            <td><a href="/board/detail/<%= post._id %>?page=<%= page %>" class="article">
+            <td><a href="/board/detail/<%= post._id %>?page=<%= page %>&keyword=<%= keyword %>&where=<%= where %>" class="article">
                 <span style="padding-right:50px !important;"><%= post.subject %>
                   <% if(post.comments.length > 0) { %>
                     <span id="comment_count">[ <%= post.comments.length %> ]</span>
@@ -340,7 +340,7 @@
 <nav style="text-align: center">
     <ul class="pagination pagination-sm">
         <li>
-            <a href="/board?page=1" aria-label="Previous">
+            <a href="/board?page=1&keyword=<%= keyword %>&where=<%= where %>" aria-label="Previous">
                처음
             </a>
         </li>
@@ -349,11 +349,11 @@
             <li class=active>
           <% } else { %>
             <li >
-          <% } %><a href="/board?page=<%= i + 1 %>"><%= i + 1 %></a></li>
+          <% } %><a href="/board?page=<%= i + 1 %>&keyword=<%= keyword %>&where=<%= where %>"><%= i + 1 %></a></li>
         <% } %>
 
         <li>
-            <a href="/board?page=<%= maxPage %>" aria-label="Next">
+            <a href="/board?page=<%= maxPage %>&keyword=<%= keyword %>&where=<%= where %>" aria-label="Next">
                 끝
             </a>
         </li>
@@ -366,7 +366,7 @@
         <form id="search_form" action="/board/search" method="get">
             <div class="input-group" style="width:350px;">
                 <span class="input-group-addon">
-                    <select name="where">
+                    <select name="where"  id='select_where'>
                         <option value="subject">제목</option>
                         <option value="content">내용</option>
                         <option value="subject_or_content">제목+내용</option>
@@ -375,7 +375,7 @@
                         <option value="tags">태그</option>
                     </select>
                 </span>
-                <input class="form-control" type="text" id="keyword" name="keyword" />
+                <input class="form-control" type="text" id="keyword" name="keyword" value="<%= keyword %>" />
                 <span class="input-group-btn">
                     <button id='btn_search' type="submit" class="btn btn-default btn-alt"><i class="fa fa-search"></i> 검색</button>
                 </span>
@@ -392,6 +392,10 @@
 <script type="text/javascript">
 
     // 현재 문서의 하이라이팅
+    if('<%= where %>'){
+      $("#select_where").val('<%= where %>');
+    }
+
      $('#<%= post._id %>').attr('class','active');
 
     // 글쓰기 버튼 클릭 시

@@ -1,5 +1,8 @@
 <html>
 <% include ../partials/head %>
+
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
 <body>
   <header>
     <% include ../partials/header %>
@@ -69,6 +72,8 @@
             <!--<span id="message-mobile"></span>-->
         <!--</div>-->
     <!--</div>-->
+
+    <div class="g-recaptcha" data-sitekey="6LdAowwUAAAAACFcQklUxYKRK-IQrtEitCaxOkTP"></div><br>
 
     <div class="form-group">
             <p class="text-center"><button id="btn_submit" type="submit" class="btn btn-primary">Create Account</button></p>
@@ -205,19 +210,37 @@
         return input.replace(/[^0-9]/gi, '');
     }
 
-
     $('#btn_submit').click(function(){
 
         $('#btn_submit').attr('disabled', true);
         if(isId && isPw && isPw2 && isEmail && isUsername){
-            $('#form_join').submit();
-            return true;
+            $('#btn_submit').submit();
+            return false;
         }else {
             alert('올바르게 입력되지 않은 정보가 있습니다.');
             $('#btn_submit').attr('disabled', false);
             return false;
         }
 
+    });
+
+    $('#form_join').submit(function() {
+      $(this).ajaxSubmit({
+        error: function(xhr) {
+          $('#btn_submit').attr('disabled', false);
+          status('Error: ' + xhr.status);
+        },
+       success: function(response) {
+         if(response.responseCode == 0){
+            location.href = '/auth/welcome';
+         } else {
+           $('#btn_submit').attr('disabled', false);
+           alert(response.responseDesc);
+         }
+       }
+      });
+      //Very important line, it disable the page refresh.
+      return false;
     });
 
 </script>

@@ -53,7 +53,7 @@
                               <% if( post.content && post.content.search('img class=') >= 0 ) { %>
                                 <i class="fa-file-image-o" style="margin-left:2px; color:#666;"></i>
                               <% } %>
-                              <% if( post.as ) { %>
+                              <% if( moment(post.createdAt).isSame( new Date() , 'day') ) { %>
                                  <span class="label label-danger" style="margin-left:5px; padding: 2px 4px; font:5pt Tahoma arial;">new</span>
                               <% } %>
                             </span></a>
@@ -78,8 +78,8 @@
                               <% if( post.content && post.content.search('img class=') >= 0 ) { %>
                                 <i class="fa fa-file-image-o" style="margin-left:3px; color:#931;"></i>
                               <% } %>
-                              <% if( post.as ) { %>
-                                 <span class="label label-danger" style="margin-left:5px; padding: 2px 4px; font:5pt Tahoma arial;">new</span>
+                              <% if( moment(post.createdAt).isSame( new Date() , 'day') ) { %>
+                                 <span class="label label-danger" style="margin-left:5px; padding: 2px 4px; font:7pt Tahoma arial;">new</span>
                               <% } %>
                             </span></a>
                     </td>

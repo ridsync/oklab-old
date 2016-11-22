@@ -1,8 +1,9 @@
 module.exports = function(passport){
-  var route =  require('express').Router();
+  var route    = require('express').Router();
   var mongoose = require('mongoose');
   var User     = require('../config/mongodb/models/User');
   var async    = require('async');
+  var request  = require('request');
 
   route.get('/register', function(req, res){
       res.render('auth/register', {
@@ -53,15 +54,36 @@ module.exports = function(passport){
     );
   });
 
+  // with ajax
   route.post('/register', function(req, res){
-    var newUser = req.body.user;
-    newUser.userLevel = 1; // 회원가입 기본레벨 부여
-    User.create(newUser, function (err,user) {
-      if(err) return res.json({success:false, message:err});
-      req.flash("loginMessage","Thank you for registration!");
-      // create에 성공하면 welcome
-      // 페이지로 이동 redirct  유저정보 로그인상태로
-      res.redirect('/auth/welcome');
+
+    if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
+      return res.json({"responseCode" : 1,"responseDesc" : "Google Captcha를 체크하세요 !!"});
+    }
+    // Put your secret key here.
+    var secretKey = "6LdAowwUAAAAAO_AE45BnXXxMGpi_lC-McogXttb";
+    // req.connection.remoteAddress will provide IP address of connected user.
+    var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
+    // Hitting GET request to the URL, Google will respond with success or error scenario.
+    request(verificationUrl,function(error,response,body) {
+      body = JSON.parse(body);
+      // Success will be true or false depending upon captcha validation.
+      if(body.success !== undefined && !body.success) {
+        return res.json({"responseCode" : 1,"responseDesc" : "Failed captcha verification !!"});
+      }
+      // res.json({"responseCode" : 0,"responseDesc" : "Sucess"});
+
+      var newUser = req.body.user;
+      newUser.userLevel = 1; // 회원가입 기본레벨 부여
+      User.create(newUser, function (err,user) {
+        if(err) return res.json({success:false, message:err});
+        req.flash("loginMessage","Thank you for registration!");
+        // create에 성공하면 welcome
+        // 페이지로 이동 redirct  유저정보 로그인상태로
+        console.log('[register] Regist Success body = ' + body.success);
+        // res.redirect('/auth/welcome');
+        res.json({"responseCode" : 0,"responseDesc" : "Sucess"});
+      });
     });
   }); // user create
 

@@ -116,6 +116,7 @@ module.exports = function(passport){
       }
     });
 
+  // for ajax
   route.get('/loginResult', function(req, res){
     var loginError = req.flash('loginError');
     if(isLoggedIn(req, res)){
@@ -177,7 +178,6 @@ module.exports = function(passport){
 
             req.login(user, function(err) {
                 if (err) return next(err);
-                console.log("[profile update] After relogin: "+req.session.passport.user.changedField);
                 res.redirect('/auth/profile');
             });
         });

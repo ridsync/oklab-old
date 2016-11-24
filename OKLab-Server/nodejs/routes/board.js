@@ -95,7 +95,7 @@ module.exports = function(){
       var postId = req.params.postId;
 
 
-      // TODO 글삭제시, 댓글도 삭제해야함  !!
+      // TODO 글삭제시 RDB처럼 데이터는두고 isDel update?? + 댓글도 같이 삭제 ??
 
       Post.findOneAndRemove({_id:postId, author:req.user._id}, function (err,post) {
         if(err) return res.json({success:false, message:err});

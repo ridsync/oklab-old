@@ -35,6 +35,10 @@ var User = mongoose.model('user',userSchema);
 
 module.exports = User;
 
+module.exports.hashPassword = function (password){
+  return bcrypt.hashSync(password);
+}
+
 function hashPassword(next){
   console.log("hi");
   var user = this;

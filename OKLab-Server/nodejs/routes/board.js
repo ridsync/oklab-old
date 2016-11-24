@@ -51,13 +51,13 @@ module.exports = function(){
       var arHitIds = [];
       if(hitIds) arHitIds = arHitIds.concat(hitIds);
       if(incHitsCount == 1) arHitIds.push(postId);
-      res.cookie('hitIds', arHitIds, { maxAge: 10 * 60 * 1000 , httpOnly: true});
+      res.cookie('hitIds', arHitIds, { maxAge: 24 * 60 * 60 * 1000 , httpOnly: true});
 
       // 댓글리스트 조회
       Comment.find({_id: { $in : post.comments } }).populate('author').exec(function (err,comments) {
             if(err) return res.json({success:false, message:err});
 
-            renderPostsList(req, res, post, comments ,isFocusComment)
+            renderPostsList(req, res, post, comments ,isFocusComment);
         });
     });
   });
@@ -250,8 +250,8 @@ module.exports = function(){
         });
       }],function(err){
         if(err) return res.json({success:false, message:err});
-      })
+      });
   }
 
   return route;
-}
+};

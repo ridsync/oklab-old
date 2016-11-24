@@ -33,7 +33,7 @@ module.exports = function(){
     saveUninitialized: true,
     store:new MongooseStore({connection: mongooseCon}),
     // cookie: { maxAge: 10 * 60 * 1000 } // TODO maxAge는 로그인시 필수네? expires가 필요없나 ?
-    cookie: { expires: new Date(Date.now() + 10 * 60 * 1000), maxAge: 9 * 60 * 1000 }
+    cookie: { maxAge: 9 * 60 * 1000 }
   }));
   return app;
 }

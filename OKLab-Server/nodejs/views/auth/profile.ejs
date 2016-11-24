@@ -1,0 +1,99 @@
+<html>
+<% include ../partials/head %>
+<body>
+  <header>
+    <% include ../partials/header %>
+  </header>
+
+  <div id="container">
+          <!-- content condition -->
+
+            <!-- content with side -->
+
+            <div id="content" class="pure-g">
+                <div class="pure-u-1">
+
+      <div style="font:9pt 'Helvetica Neue'">
+          <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+              <li class="active"><a href="#profile" data-toggle="tab">Profile</a></li>
+              <li><a href="#messages" data-toggle="tab">Messages</a></li>
+          </ul>
+          <div id="my-tab-content" class="tab-content" style="font:9pt 'Helvetica Neue'">
+              <div style="padding:15px 0;" class="tab-pane active" id="profile">
+
+                  <div class="panel panel-default">
+                      <!-- Default panel contents -->
+                      <div class="panel-heading">회원 정보</div>
+                      <div class="panel-body">
+                          <p>비밀번호는 암호화되어 저장되어 서버에서도 알 수 없습니다.<br>
+                          회원 정보를 변경하려면 하단의 [회원 정보 변경하기] 버튼을 클릭해 주세요.<br></p>
+                      </div>
+                      <!-- Table -->
+                      <table class="table" style="font:9pt 'Helvetica Neue'">
+                          <style scoped>
+                              i { margin-left:5px; }
+                          </style>
+                          <tr><td>아이디</td><td><%= user.userId %></td></tr>
+                          <tr><td>비밀번호</td><td><%= user.password %></td></tr>
+                          <tr><td>이름</td><td id="td-name"><%= user.userName %></td></tr>
+                          <tr><td>이메일 주소</td><td id="td-email"><%= user.email %></td></tr>
+                          <tr><td>전화번호</td><td id="td-mobile"><%= user.phone %></td></tr>
+                          <tr><td>회원 권한</td><td><%= user.userLevel %></td></tr>
+                          <tr><td>가입일</td><td><%= user.createdAt %></td></tr>
+                          <tr><td>만기일</td><td><%= user.expireAt %></td></tr>
+                      </table>
+                  </div>
+                  <a href="/auth/profile/update" class="btn btn-default">회원 정보 변경하기</a>
+
+              </div>
+
+              <div style="padding:15px 0;" class="tab-pane" id="messages">
+                  <div class="panel panel-default">
+                      <!-- Default panel contents -->
+                      <div class="panel-heading">메시지함</div>
+                      <div class="panel-body">
+                          <p>준비중입니다.</p>
+                      </div>
+                      <!-- Table -->
+                      <table class="table" style="font:9pt 'Helvetica Neue'">
+                          <tr>
+                              <td width="15%"> 보낸이</td>
+                              <td>내용</td>
+                              <td width="10%">보낸 시각</td>
+                              <td width="10%">읽은 시각</td>
+                          </tr>
+                          <tr>
+                              <td>-</td>
+                              <td>-</td>
+                              <td>-</td>
+                              <td>-</td>
+                          </tr>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+      <script>
+
+          jQuery(document).ready(function ($) {
+              $('#tabs').tab();
+          });
+      </script>
+                  </div>
+              </div>
+
+
+    </div>
+  <!-- end of set layout style-->
+
+    <footer>
+      <% include ../partials/footer %>
+    </footer>
+
+</body>
+
+<script src="/javascripts/responsive-menu.js"></script>
+</html>

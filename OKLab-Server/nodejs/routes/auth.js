@@ -147,6 +147,45 @@ module.exports = function(passport){
     });
   });
 
+  route.get('/profile', function(req, res){
+    if(isLoggedIn(req ,res)){
+      res.render('auth/profile',{title: 'User Profle', user:req.user});
+    } else {
+      res.redirect('/auth/login');
+    }
+  });
+
+  route.get('/profile/update', function(req, res){
+    if(isLoggedIn(req ,res)){
+      res.render('auth/profileUpdate',{title: 'User Profle Update', user:req.user});
+    } else {
+      res.redirect('/auth/notAuth');
+    }
+  });
+
+  route.post('/profile/update', function(req, res){
+    if(isLoggedIn(req ,res)){
+        var newPassword = User.hashPassword(req.body.user.password);
+        var newUserName = req.body.user.userName;
+        var newEmail = req.body.user.email;
+        var newPhone = req.body.user.phone;
+        User.findOneAndUpdate({userId:req.user.userId},
+            { $set: { password: newPassword , uesrName:newUserName, email:newEmail, phone:newPhone}}, { new: true })
+        .exec(function (err,user) {
+            if(err) return res.json({success:false, message:err});
+            console.log('[profile update] Success User = ' + JSON.stringify(user) );
+
+            req.login(user, function(err) {
+                if (err) return next(err);
+                console.log("[profile update] After relogin: "+req.session.passport.user.changedField);
+                res.redirect('/auth/profile');
+            });
+        });
+    } else {
+      res.redirect('/auth/notAuth');
+    }
+  });
+
   route.get('/notAuth', function(req, res, next) {
     // res.render('auth/notauth');
     res.redirect('/auth/login');
@@ -156,8 +195,8 @@ module.exports = function(passport){
     if (req.isAuthenticated()){
       return true;
     }
-    return false
+    return false;
   }
 
   return route;
-}
+};

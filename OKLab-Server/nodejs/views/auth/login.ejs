@@ -41,7 +41,8 @@
               i { margin-right: 3px; }
               a { display:block; font-size:90%; color:#333; padding:5px 0; margin-right: 10px; }
           </style>
-              <div style="height:15px; color:red; font:9pt 돋움, Arial" id="messages"></div>
+              <div style="height:15px; color:red; font:9pt 돋움, Arial" id="messages"><%= resMessage %></div>
+              <br>
               <a href="/auth/forgot"><i class="fa fa-unlock-alt"></i>Forgot Password</a>
               <a href="/auth/register"><i class="fa fa-sign-in"></i>New Here? Create an account</a>
       </div>
@@ -55,7 +56,7 @@
   <script type="text/javascript">
 
 
-      $('#password').focus(function(e) {
+      $('#password, #id').focus(function(e) {
           $('#messages').html('');
       })
 

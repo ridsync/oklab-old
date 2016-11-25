@@ -36,11 +36,11 @@ module.exports = function(app){
 
           if (!user){
               req.flash("userId", req.body.userId);
-              return done(null, false, req.flash('loginError', 'No user found.'));
+              return done(null, false, req.flash('loginError', '아이디 또는 비밀번호가 올바르지 않습니다.'));
           }
           if (!user.authenticate(password)){
               req.flash("userId", req.body.userId);
-              return done(null, false, req.flash('loginError', 'Password does not Match.'));
+              return done(null, false, req.flash('loginError', '아이디 또는 비밀번호가 올바르지 않습니다.'));
           }
           console.log('User Login Success  user = ' + user.userId);
           req.flash('postsMessage', 'Welcome '+user.userName+'!');

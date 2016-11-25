@@ -112,7 +112,7 @@ module.exports = function(passport){
       if(isLoggedIn(req ,res)){
         res.redirect('/');
       } else {
-        res.render('auth/login',{title: 'Login Page', userId:req.flash("userId")[0]});
+        res.render('auth/login',{title: 'Login Page', userId:req.flash("userId")[0], resMessage:req.flash("noAuth")});
       }
     });
 
@@ -122,7 +122,7 @@ module.exports = function(passport){
     if(isLoggedIn(req, res)){
       console.log('[login] login success userId = ' + req.flash("userId")[0]);
       res.send(null);
-    } else {
+    } else { // TODO 로그인에러 처리(아이디암호확인 메세지전달등)
       console.log('[login] login failed loginError = ' + loginError);
       res.send(loginError);
       req.flash('loginError',null);
@@ -188,6 +188,7 @@ module.exports = function(passport){
 
   route.get('/notAuth', function(req, res, next) {
     // res.render('auth/notauth');
+    req.flash('noAuth', '권한이 없습니다. 로그인 후 다시 시도하세요.')
     res.redirect('/auth/login');
   });
 

@@ -169,7 +169,6 @@ module.exports = function(){
     if (req.isAuthenticated()){
       return next();
     }
-    req.flash("postsMessage","Please login first.");
     res.redirect('/auth/notAuth');
   }
 

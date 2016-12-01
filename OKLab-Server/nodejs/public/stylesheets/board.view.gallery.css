@@ -17,7 +17,7 @@
 
 	/* Gallery */
 	.thumb { max-height: 350px; }
-	.thumb a img { height: 200px; max-height: 100%; max-width: 100%, margin: 0 auto}
+	.thumb a img { height: 200px; max-height: 100%; max-width: 100%; margin: 0 auto}
 	.thumbnail:hover { text-decoration: none; }
 	.info-wrapper { font:9pt 돋움, Arial; height:80px; padding:5px; }
 	.block { display: block; }

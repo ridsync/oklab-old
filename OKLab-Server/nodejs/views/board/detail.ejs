@@ -295,7 +295,7 @@
                       <span id="comment_count">[ <%= post.comments.length %> ]</span>
                     <% } %>
                     <% if( post.content && post.content.search('img class=') >= 0 ) { %>
-                      <i class="fa fa-picture-o" style="margin-left:2px; color:#666;"></i>
+                      <i class="fa fa-file-image-o" style="margin-left:2px; color:#666;"></i>
                     <% } %>
                     <% if( moment(post.createdAt).isSame( new Date() , 'day') ) { %>
                        <span class="label label-danger" style="margin-left:5px; padding: 2px 4px; font:5pt Tahoma arial;">new</span>
@@ -320,7 +320,10 @@
                     <span id="comment_count">[ <%= post.comments.length %> ]</span>
                   <% } %>
                   <% if( post.content && post.content.search('img class=') >= 0 ) { %>
-                    <i class="fa fa-picture-o" style="margin-left:2px; color:#666;"></i>
+                    <i class="fa fa-file-image-o" style="margin-left:2px; color:#666;"></i>
+                  <% } %>
+                  <% if( post.content && post.content.search('iframe src=') >= 0 ) { %>
+                    <i class="fa fa-file-video-o" style="margin-left:3px; color:#931;"></i>
                   <% } %>
                   <% if( moment(post.createdAt).isSame( new Date() , 'day') ) { %>
                      <span class="label label-danger" style="margin-left:5px; padding: 2px 4px; font:5pt Tahoma arial;">new</span>

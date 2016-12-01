@@ -11,6 +11,11 @@ module.exports = function(){
     renderPostsList(req, res);
   });
 
+  // Gallery
+  route.get('/gallery', function(req, res){
+    renderPostsList(req, res);
+  });
+
   // Search
   route.get('/search' , function(req, res){
       renderPostsList(req, res);
@@ -238,6 +243,11 @@ module.exports = function(){
               notices:notices,posts:posts,
               keyword:keyword, where:where, maxPage:maxPage, page:page, totalCount:count,
               moment:moment, user:req.user, postsMessage:req.flash("postsMessage")[0]
+            });
+          } else if ( reqPath.includes('gallery') ){
+            return res.render('board/gallery',{posts:posts,
+              keyword:keyword, where:where, page:page, maxPage:maxPage, totalCount:count,
+              moment:moment, user:req.user, urlQuery:req._parsedUrl.query, postsMessage:req.flash("postsMessage")[0]
             });
           } else {
             return res.render('board/list',{notices:notices, posts:posts,

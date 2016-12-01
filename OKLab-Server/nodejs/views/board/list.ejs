@@ -24,6 +24,7 @@
               <div class="list-group list-special" style="border:1px solid #ddd;">
 
                   <a href="/board" class="list-group-item active">일반 타입</a>
+                  <a href="/board/gallery" class="list-group-item">갤러리 타입</a>
               </div>
           </div>
           <div class="pure-u-1 pure-u-md-4-5 region">
@@ -77,6 +78,9 @@
                                   <% } %>
                                   <% if( post.content && post.content.search('img class=') >= 0 ) { %>
                                     <i class="fa fa-file-image-o" style="margin-left:3px; color:#931;"></i>
+                                  <% } %>
+                                  <% if( post.content && post.content.search('iframe src=') >= 0 ) { %>
+                                    <i class="fa fa-file-video-o" style="margin-left:3px; color:#931;"></i>
                                   <% } %>
                                   <% if( moment(post.createdAt).isSame( new Date() , 'day') ) { %>
                                      <span class="label label-danger" style="margin-left:5px; padding: 2px 4px; font:7pt Tahoma arial;">new</span>

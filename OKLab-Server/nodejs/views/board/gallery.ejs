@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <% include ../partials/head %>
+
+<body>
+  <header>
+    <% include ../partials/header %>
+  </header>
+
+
+  <div id="container">
+         <!-- content condition -->
+
+     <div id="content-header">
+         갤러리 타입 게시판입니다.
+     </div>
+
+     <!-- content with side -->
+
+     <div id="content" class="pure-g">
+         <div class="pure-u-1 pure-u-md-1-5 region">
+             <div class="list-group list-special" style="border:1px solid #ddd;">
+
+                 <a href="/board" class="list-group-item ">일반 타입</a>
+                 <a href="/board/gallery" class="list-group-item active">갤러리 타입</a>
+             </div>
+         </div>
+         <div class="pure-u-1 pure-u-md-4-5 region">
+
+    <link rel="stylesheet" href="/stylesheets/board.view.gallery.css">
+
+     <div class="row">
+
+       <% if(posts) { %>
+         <% posts.forEach(function(post){ %>
+            <% if( post.content.includes('/uploads') ) { %>
+              <% var imagepath = post.content.substring( post.content.lastIndexOf("/uploads") , post.content.lastIndexOf("jpg") + 3 ) %>
+           <div class="col-md-4 col-sm-6 thumb">
+               <a class="thumbnail" href="<%= imagepath %>">
+                 <div class="boximg">
+                     <img src="<%= imagepath %>" class="img-responsive">
+                 </div>
+                 <br>
+                 <div class="info-wrapper">
+                     <div class="info-body">
+                         <span class="block strong"><%= post.subject %></span>
+
+                         <span class="block" style="white-space: nowrap; overflow:hidden"></span>
+                     </div>
+                     <div class="info-footer">
+                         <span class="date"><%= moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss') %></span>
+                         <% if(post.comments.length > 0) { %>
+                         <span class="n-comments"><i class="fa fa-commenting-o"></i> [<%= post.comments.length %>]</span>
+                         <% } %>
+                         <span class="writer"><i class="fa fa-user"></i> <%= post.author.userName %></span>
+                     </div>
+                 </div>
+              </a>
+           </div>
+        <% } %>
+       <% }) %>
+     <% } %>
+
+     </div> <!--row end -->
+
+       <div class="row">
+           <p class="text-right">
+               <button id="btn_write_document" class="btn btn-primary btn-alt"><i class="fa fa-pencil"></i> 사진업로드</button>
+           </p>
+       </div>
+     </div>
+
+
+    </div>
+  </div>
+         <!-- content with no side -->
+
+        <script type="text/javascript">
+
+            // 현재 문서의 하이라이팅
+
+
+            // 글쓰기 버튼 클릭 시
+            $('#btn_write_document').click(function(){
+
+                alert('권한이 없습니다.');
+
+            });
+        </script>
+
+     </div>
+     <!-- end of set layout style-->
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+
+</body>
+
+<script src="/javascripts/responsive-menu.js"></script>
+</html>

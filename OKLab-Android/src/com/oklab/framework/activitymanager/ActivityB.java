@@ -30,7 +30,7 @@ public class ActivityB extends BaseActivity {
 //					intent.putExtra(EXTRA_NAME_DATA1, "Data-123");
 					startActivityForResult(intent, REQ_CODE_DATA_EXPRESS);
 //					overridePendingTransition(android.R.anim.fade_in,0);
-					finish();
+//					finish();
 				}
 			});
 			

@@ -56,20 +56,20 @@ public class MainFragmentActivity extends BaseActivity implements OnClickListene
 		switch (v.getId()) {
 
 		case R.id.bt_oneFragment:
-//			mCurrentFragmentIndex = FRAGMENT_ONE;
-//			fragmentReplace(mCurrentFragmentIndex);
+			mCurrentFragmentIndex = FRAGMENT_ONE;
+			fragmentReplace(mCurrentFragmentIndex);
 			
 			// FragmentDialog 테스트
-			TestDlgFragment dlg = TestDlgFragment.getInstance();
-			dlg.show(getFragmentManager(), "tagtest");
+//			TestDlgFragment dlg = TestDlgFragment.getInstance();
+//			dlg.show(getFragmentManager(), "tagtest");
 			break;
 		case R.id.bt_twoFragment:
 			mCurrentFragmentIndex = FRAGMENT_TWO;
-			fragmentAdd(mCurrentFragmentIndex);
+			fragmentReplace(mCurrentFragmentIndex);
 			break;
 		case R.id.bt_threeFragment:
 			mCurrentFragmentIndex = FRAGMENT_THREE;
-			fragmentAdd(mCurrentFragmentIndex);
+			fragmentReplace(mCurrentFragmentIndex);
 			break;
 
 		}

@@ -55,9 +55,19 @@ limitations under the License.
                 android:textColor="@color/white"
                 android:textSize="19dp"
                 android:onClick="startActivityLifeCycle"
-                android:text="LifeCycle(Activity,Fragment)" />
+                android:text="LifeCycle(Activity)" />
             <Button
                 android:id="@+id/btn_no1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:background="@color/opacity_50"
+                android:textColor="@color/white"
+                android:textSize="19dp"
+                android:onClick="startActivityFragment"
+                android:text="LifeCycle(Fragment)" />
+            <Button
+                android:id="@+id/btn_no2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
@@ -68,7 +78,7 @@ limitations under the License.
                 android:text="OK트위터" />
                         
             <Button
-                android:id="@+id/btn_no2"
+                android:id="@+id/btn_no3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
@@ -78,7 +88,7 @@ limitations under the License.
                 android:onClick="startActivityEvents"
                 android:text="터치이벤트" />
             <Button
-                android:id="@+id/btn_no3"
+                android:id="@+id/btn_no4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
@@ -88,7 +98,7 @@ limitations under the License.
                 android:onClick="startActivityViews"
                 android:text="이미지뷰" />
 			<Button
-                android:id="@+id/btn_no4"
+                android:id="@+id/btn_no5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
@@ -96,9 +106,9 @@ limitations under the License.
                 android:textColor="@color/white"
                 android:textSize="19dp"
                 android:onClick="startActivityManagment"
-                android:text="엑티비티" />
+                android:text="테스크관리등" />
             <Button
-                android:id="@+id/btn_no5"
+                android:id="@+id/btn_no6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
@@ -108,7 +118,7 @@ limitations under the License.
                 android:onClick="startActivityWebView"
                 android:text="WebView" />
             <Button
-                android:id="@+id/btn_no6"
+                android:id="@+id/btn_no7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
@@ -119,7 +129,7 @@ limitations under the License.
                 android:text="동영상 플레이어" />
             
  			<Button
-                android:id="@+id/btn_no6"
+                android:id="@+id/btn_no8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"

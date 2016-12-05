@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.oklab.events.pinchtozoom.PinchToZoomViewTestAct;
+import com.oklab.framework.activitymanager.ActivityA;
 import com.oklab.framework.activitymanager.SystemInfoAPI;
+import com.oklab.framework.activitymanager.TaskManagement;
 import com.oklab.framework.fragment.MainFragmentActivity;
 import com.oklab.menutabs.GameTabViewActivity;
 import com.oklab.myshoptest.ContentResolverNotherAppLauch;
 import com.oklab.oktwitter.LoginActivity;
+import com.oklab.oktwitter.OKTwitterActivity;
 import com.oklab.player.LearningViewActivity;
 import com.oklab.webview.shouldOverrideUrlLoadingOnWebView;
 
@@ -23,14 +26,24 @@ public class MainMenuActivity extends BaseActivity{
 	}
 	
 	/**
-	 * 1. OK Twitter
+	 * 1. Activity LifeCycle
 	 * @param v
 	 */
 	public void startActivityLifeCycle(View v){
-		Intent intent = new Intent(MainMenuActivity.this, MainFragmentActivity.class);
+		Intent intent = new Intent(MainMenuActivity.this, ActivityA.class);
         startActivity(intent);
 	}
-	
+
+	/**
+	 * 2. Fragment LifeCycle
+	 * => FrameWork !!
+	 * @param v
+	 */
+	public void startActivityFragment(View v){
+		Intent intent = new Intent(MainMenuActivity.this, MainFragmentActivity.class);
+		startActivity(intent);
+	}
+
 	/**
 	 * 1. OK Twitter
 	 * @param v
@@ -65,16 +78,15 @@ public class MainMenuActivity extends BaseActivity{
         startActivity(intent);
 	}
 	/**
-	 * 4. Activity (Fragment) & Task 관리
+	 * 4. Activity Task 관리 등
 	 * => FrameWork !!
 	 * @param v
 	 */
 	public void startActivityManagment(View v){
+		Intent intent = new Intent(MainMenuActivity.this, TaskManagement.class);
+
 //		Intent intent = new Intent(MainMenuActivity.this, EncodingTest.class);
-		Intent intent = new Intent(MainMenuActivity.this, SystemInfoAPI.class);
-//		Intent intent = new Intent(MainMenuActivity.this, ActivityA.class);
-//		Intent intent = new Intent(MainMenuActivity.this, MainFragmentActivity.class);
-//		Intent intent = new Intent(MainMenuActivity.this, TaskManagement.class);
+//		Intent intent = new Intent(MainMenuActivity.this, SystemInfoAPI.class);
 //		Intent intent = new Intent(MainMenuActivity.this, PickMediaTestActivity.class);
 //		Intent intent = new Intent(MainMenuActivity.this, ProgressBarCustomViewTest.class);
         startActivity(intent);

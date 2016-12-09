@@ -5,9 +5,19 @@ module.exports = function(){
   var path = require('path');
   // var rootPath = require('app-root-path');
 
+  route.get('/upload', function(req, res){
+    console.log(req.file)
+    res.render('board/upload');
+  });
+
   route.post('/upImage', multer.single('imgFile'), function(req, res){
     console.log(req.file)
     res.send(req.file.filename);
+  });
+
+  route.post('/upImageMulti', multer.array('userfile'), function(req, res){
+    console.log(req.files)
+    res.send({"retVal":1,"retMsg":"SUCCESS"});
   });
 
   route.delete('/delete', function(req, res){

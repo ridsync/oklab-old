@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<Repo> call, Response<Repo> response) {
                 if (response.isSuccessful()) {
                     Repo repo = response.body();
-                    tem.setText(String.valueOf(repo.getMain().getTemp()));
+                    tem.setText(String.valueOf(repo.getMain().getTemp()) + "ºC");
                 } else {
 
                 }

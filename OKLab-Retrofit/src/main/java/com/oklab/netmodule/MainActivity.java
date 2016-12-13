@@ -1,9 +1,16 @@
 package com.oklab.netmodule;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,13 +21,15 @@ import android.widget.TextView;
 
 import com.oklab.netmodule.concurrent.OKTaskManager;
 import com.oklab.netmodule.concurrent.UPloadCallable;
-import com.oklab.netmodule.retrofit.ApiInterface;
 import com.oklab.netmodule.model.BaseModel;
+import com.oklab.netmodule.model.Repo;
+import com.oklab.netmodule.retrofit.ApiInterface;
 import com.oklab.netmodule.retrofit.ProgressRequestBody;
 import com.oklab.netmodule.retrofit.R;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.Permission;
 import java.util.concurrent.Future;
 
 import butterknife.Bind;
@@ -31,6 +40,7 @@ import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -53,7 +63,9 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar progressBar;
     @Bind(R.id.tem)
     TextView tem;
-    @Bind(R.id.downloadBtn)
+    @Bind(R.id.upload)
+    TextView upload;
+    @Bind(R.id.uploadBtn)
     Button getWeatherBtn;
     @Bind(R.id.tvLatitude)
     TextView tvLatitude;
@@ -64,8 +76,76 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.lon)
     EditText mlon;
 
-    @OnClick(R.id.downloadBtn)
-    public void onDownload(View view){
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
+        final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+        final float MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
+
+        if( ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION ) == PackageManager.PERMISSION_GRANTED){
+            LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+            if(lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+                lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, new LocationListener() {
+                    @Override
+                    public void onLocationChanged(Location location) {
+                    }
+
+                    @Override
+                    public void onStatusChanged(String provider, int status, Bundle extras) {
+                    }
+
+                    @Override
+                    public void onProviderEnabled(String provider) {
+                    }
+
+                    @Override
+                    public void onProviderDisabled(String provider) {
+                    }
+                });
+                Location location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                double longitude = location.getLongitude();
+                mlon.setText(longitude+"");
+                double latitude = location.getLatitude();
+                mlat.setText(latitude+"");
+            }
+        } else {
+            mlon.setText("no GPS Permission");
+            mlat.setText("no GPS Permission");
+        }
+    }
+
+    @OnClick(R.id.getWeatherBtn)
+    public void setGetWeatherBtn(View view){
+
+        String lat= mlat.getText().toString();
+        String lot = mlon.getText().toString();
+
+        Retrofit client = new Retrofit.Builder().baseUrl("http://api.openweathermap.org").addConverterFactory(GsonConverterFactory.create()).build();
+
+        ApiInterface service = client.create(ApiInterface.class);
+        Call<Repo> call = service.repo("684b98e21b4f35b7d52abe9ff6279349", "metric" , Double.valueOf(lat), Double.valueOf(lot));
+        call.enqueue(new Callback<Repo>() {
+            @Override
+            public void onResponse(Call<Repo> call, Response<Repo> response) {
+                if (response.isSuccessful()) {
+                    Repo repo = response.body();
+                    tem.setText(String.valueOf(repo.getMain().getTemp()));
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Repo> call, Throwable t) {
+            }
+        });
+    }
+
+    @OnClick(R.id.uploadBtn)
+    public void onUpload(View view){
 
         execBackgroundWork();
 
@@ -80,15 +160,11 @@ public class MainActivity extends AppCompatActivity {
 ////        }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-    }
-
-
-    public void execBackgroundWork(){
+    /**
+     *  ※ Concurrent TaskManager를 이용한 백그라운드 작업 ※
+     *     - Retrofit,DB,기타 I/O 처리 모듈등에 사용
+     */
+    protected void execBackgroundWork(){
         OKTaskManager.getInstance().getBgTasks().execute(new Runnable() {
             @Override
             public void run() {
@@ -97,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void submitBackgroundWork(){
+    protected void submitBackgroundWork(){
         final Future future = OKTaskManager.getInstance().getBgTasks().submit(new UPloadCallable(getApplicationContext()));
 
         new Handler().postDelayed(new Runnable() {
@@ -108,13 +184,8 @@ public class MainActivity extends AppCompatActivity {
         }, 3000);
     }
 
-    public void doMainThreadWork(){
-        OKTaskManager.getInstance().getMainThreadTasks().execute(new Runnable() {
-            @Override
-            public void run() {
-                // do some background work here.
-            }
-        });
+    protected void doMainThreadWork(Runnable runnable){
+        OKTaskManager.getInstance().getMainThreadTasks().execute(runnable);
     }
 
 
@@ -171,18 +242,18 @@ public class MainActivity extends AppCompatActivity {
         try {
             Response<BaseModel> result = call.execute();
             if(result.isSuccessful() && result.body().retVal == 1){
-                tem.post(new Runnable() {
+                doMainThreadWork(new Runnable() {
                     @Override
                     public void run() {
-                        tem.setText("UPload Completed");
+                        upload.setText("UPload Completed");
                         Log.d("Retrofit"," Thread test - "+ "UPload Completed");
                     }
                 });
             } else {
-                tem.post(new Runnable() {
+                doMainThreadWork(new Runnable() {
                     @Override
                     public void run() {
-                        tem.setText("UPload Failure");
+                        upload.setText("UPload Failure");
                         Log.d("Retrofit"," Thread test - "+ "UPload Failure");
                     }
                 });

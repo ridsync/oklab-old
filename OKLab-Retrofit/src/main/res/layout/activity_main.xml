@@ -10,25 +10,6 @@
     tools:context="com.oklab.netmodule.MainActivity">
 
     <TextView
-        android:id="@+id/tem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tvLongtitude"
-        android:layout_marginTop="46dp"
-        android:text="다운로드테스트"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Button
-        android:id="@+id/downloadBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tem"
-        android:layout_alignParentEnd="true"
-        android:onClick="onDownload"
-        android:text="Download" />
-
-    <TextView
         android:id="@+id/tvLatitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,38 +23,84 @@
         android:id="@+id/tvLongtitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/lat"
-        android:layout_marginRight="62dp"
         android:layout_marginTop="30dp"
         android:text="longtitude"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/tvLatitude"
+        android:layout_alignParentStart="true"/>
 
     <EditText
         android:id="@+id/lat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tvLatitude"
-        android:layout_marginRight="62dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginStart="36dp"
         android:layout_toEndOf="@+id/tvLatitude"
-        android:width="100dp" />
+        android:minWidth="150dp" />
 
     <EditText
         android:id="@+id/lon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvLatitude"
-        android:layout_alignStart="@+id/lat"
-        android:layout_marginRight="62dp"
-        android:width="100dp" />
+        android:layout_below="@+id/lat"
+        android:layout_alignBottom="@+id/tvLongtitude"
+        android:layout_marginStart="36dp"
+        android:layout_toEndOf="@+id/tvLongtitude"
+        android:minWidth="150dp" />
+
+    <TextView
+        android:id="@+id/tem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvLongtitude"
+        android:layout_marginTop="46dp"
+        android:text="Temperature"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/getWeatherBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tem"
+        android:layout_alignParentEnd="true"
+        android:text="getWheather" />
+
+    <TextView
+        android:id="@+id/horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/getWeatherBtn"
+        android:layout_marginTop="16dp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/upload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/horizontal"
+        android:layout_marginTop="24dp"
+        android:text="업로드테스트"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/uploadBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/horizontal"
+        android:layout_marginTop="12dp"
+        android:layout_alignParentEnd="true"
+        android:text="Upload" />
 
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tem"
-        android:layout_marginTop="30dp"
+        android:layout_below="@+id/uploadBtn"
+        android:layout_marginTop="20dp"
         style="?android:attr/progressBarStyleHorizontal"/>
 
 </RelativeLayout>

@@ -61,15 +61,15 @@
           <div class="row comment" style="padding:0; margin:0;">
 
             <div class="col-sm-2 comment_info">
-                <span class="writer"><strong><%= comment.author.userId %></strong></span>
+                <span class="writer"><strong><%= comment.author.userName %></strong></span>
                 <span class="created_at"><%= moment(post.createdAt).format('YYYY-MM-DD hh:mm:ss'); %></span>
             </div>
 
             <div class="col-sm-10 comment_content_box">
                 <span class="comment_content" style="display: block; overflow: hidden" id="comment_<%= comment._id %>"><%- comment.content %></span>
-                <span class="mobileOnly">    <strong><em><%= comment.author %></em></strong> 님이 <%= moment(post.createdAt).format('YYYY-MM-DD hh:mm:ss'); %> 에 작성 </span>
+                <span class="mobileOnly">    <strong><em><%= comment.author.userName %></em></strong> 님이 <%= moment(post.createdAt).format('YYYY-MM-DD hh:mm:ss'); %> 에 작성 </span>
                 <div class="comment_footer">
-                  <% if( user && user.userId == comment.author.userId) { %>
+                  <% if( user && user.userId == comment.author.userName) { %>
                   <button id="btn_comment_edit_<%= comment._id %>" class="btn_comment_edit btn btn-default btn-sm" onclick=editButtonClicked('<%= comment._id %>','<%= post._id %>,<%= page %>')>수정</button>
                   <button id="editmode_<%= comment._id %>" class="editmode btn btn-primary btn-sm">수정 완료</button>
                   <button class="btn_comment_delete btn btn-default btn-sm" onclick=deleteCommentAlert('board','<%= post._id %>','<%= comment._id %>')>삭제</button>
@@ -320,7 +320,7 @@
                     <span id="comment_count">[ <%= post.comments.length %> ]</span>
                   <% } %>
                   <% if( post.content && post.content.search('img class=') >= 0 ) { %>
-                    <i class="fa fa-file-image-o" style="margin-left:2px; color:#666;"></i>
+                    <i class="fa fa-file-image-o" style="margin-left:2px; color:#931;"></i>
                   <% } %>
                   <% if( post.content && post.content.search('iframe src=') >= 0 ) { %>
                     <i class="fa fa-file-video-o" style="margin-left:3px; color:#931;"></i>

@@ -1,2 +1,1 @@
-include ':OKLab-JavaAnd', ':fablibrary'
-include 'OKLab-Android'
+include 'OKLab-Android',':OKLab-JavaAnd', ':fablibrary', ':OKLab-Retrofit'

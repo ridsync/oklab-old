@@ -171,7 +171,7 @@ module.exports = function(passport){
         var newEmail = req.body.user.email;
         var newPhone = req.body.user.phone;
         User.findOneAndUpdate({userId:req.user.userId},
-            { $set: { password: newPassword , uesrName:newUserName, email:newEmail, phone:newPhone}}, { new: true })
+            { $set: { password: newPassword , userName:newUserName, email:newEmail, phone:newPhone}}, { new: true })
         .exec(function (err,user) {
             if(err) return res.json({success:false, message:err});
             console.log('[profile update] Success User = ' + JSON.stringify(user) );

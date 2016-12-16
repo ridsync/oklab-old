@@ -10,5 +10,9 @@ module.exports = function(express){
     res.render('about', { title: 'OK MEAN STACK: About' });
   });
 
+  route.get('/game', function(req, res, next) {
+    res.render('game', { title: 'OK MEAN STACK: Game DEV' });
+  });
+
   return route;
 }

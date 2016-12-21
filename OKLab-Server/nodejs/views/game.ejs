@@ -143,13 +143,22 @@ $(document).ready(function(){
 
 function betting(){
 
+    $('.btn-default').attr("disabled",true);
+
     betMoney = $('#bet').val();
     $('#message-bet').html('');
     $('#result').val('');
     console.log('betMoney = ' + betMoney);
 
     if(seedMoney <=0){
-      console.log('모든 돈을 잃었습니다. 다시 시작? count = ' + wheelCount);
+      var retrunVal = confirm('돈을 다 잃으셨네요~ 다시 한판 더?');
+      if(retrunVal){
+        seedMoney = 10000;
+        betMoney = 0;
+        $('#result').val('');
+        $('#bet').val('');
+        $('#seed').val(seedMoney);
+      }
       return;
     }
     if (betMoney < 100 || betMoney % 100 != 0) {
@@ -214,17 +223,17 @@ function spinUp(){
     // 숫자표시 애니메이션 작동
 
     $slot1.sly('pause');
-    $slot1.sly('activate', slot1 -1, false );
+    $slot1.sly('activate', slotNumber[0] -1, false );
 
     setTimeout(function(){
       $slot2.sly('pause');
-      $slot2.sly('activate', slot2 -1, false );
+      $slot2.sly('activate', slotNumber[1] -1, false );
       console.log('setTimeout slot2 :');
     },3000);
 
     setTimeout(function(){
       $slot3.sly('pause');
-      $slot3.sly('activate', slot3 -1, false );
+      $slot3.sly('activate', slotNumber[2] -1, false );
       console.log('setTimeout slot3 :');
           setTimeout(function(){
               resetGame();
@@ -246,6 +255,8 @@ function resetGame(){
   }
   $('#result').val(resultStr + getMoney);
   $('#seed').val(seedMoney);
+
+  $('.btn-default').attr("disabled",false);
 
   // 게임 리셋
   if(seedMoney == 0){

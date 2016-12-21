@@ -19,8 +19,8 @@ betting = function(){
     }
     if (input <= 100 || input % 100 != 0) {
         console.log('베팅액을 100원단위로 입력');
-    } else if(input > 1000){
-        console.log('베팅액을 1000원이상은 불가능');
+    } else if(input > 2000){
+        console.log('베팅액을 2000원이상은 불가능');
     } else if( input > seedMoney){
         console.log('베팅액이 보유금액을 초과해따');
     } else { // 게임진행

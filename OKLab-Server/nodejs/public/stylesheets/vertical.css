@@ -1,0 +1,115 @@
+body { background: #e8e8e8; }
+.container { margin: 0 auto; }
+
+/* Example wrapper */
+.wrap {
+	float: left;
+	width: 550px;
+	margin: 0 40px 3em 0;
+}
+/*.wrap:nth-child(2n) { margin-right: 0; }*/
+
+.wrap #slots {
+	position: absolute;
+	z-index: 2;
+	width: 500px;
+	height: 500px;
+	margin-top: 250px;
+}
+
+.wrap .jackpot {
+	position: relative;
+	z-index: 1;
+	width: 500px;
+	height: 500px;
+}
+
+/* Frame */
+.frame {
+	display: inline-block;
+	margin: 5px;
+	width: 90px;
+	height: 140px;
+	overflow: hidden;
+	border: 1px solid #444;
+	background: #441212;
+}
+.frame .slidee {
+	padding: 20px 25px;
+	background: #fff;
+}
+.frame ul.items {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	font-size: 60px;
+	line-height: 140px;
+}
+.frame ul.items li {
+	float: left;
+	width: 100%;
+	height: 140px;
+	margin: 0 0 1px;
+	padding: 0;
+	background: #441212;
+	color: #ddd;
+	text-align: center;
+	cursor: pointer;
+}
+.frame ul.items li.active {
+	color: #ffffff;
+	background: #881212;
+}
+
+/* Scrollbar */
+.scrollbar {
+	position: absolute;
+	right: 10px;
+	width: 2px;
+	height: 600px;
+	background: #ccc;
+	line-height: 0;
+}
+.scrollbar .handle {
+	width: 100%;
+	height: 100px;
+	background: #292a33;
+	cursor: pointer;
+}
+.scrollbar .handle .mousearea {
+	position: absolute;
+	top: 0;
+	left: -10px;
+	width: 22px;
+	height: 100%;
+}
+
+/* Pages */
+.pages {
+	list-style: none;
+	margin: 20px 0;
+	padding: 0;
+	text-align: center;
+}
+.pages li {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	margin: 0 4px;
+	text-indent: -999px;
+	border-radius: 10px;
+	cursor: pointer;
+	overflow: hidden;
+	background: #fff;
+	box-shadow: inset 0 0 0 1px rgba(0,0,0,.2);
+}
+.pages li:hover {
+	background: #aaa;
+}
+.pages li.active {
+	background: #666;
+}
+
+/* Controls */
+.controls { margin: 25px 0; text-align: center; }

@@ -144,6 +144,7 @@ $(document).ready(function(){
 function betting(){
 
     $('.btn-default').attr("disabled",true);
+    $('.btn-default').blur();
 
     betMoney = $('#bet').val();
     $('#message-bet').html('');

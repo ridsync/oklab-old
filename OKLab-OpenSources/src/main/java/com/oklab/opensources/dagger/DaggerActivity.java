@@ -25,10 +25,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
+import io.realm.RealmResults;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
@@ -134,18 +136,18 @@ public class DaggerActivity extends BaseActivity {
         subscription = delayedApiCall.subscribe(new Subscriber<RealmTest>() {
             @Override
             public void onCompleted() {
-                System.out.println("onCompleted = " + idx);
+                Log.d(DaggerActivity.class.getSimpleName(),"onCompleted = " + idx);
                 tem.setText("RX onCompleted : " + idx);
             }
 
             @Override
             public void onError(Throwable e) {
-                System.out.println("onError -> " + e.getMessage());
+                Log.d(DaggerActivity.class.getSimpleName(),"onError -> " + e.getMessage());
             }
 
             @Override
             public void onNext(RealmTest test) {
-                System.out.println("onNext -> " + test.getName());
+                Log.d(DaggerActivity.class.getSimpleName(),"onNext -> " + test.getName());
                 tem.setText("RX onNext : " + test.getName());
 
                 if(idx > 50) subscription.unsubscribe();
@@ -157,9 +159,25 @@ public class DaggerActivity extends BaseActivity {
     public void onUpload(View view) {
 
         RealmTest test = mRealm.where(RealmTest.class).equalTo("id", 2).findFirst();
-
         mlon.setText(test.getId() + test.getName());
-        Log.d(DaggerActivity.class.getSimpleName(), "[Dagger] RealmTest mlon = " + test.getName());
+        Log.d(DaggerActivity.class.getSimpleName(), "[Dagger] RealmTest name = " + test.getName());
+
+        mRealm.where(RealmTest.class).equalTo("id", 2)
+                .findAllAsync().asObservable()
+                .filter(new Func1<RealmResults<RealmTest>, Boolean>() {
+            @Override
+            public Boolean call(RealmResults<RealmTest> persons) {
+                // Ignore unloaded results
+                return persons.isLoaded();
+            }
+        }).subscribe(new Action1<RealmResults<RealmTest>>() {
+                    @Override
+                    public void call(RealmResults<RealmTest> persons) {
+                        // Show persons...
+                        RealmTest test = persons.get(0);
+                        Log.d(DaggerActivity.class.getSimpleName(), "[Dagger] RealmTest name = " + test.getName());
+                    }
+                });
 
         // Stop
         if (subscription != null && !subscription.isUnsubscribed()) {

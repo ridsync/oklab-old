@@ -17,6 +17,7 @@ import com.squareup.otto.Subscribe;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -24,6 +25,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
+import rx.Observable;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 public class DaggerActivity extends BaseActivity {
 
@@ -49,6 +56,10 @@ public class DaggerActivity extends BaseActivity {
 
     @Inject
     NetworkStateManager networkStateManager;
+
+    int idx = 0;
+    Observable<RealmTest> delayedApiCall;
+    private Subscription subscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,9 +112,45 @@ public class DaggerActivity extends BaseActivity {
         mRealm.insertOrUpdate(test);
         mRealm.commitTransaction();
 
+        // EventBus
         Log.d(DaggerActivity.class.getSimpleName(),  mEventBus.toString());
         mEventBus.post(test);
 
+        // RxJava interval 반복작업
+        // Handler로 그냥 딜레이 반복 하는게 더 단순해보이네 ㅡㅡ;
+        delayedApiCall = Observable.interval(5, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+//                .startWith(0L)
+                .map(new Func1<Long , RealmTest>() {
+                    @Override
+                    public RealmTest call(Long  seconds) {
+                        System.out.println("call seconds = " + seconds);
+                        RealmTest realm = new RealmTest();
+                        realm.setName(""+idx++);
+                        return realm;
+                    }
+                });
+        subscription = delayedApiCall.subscribe(new Subscriber<RealmTest>() {
+            @Override
+            public void onCompleted() {
+                System.out.println("onCompleted = " + idx);
+                tem.setText("RX onCompleted : " + idx);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                System.out.println("onError -> " + e.getMessage());
+            }
+
+            @Override
+            public void onNext(RealmTest test) {
+                System.out.println("onNext -> " + test.getName());
+                tem.setText("RX onNext : " + test.getName());
+
+                if(idx > 50) subscription.unsubscribe();
+            }
+        });
     }
 
     @OnClick(R.id.uploadBtn)
@@ -114,6 +161,11 @@ public class DaggerActivity extends BaseActivity {
         mlon.setText(test.getId() + test.getName());
         Log.d(DaggerActivity.class.getSimpleName(), "[Dagger] RealmTest mlon = " + test.getName());
 
+        // Stop
+        if (subscription != null && !subscription.isUnsubscribed()) {
+            System.out.println("stopped");
+            subscription.unsubscribe();
+        }
     }
 
 }

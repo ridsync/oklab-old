@@ -35,6 +35,8 @@ dependencies {
     apt 'com.google.dagger:dagger-compiler:2.8'
     provided 'javax.annotation:jsr250-api:1.0'
 
+    compile 'io.reactivex:rxandroid:1.2.1'
+
     // otto
     compile 'com.squareup:otto:1.3.8'
 }

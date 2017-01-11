@@ -5,11 +5,7 @@ module.exports = function(){
   var path = require('path');
   // var rootPath = require('app-root-path');
 
-  route.get('/upload', function(req, res){
-    console.log(req.file)
-    res.render('board/upload');
-  });
-
+  // add.ejs
   route.post('/upImage', multer.single('imgFile'), function(req, res){
     console.log(req.file)
     res.send(req.file.filename);
@@ -30,6 +26,31 @@ module.exports = function(){
       console.log('successfully deleted  - ' + filename);
     });
     res.send('File Delete Completed');
+  });
+
+  // file.ejs
+  route.get('/fileio', function(req, res){
+    console.log(req.file)
+    res.render('board/file');
+  });
+
+  route.post('/multer', multer.single('userfile'), function(req, res){
+    console.log(req.file)
+    res.send('Uploaded : '+req.file.filename);
+  });
+
+  route.get('/download/:file(*)', function(req, res){
+    var fileName = req.params.file;
+    console.log('download filename = ' + fileName)
+    var file = 'public/images/' + fileName;
+    res.download(file);
+  });
+
+  route.get('/sendfile/:file(*)', function(req, res){
+    var fileName = req.params.file;
+    console.log('sendfile filename = ' +fileName)
+    var file = path.resolve( 'public/images/' , fileName);
+    res.sendFile(file);
   });
 
   return route;

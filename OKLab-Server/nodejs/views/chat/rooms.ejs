@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html >
   <head>
+    <title>Chat Rooms</title>
     <% include ../partials/head %>
-    <title>Chat IO</title>
     <link rel="stylesheet" href="/stylesheets/chatstyle.css">
-    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
   </head>
   <body>
     <header>
@@ -14,7 +13,7 @@
     <div class="container clearfix" style="width: 500px;">
       <div class="controls" style="border: none; width: 100%;">
           <!-- <a href="/logout" class="logout-btn" style="width: auto; padding: 13px; font-size: 12px;">Logout</a> -->
-          <a class="logout-btn" style="width: auto; padding: 13px; font-size: 12px;">Logout</a>
+          <a class="logout-btn" style="width: 70px; padding: 13px; font-size: 12px;">LIVE !!</a>
       </div>
 
       <div class="room" style="width: 100%;">
@@ -48,6 +47,19 @@
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script src="/javascripts/chat.js"></script>
-    <script>$(function(){app.rooms()});</script>
+    <script>
+    $(function(){app.rooms()});
+    var int = 0 ;
+    var showAlert = setInterval(function() {
+        int++;
+        var order = int % 4;
+        var suffix = '.';
+        for(var i=0; i < order; i++){
+          suffix = suffix + ".";
+        }
+        $('.logout-btn').html('LIVE' + suffix);
+     }, 500);
+
+    </script>
   </body>
 </html>

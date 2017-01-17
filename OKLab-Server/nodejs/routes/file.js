@@ -3,7 +3,22 @@ module.exports = function(){
   var multer = require('../config/multer')();
   var fs = require('fs');
   var path = require('path');
+  var User     = require('../config/mongodb/models/User');
   // var rootPath = require('app-root-path');
+
+  // profile.ejs
+  route.post('/photoUp', multer.single('userPhoto'), function(req, res){
+    console.log(req.file)
+    var filename = '/uploads/' + req.file.filename;
+    User.findOneAndUpdate({userId:req.user.userId},
+        { $set: {picture: filename}}, { new: true })
+    .exec(function (err,user) {
+        if(err) return res.json({success:false, message:err});
+        console.log('[profile update] photoUp Success User = ' + JSON.stringify(user) );
+        res.send(filename);
+    });
+
+  });
 
   // add.ejs
   route.post('/upImage', multer.single('imgFile'), function(req, res){

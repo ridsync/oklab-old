@@ -41,6 +41,19 @@
                           <tr><td>회원 권한</td><td><%= user.userLevel %></td></tr>
                           <tr><td>가입일</td><td><%= user.createdAt %></td></tr>
                           <tr><td>만기일</td><td><%= user.expireAt %></td></tr>
+                          <tr><td>프로필사진<div ><img src="<%= user.picture %>" alt="avatar"  height="70" width="70"></div></td><td>
+                            <form id="progressForm" name="progressForm" action="/file/photoUp" method="post" enctype="multipart/form-data">
+                              <input type="file" id="fileTarget" name="userPhoto" required>
+                              <input type="submit" value="파일 업로드">
+                            </form>
+                            <div class="progress">
+                              <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar">
+                                <span id="percent"></span>
+                              </div>
+                            </div>
+                            <div id="status"></div>
+
+                          </td></tr>
                       </table>
                   </div>
                   <a href="/auth/profile/update" class="btn btn-default">회원 정보 변경하기</a>
@@ -81,6 +94,69 @@
           jQuery(document).ready(function ($) {
               $('#tabs').tab();
           });
+
+          (function() {
+
+          var bar = $('.progress-bar');
+          var percent = $('#percent');
+          var status = $('#status');
+          var formValid = false;
+          $('#progressForm').ajaxForm({
+              beforeSend: function() {
+                  status.empty();
+                  var percentVal = '0%';
+                  bar.width(percentVal)
+                  percent.html(percentVal);
+
+                  if (ValidateUploadForm()) {
+                      formValid = true;
+                      bar.addClass('progress-bar-striped');
+                      bar.removeClass('progress-bar-success');
+                      bar.addClass('progress-bar-info');
+                      bar.addClass('active');
+                  } else {
+                      formValid = false;
+                  }
+                  return formValid; // form submit 제어는 안된다.
+              },
+              uploadProgress: function(event, position, total, percentComplete) {
+                if (formValid) {
+                  var percentVal = percentComplete + '%';
+                  bar.width(percentVal)
+                  percent.html(percentVal);
+                }
+              },
+              success: function() {
+                if (formValid) {
+                  var percentVal = '100%';
+                  bar.width(percentVal)
+                  percent.html(percentVal);
+                }
+              },
+          	complete: function(xhr) {
+                if (formValid) {
+                  bar.removeClass('active');
+                  bar.removeClass('progress-bar-striped');
+                  bar.removeClass('progress-bar-info');
+                  bar.addClass('progress-bar-success');
+              		status.html(xhr.responseText);
+                }
+          	}
+          });
+
+          function ValidateUploadForm() {
+                var fileTarget = $('#fileTarget').val();
+                if ( fileTarget !== '' && fileTarget.length > 0){
+                  console.log('ValidateUploadForm true !!!! ');
+                  return true;
+                } else {
+                    console.log('ValidateUploadForm false !!!! ');
+                  return false;
+                }
+          }
+
+          })();
+
       </script>
                   </div>
               </div>

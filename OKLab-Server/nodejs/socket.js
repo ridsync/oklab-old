@@ -4,7 +4,7 @@ var config 	= require('./config/config');
 var redis 	= require('redis').createClient;
 var adapter = require('socket.io-redis');
 
-var Room = require('./config/chat/Room');
+var Room = require('./config/mongodb/chat/room');
 
 /**
  * Encapsulates all code for emitting and listening to socket events

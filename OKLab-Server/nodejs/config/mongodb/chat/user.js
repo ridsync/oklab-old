@@ -1,4 +1,4 @@
-var userModel = require('../mongodb/models/User');
+var userModel = require('../models/User');
 
 var create = function (data, callback){
 	var newUser = new userModel(data);

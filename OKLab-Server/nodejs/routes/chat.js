@@ -1,8 +1,8 @@
 module.exports = function(){
   var Mongoose = require('mongoose');
   var Route =  require('express').Router();
-  var User = require('../config/chat/user');
-  var Room = require('../config/chat/room');
+  var User = require('../config/mongodb/chat/user');
+  var Room = require('../config/mongodb/chat/room');
 
   Route.get('/', function(req, res, next) {
     if(isLoggedIn(req,res)){

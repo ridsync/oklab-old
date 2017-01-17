@@ -1,0 +1,21 @@
+{
+	"dbURI": "mongodb://10.23.51.124:27017/oklab_nodejs_board",
+	"sessionSecret": "1234DSFs@adf1234!@#$asd",
+	"facebook": {
+		"clientID": "<AppID>",
+		"clientSecret": "<AppSecret>",
+		"callbackURL": "/auth/facebook/callback",
+		"profileFields": ["id", "displayName", "photos"]
+	},
+	"twitter": {
+		"consumerKey": "<ConsumerKey>",
+		"consumerSecret": "<ConsumerSecret>",
+		"callbackURL": "/auth/twitter/callback",
+		"profileFields": ["id", "displayName", "photos"]
+	},
+	"redis": {
+		"host": "10.23.51.124",
+		"port": 6379,
+		"password": ""
+	}
+}

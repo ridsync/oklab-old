@@ -1,10 +1,14 @@
 var mongoose = require('mongoose');
 var bcrypt   = require("bcrypt-nodejs");
 
+const SALT_WORK_FACTOR = 10;
+const DEFAULT_USER_PICTURE = "/images/hyuna.jpg";
+
 var userSchema = mongoose.Schema({
   userId: {type:String, required:true, unique:true},
   password: {type:String, required:true},
   userName: {type:String, required:true},
+  picture: { type: String, default:  DEFAULT_USER_PICTURE},
   email: {type:String, required:true},
   phone: {type:String},
   userLevel: {type:Number, required:true},
@@ -40,8 +44,13 @@ module.exports.hashPassword = function (password){
 }
 
 function hashPassword(next){
-  console.log("hi");
+  console.log("hashPassword");
   var user = this;
+  // ensure user picture is set
+  if(!user.picture){
+      user.picture = DEFAULT_USER_PICTURE;
+  }
+
   if(!user.isModified("password")){
     return next();
   } else {

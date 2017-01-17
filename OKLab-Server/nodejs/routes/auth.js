@@ -120,10 +120,10 @@ module.exports = function(passport){
   route.get('/loginResult', function(req, res){
     var loginError = req.flash('loginError');
     if(isLoggedIn(req, res)){
-      console.log('[login] login success userId = ' + req.flash("userId")[0]);
+      console.log('[auth] login success userId = ' + req.flash("userId")[0]);
       res.send(null);
     } else { // TODO 로그인에러 처리(아이디암호확인 메세지전달등)
-      console.log('[login] login failed loginError = ' + loginError);
+      console.log('[auth] login failed loginError = ' + loginError);
       res.send(loginError);
       req.flash('loginError',null);
     }

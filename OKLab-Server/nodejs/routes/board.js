@@ -22,12 +22,12 @@ module.exports = function(){
   });
 
   // board post add view
-  route.get('/add/post' , isLoggedIn , function(req, res, next){
+  route.get('/add/post' , isAuthenticated , function(req, res, next){
       res.render('board/add');
   });
 
 // board post add
-  route.post('/add/post' , isLoggedIn , function(req, res){
+  route.post('/add/post' , isAuthenticated , function(req, res){
       req.body.post.postType = 'normal';
       req.body.post.author = req.user._id;
       console.log("add/post new post data =  "+ req.body.post);
@@ -67,8 +67,8 @@ module.exports = function(){
     });
   });
 
-  //글수정,삭제  //TODO isLoggedIn <- 자신의 글만 허용되도록하느것도 필요하다
-  route.get('/edit/post/:postId' , isLoggedIn, function(req, res){
+  //글수정,삭제  //TODO isAuthenticated <- 자신의 글만 허용되도록하느것도 필요하다
+  route.get('/edit/post/:postId' , isAuthenticated, function(req, res){
     var postId = req.params.postId;
     var page = req.query.page;
 
@@ -82,7 +82,7 @@ module.exports = function(){
     });
   });
 
-  route.post('/edit/post' , isLoggedIn, function(req, res){
+  route.post('/edit/post' , isAuthenticated, function(req, res){
       var postId = req.body.post.postId;
       var subject = req.body.post.subject;
       var content = req.body.post.content;
@@ -96,7 +96,7 @@ module.exports = function(){
       });
   });
 
-  route.delete('/delete/post/:postId' , isLoggedIn, function(req, res){
+  route.delete('/delete/post/:postId' , isAuthenticated, function(req, res){
       var postId = req.params.postId;
 
 
@@ -110,7 +110,7 @@ module.exports = function(){
   });
 
   // 댓글 추가 , 수정 , 삭제
-  route.post('/add/comment/:postId' , isLoggedIn , function(req, res){
+  route.post('/add/comment/:postId' , isAuthenticated , function(req, res){
       var postId = req.params.postId;
       var page = req.query.page;
       req.body.comment.author = req.user._id;
@@ -128,7 +128,7 @@ module.exports = function(){
       });
   });
 
-  route.put('/edit/comment/:commentId' , isLoggedIn, function(req, res){
+  route.put('/edit/comment/:commentId' , isAuthenticated, function(req, res){
     var commentId = req.params.commentId;
     var postId = req.body.postId;
     var newContent = req.body.comment_content;
@@ -152,7 +152,7 @@ module.exports = function(){
   });
 
   // for ajax
-  route.delete('/delete/comment/:commentId' , isLoggedIn, function(req, res){
+  route.delete('/delete/comment/:commentId' , isAuthenticated, function(req, res){
     var postId = req.body.postId;
     var commentId = req.params.commentId;
 
@@ -170,7 +170,7 @@ module.exports = function(){
 
   });
 
-  function isLoggedIn(req, res, next) {
+  function isAuthenticated(req, res, next) {
     if (req.isAuthenticated()){
       return next();
     }

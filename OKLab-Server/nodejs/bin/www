@@ -3,7 +3,6 @@
 /**
  * Module dependencies.
  */
-
 var app = require('../app');
 var debug = require('debug')('nodejs:server');
 var http = require('http');
@@ -16,10 +15,11 @@ var port = normalizePort(process.env.PORT || '3960');
 app.set('port', port);
 
 /**
- * Create HTTP server.
+ * Create HTTP server. socket.io Initialize
  */
 
 var server = http.createServer(app);
+var socketio = require('../socket')(server);
 
 /**
  * Listen on provided port, on all network interfaces.

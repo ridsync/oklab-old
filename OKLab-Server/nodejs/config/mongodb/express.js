@@ -1,15 +1,16 @@
 module.exports = function(){
   var express = require('express');
-  var session = require('express-session');
-  var Store = require('express-session').Store;
+  // var session = require('express-session'); // 별도 세션js로 뺌
+  // var Store = require('express-session').Store;
+  // var MongooseStore = require('mongoose-express-session')(Store);
+  // var db = require('./db')();
+  var session 	= require('./session');
   var path = require('path');
   var flash = require('connect-flash');
   var favicon = require('serve-favicon');
   var logger = require('morgan');
   var cookieParser = require('cookie-parser');
   var bodyParser = require('body-parser');
-  var mongooseCon = require('./db')();
-  var MongooseStore = require('mongoose-express-session')(Store);
 
   var app = express();
   // view engine setup
@@ -27,13 +28,14 @@ module.exports = function(){
   app.use(express.static('public'));
   app.use(require('stylus').middleware('public'));
   app.use(flash());
-  app.use(session({
-    secret: '1234DSFs@adf1234!@#$asd',
-    resave: false,
-    saveUninitialized: true,
-    store:new MongooseStore({connection: mongooseCon}),
-    // cookie: { maxAge: 10 * 60 * 1000 } // TODO maxAge는 로그인시 필수네? expires가 필요없나 ?
-    cookie: { maxAge: 9 * 60 * 1000 }
-  }));
+  app.use(session);
+  // app.use(session({
+  //   secret: '1234DSFs@adf1234!@#$asd',
+  //   resave: false,
+  //   saveUninitialized: true,
+  //   store:new MongooseStore({connection: db}),
+  //   // cookie: { maxAge: 10 * 60 * 1000 } // TODO maxAge는 로그인시 필수네? expires가 필요없나 ?
+  //   cookie: { maxAge: 9 * 60 * 1000 }
+  // }));
   return app;
 }

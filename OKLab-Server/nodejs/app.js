@@ -16,6 +16,7 @@ app.use(function(req, res, next) {
 var main = require('./routes/main')();
 var auth = require('./routes/auth')(passport);
 var board = require('./routes/board')();
+var chat = require('./routes/chat')();
 var file = require('./routes/file')();
 // var index = require('./routes/mysql/index')();
 // var auth = require('./routes/mysql/auth')(passport);
@@ -25,6 +26,7 @@ app.use('/', main);
 app.use('/auth', auth);
 app.use('/board', board);
 app.use('/file', file);
+app.use('/chat', chat);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

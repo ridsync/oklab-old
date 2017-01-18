@@ -11,7 +11,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.container {
+.containers {
   margin: 2% auto;
   width: 760px;
   background: #444753;
@@ -92,7 +92,7 @@ body {
   padding: 10px 30px 20px;
   border-bottom: 2px solid white;
   overflow-y: scroll;
-  max-height: 580px;
+  max-height: 530px;
   min-height: 300px;
 }
 .chat .chat-history .message-data {
@@ -307,6 +307,12 @@ ul {
 button:hover, button:active, button:focus {
   background: #89c771;
 }
+a.live-btn{
+  background-color: rgb(226, 98, 92);
+}
+a.live-btn:hover, a.live-btn:active, a.live-btn:focus {
+  background-color: rgb(245, 106, 99);
+}
 a.rooms-btn:hover, a.rooms-btn:active, a.rooms-btn:focus {
   background: #89c771;
 }
@@ -344,7 +350,7 @@ a.logout-btn:hover, a.logout-btn:active, a.logout-btn:focus {
 .message.success {
   color: #86BB71;
 }
-.container {
+.containers {
   overflow: hidden;
 }
 .chat, .users-list{

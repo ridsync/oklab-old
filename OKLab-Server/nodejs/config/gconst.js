@@ -6,5 +6,8 @@
 // TODO config.json으로도 구성가능 참조 !!
 
 exports.MONGODB_ADDR = 'mongodb://10.23.51.124:27017/oklab_nodejs_board';
-exports.UPLOAD_DIR = 'public/uploads/';
+exports.DIR_PUBLIC_ROOT = 'public';
+exports.DIR_UPLOAD = '/uploads';
+exports.DIR_UPLOAD_PROFILE = '/uploads/profile';
+exports.DIR_UPLOAD_POSTPIC = '/uploads/post';
 exports.LOGGER = 'LOGGER';

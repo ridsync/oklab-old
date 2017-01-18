@@ -1,5 +1,7 @@
 <html>
-<%include ../partials/head %>
+<head>
+  <%include ../partials/head %>
+</head>
 <body>
   <header>
     <% include ../partials/header %>
@@ -106,7 +108,7 @@
             type: "POST",
             data: formData,
             success: function (msg) {
-                tinymce.activeEditor.insertContent('<a class="mg-popup-img" href="/uploads/'+msg+'"><img class="pop" src="/uploads/'+msg+'" style="max-width:100%; max-height:100%;" /></a>');
+                tinymce.activeEditor.insertContent('<a class="mg-popup-img" href="'+msg+'"><img class="pop" src="'+msg+'" style="max-width:100%; max-height:100%;" /></a>');
                 if($('#uploads').val().length > 1){
                     $('#uploads').val($('#uploads').val()+','+msg);
                 } else $('#uploads').val(msg);
@@ -154,6 +156,4 @@
     <%include ../partials/footer %>
 
 </body>
-
-<script src="/javascripts/responsive-menu.js"></script>
 </html>

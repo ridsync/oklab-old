@@ -92,6 +92,10 @@ var app = {
       return $('<div />').text(str).html();
     },
 
+    encodeBrHTML: function (str){
+      return $('<div />').text(str).html().replace(/\n/g,'<br>');
+    },
+
     // Update rooms list
     updateRoomsList: function(room){
       room.title = this.encodeHTML(room.title);
@@ -140,7 +144,7 @@ var app = {
     addMessage: function(message){
       message.date      = (new Date(message.date)).toLocaleString();
       message.username  = this.encodeHTML(message.username);
-      message.content   = this.encodeHTML(message.content);
+      message.content   = this.encodeBrHTML(message.content);
 
       var html = `<li>
                     <div class="message-data">

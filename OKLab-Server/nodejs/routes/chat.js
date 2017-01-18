@@ -17,7 +17,7 @@ module.exports = function(){
   	Room.find(function(err, rooms){
   		if(err) throw err;
       console.log("[chat] chatRoom rooms" + rooms);
-  		res.render('chat/rooms', { rooms });
+  		res.render('chat/rooms', { title:'Chat Rooms', rooms });
   	});
   });
 
@@ -30,7 +30,7 @@ module.exports = function(){
   		if(!room){
   			return next();
   		}
-  		res.render('chat/chatroom', { user: req.user, room: room });
+  		res.render('chat/chatroom', { title:room.title, user: req.user, room: room });
   	});
 
   });

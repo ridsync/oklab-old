@@ -1,8 +1,8 @@
-var config 	= require('../config');
+var config 	= require('./config');
 var session 	= require('express-session');
 var Store = require('express-session').Store;
 // var MongoStore	= require('connect-mongo')(session);
-var db = require('./db')();
+var db = require('./mongodb/db')();
 var MongooseStore = require('mongoose-express-session')(Store);
 
 /**

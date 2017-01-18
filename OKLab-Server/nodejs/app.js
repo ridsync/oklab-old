@@ -1,5 +1,5 @@
-var app = require('./config/mongodb/express')();
-var passport = require('./config/mongodb/passport')(app);
+var app = require('./config/express')();
+var passport = require('./config/passport')(app);
 // var app = require('./config/mysql/express')();
 // var passport = require('./config/mysql/passport')(app);
 

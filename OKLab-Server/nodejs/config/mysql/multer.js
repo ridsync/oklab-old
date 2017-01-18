@@ -1,8 +1,11 @@
 module.exports = function(){
   var multer = require('multer');
+  var gConst = require('./gconst');
+  var path = require('path');
+  
   var _storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'uploads/')
+      cb(null, path.join(gConst.DIR_PUBLIC_ROOT, gConst.DIR_UPLOAD) )
     },
     filename: function (req, file, cb) {
       console.log(file);

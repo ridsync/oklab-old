@@ -2,7 +2,7 @@ module.exports = function(app){
   var passport = require('passport');
   var LocalStrategy = require('passport-local').Strategy;
   // var FacebookStrategy = require('passport-facebook').Strategy;
-  var User          = require('./models/User');
+  var User          = require('./mongodb/models/User');
 
   app.use(passport.initialize());
   app.use(passport.session());

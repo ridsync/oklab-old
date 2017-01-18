@@ -1,6 +1,6 @@
 module.exports = function(){
   var route = require('express').Router();
-  var multer = require('../config/multer')();
+  var multer = require('../config/multer');
   var fs = require('fs');
   var path = require('path');
 

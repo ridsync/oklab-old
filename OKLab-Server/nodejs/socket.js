@@ -136,7 +136,7 @@ var init = function(server){
 
 	// Allow sockets to access session data
 	io.use((socket, next) => {
-		require('./config/mongodb/session')(socket.request, {}, next);
+		require('./config/session')(socket.request, {}, next);
 	});
 
 	// Define all Events

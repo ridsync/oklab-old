@@ -1,5 +1,8 @@
 <html>
-<% include ../partials/head %>
+<head>
+  <%include ../partials/head %>
+  <link rel="stylesheet" href="/stylesheets/profile.view.css">
+</head>
 <body>
   <header>
     <% include ../partials/header %>
@@ -87,8 +90,6 @@
           </div>
       </div>
 
-
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
       <script>
 
           jQuery(document).ready(function ($) {
@@ -140,6 +141,7 @@
                   bar.removeClass('progress-bar-info');
                   bar.addClass('progress-bar-success');
               		status.html(xhr.responseText);
+                  $('img').attr('src',xhr.responseText);
                 }
           	}
           });
@@ -170,6 +172,4 @@
     </footer>
 
 </body>
-
-<script src="/javascripts/responsive-menu.js"></script>
 </html>

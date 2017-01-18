@@ -27,7 +27,7 @@
     <div class="document_header">
         <span class="document_subject"><%= post.subject %></span>
         <span class="document_regdate"><%= moment(post.createdAt).format('YYYY-MM-DD a hh:mm:ss') %> 조회 <em><%= post.hits %></em></span>
-        <span class="document_writer"><%= post.author.userName %></span>
+        <span class="document_writer"><img src="<%= post.author.picture %>" alt="avatar"  height="30" width="30"><%= post.author.userName %></span>
     </div>
 
     <div class="document_content mg-popup-gallery">
@@ -62,7 +62,7 @@
           <div class="row comment" style="padding:0; margin:0;">
 
             <div class="col-sm-2 comment_info">
-                <span class="writer"><strong><%= comment.author.userName %></strong></span>
+                <span class="writer"><img src="<%= post.author.picture %>" alt="avatar"  height="20" width="20"><strong><%= comment.author.userName %></strong></span>
                 <span class="created_at"><%= moment(post.createdAt).format('YYYY-MM-DD hh:mm:ss'); %></span>
             </div>
 
@@ -303,7 +303,7 @@
                     <% } %>
                   </span></a>
             </td>
-            <td><%= post.author.userName %></td>
+            <td><img src="<%= post.author.picture %>" alt="avatar"  height="20" width="20"><%= post.author.userName %></td>
             <td><%= moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss'); %></td>
             <td class="center"><%= post.hits %></td>
         </tr>
@@ -331,7 +331,7 @@
                   <% } %>
                 </span></a>
             </td>
-            <td><%= post.author.userName %></td>
+            <td><img src="<%= post.author.picture %>" alt="avatar"  height="20" width="20"><%= post.author.userName %></td>
             <td><%= moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss') %></td>
             <td class="center"><%= post.hits %></td>
         </tr>

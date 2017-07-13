@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:paddingTop="8dp"
+                android:id="@+id/RL_VISITOR_ITEMVIEW">
+
+    <RelativeLayout
+        android:id="@+id/RL_VISITOR_DATE_BOX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/TV_VISITOR_DATE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:textSize="12dp"
+            android:textColor="@color/md_black_1000"
+            android:text="Today"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/RL_VISITOR_ITEM_BOX"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/RL_VISITOR_DATE_BOX">
+
+        <ImageView
+            android:id="@+id/IV_VISITOR_PROFILE"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"/>
+
+        <RelativeLayout
+            android:id="@+id/RL_VISITOR_TARGET_BOX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp">
+
+            <ImageView
+                android:id="@+id/IV_VISITOR_TARGET_LIKED"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/IV_VISITOR_TARGET_CHAT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@+id/IV_VISITOR_TARGET_LIKED"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RL_VISITOR_COMMENT_BOX"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/RL_VISITOR_TARGET_BOX"
+            android:layout_toRightOf="@id/IV_VISITOR_PROFILE">
+
+            <TextView
+                android:id="@+id/TV_VISITOR_NAME"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="2dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="@color/md_black_1000"
+                android:text="maryJohnson"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:id="@+id/TV_VISITOR_LOCATIONAGE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:layout_below="@+id/TV_VISITOR_NAME"
+                android:layout_marginTop="7dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="@color/md_black_1000"
+                android:text="seoul, 23"
+                android:textSize="15dp"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/IV_VISITOR_DIVIDER"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/RL_VISITOR_ITEM_BOX"
+        android:background="@color/md_orange_400"/>
+</RelativeLayout>

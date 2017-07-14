@@ -44,14 +44,19 @@ class VisitorActivitykt : AppCompatActivity() , SwipeRefreshLayout.OnRefreshList
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_visitor)
 
-//        val fragment:Fragment = VisitorFragmentkt()
-//        fragmentManager.beginTransaction()
-//                .add(R.id.fragment_container, fragment, "VisitorFragmentkt").commit()
+        val fragment:Fragment = VisitorFragmentkt()
+        fragmentManager.beginTransaction()
+                .add(R.id.fragment_container, fragment, "VisitorFragmentkt").commit()
 
-        initFirst()
+//        initFirst()
     }
 
     private fun initFirst(){
+        TV_text_view?.let{
+            with(it) {
+                text = "Activity Dadadad"
+            }
+        }
 
         setSwipeToRefresh()
         setRecyclerView()

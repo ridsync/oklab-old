@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import app.com.thetechnocafe.kotlinweather.Home.BaseRecyclerExtendsAdapter
 import app.com.thetechnocafe.kotlinweather.Home.CropCircleTransform
 import app.com.thetechnocafe.kotlinweather.Home.ReloadRecyclerViewScrollListner
@@ -17,13 +18,18 @@ import app.com.thetechnocafe.kotlinweather.Networking.NetworkService
 import app.com.thetechnocafe.kotlinweather.Networking.ResVisitorList
 import app.com.thetechnocafe.kotlinweather.R
 import com.bumptech.glide.Glide
+import com.jakewharton.rxbinding2.view.RxView
+import com.jakewharton.rxbinding2.widget.RxCheckedTextView
+import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Action
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.layout_visitor.*
 import kotlinx.android.synthetic.main.item_visitor_list.view.*
 import kotlinx.android.synthetic.main.layout_visitor.view.*
 import java.util.ArrayList
 import java.util.HashMap
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by arent on 2017. 7. 11..
@@ -50,6 +56,22 @@ class VisitorFragmentkt : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
         RL_VISITOR_MAIN.setBackgroundResource(R.color.cardview_light_background)
 
+        TV_text_view?.let{
+            with(it) {
+                text = "Fragment Da"
+            }
+        }
+        RxView.clicks(BTN_button)
+                .throttleFirst(5000,TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    TV_text_view.text = "Click"
+                Toast.makeText(activity.applicationContext,"Click Testyoyoyo",Toast.LENGTH_SHORT).show()
+        }
+        RxTextView.textChangeEvents(TV_text_view).skip(1).subscribe {
+
+            BTN_button.text = "ChangeText"
+        }
     }
 
     private fun initFirst(){

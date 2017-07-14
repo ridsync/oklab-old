@@ -10,6 +10,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView android:id="@+id/TV_text_view"
+                  android:layout_width="200dp"
+                  android:layout_height="60dp"
+                  android:background="@color/md_white_1000"
+                  android:layout_centerHorizontal="true"
+                  android:layout_alignParentBottom="true"
+                  android:layout_marginBottom="50dp"
+                  android:text="Test"
+                  android:textSize="14sp"/>
+
+        <Button android:id="@+id/BTN_button"
+                  android:layout_width="80dp"
+                  android:layout_height="35dp"
+                  android:layout_above="@+id/TV_text_view"
+                  android:layout_alignRight="@+id/TV_text_view"
+                  android:text="Button"
+                  android:textSize="11sp"/>
+
         <RelativeLayout
             android:id="@+id/RL_VISITOR_EXIST_BOX"
             android:layout_width="match_parent"

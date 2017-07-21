@@ -1,26 +1,20 @@
-package app.com.thetechnocafe.kotlinweather.Home
+package app.com.thetechnocafe.kotlinweather.home
 
 import android.app.Fragment
-import android.app.FragmentManager
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import app.com.thetechnocafe.kotlinweather.Consts.Constants
-import app.com.thetechnocafe.kotlinweather.Consts.Secrets
-import app.com.thetechnocafe.kotlinweather.Models.VisitorInfo
-import app.com.thetechnocafe.kotlinweather.Networking.NetworkService
-import app.com.thetechnocafe.kotlinweather.Networking.ResVisitorList
+import app.com.thetechnocafe.kotlinweather.models.VisitorInfo
+import app.com.thetechnocafe.kotlinweather.networking.NetworkService
+import app.com.thetechnocafe.kotlinweather.models.ResVisitorList
 import app.com.thetechnocafe.kotlinweather.R
 import com.bumptech.glide.Glide
-import com.playcorp.sqapp.ui.fragment.VisitorFragmentkt
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.layout_visitor.*
@@ -37,18 +31,19 @@ class VisitorActivitykt : AppCompatActivity() , SwipeRefreshLayout.OnRefreshList
     private var mFirstSeq: Long = 0
     private var mUserList = ArrayList<VisitorInfo>()
 
-    private var mListAdapter: VisitorAdapter? = null
-    private var mScrollListener: ReloadRecyclerViewScrollListner? = null
+    lateinit var mListAdapter: VisitorAdapter
+    lateinit var mScrollListener: ReloadRecyclerViewScrollListner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_visitor)
 
-        val fragment:Fragment = VisitorFragmentkt()
-        fragmentManager.beginTransaction()
-                .add(R.id.fragment_container, fragment, "VisitorFragmentkt").commit()
+        initFirst()
 
-//        initFirst()
+//        val fragment:Fragment = VisitorFragmentkt()
+//        fragmentManager.beginTransaction()
+//                .add(R.id.fragment_container, fragment, "VisitorFragmentkt").commit()
+
     }
 
     private fun initFirst(){
@@ -56,6 +51,23 @@ class VisitorActivitykt : AppCompatActivity() , SwipeRefreshLayout.OnRefreshList
             with(it) {
                 text = "Activity Dadadad"
             }
+        }
+
+        BTN_start_time_activity.setOnClickListener {
+            val intent = TimeLineActivity.newIntent(this,"userId")
+            startActivity(intent)
+        }
+
+        BTN_start_home_activity.setOnClickListener {
+            val intent = HomeActivity.newIntent(this,"userId")
+            startActivity(intent)
+        }
+
+        BTN_button.setOnClickListener {
+            val fragment:Fragment = VisitorFragmentkt()
+            fragmentManager.beginTransaction()
+                .add(R.id.fragment_container, fragment, "VisitorFragmentkt").commit()
+            fragment_container.visibility = View.VISIBLE
         }
 
         setSwipeToRefresh()
@@ -67,7 +79,7 @@ class VisitorActivitykt : AppCompatActivity() , SwipeRefreshLayout.OnRefreshList
     override fun onRefresh() {
         mFirstSeq = 0
         mIsExecuteFadeAnim = false
-        mScrollListener?.reset()
+        mScrollListener.reset()
         swipeRefreshLayout?.isEnabled = false
         getVisitorList()
     }
@@ -75,7 +87,7 @@ class VisitorActivitykt : AppCompatActivity() , SwipeRefreshLayout.OnRefreshList
 
     private fun setRecyclerView() {
         val manager = LinearLayoutManager(applicationContext)
-        manager.orientation = LinearLayoutManager.VERTICAL
+                .apply { orientation = LinearLayoutManager.VERTICAL }
         RCV_VISITOR_LISTVIEW.layoutManager = manager
         RCV_VISITOR_LISTVIEW.setHasFixedSize(true)
         mListAdapter = VisitorAdapter(mUserList)
@@ -83,9 +95,8 @@ class VisitorActivitykt : AppCompatActivity() , SwipeRefreshLayout.OnRefreshList
         // LoadMore
         mScrollListener = object : ReloadRecyclerViewScrollListner(manager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int) {
-                if (mListAdapter == null)
-                    return
-                if ( mFirstSeq > mListAdapter?.pageItemCountByLoadMore as Long ) {
+                val pageCountUnit = mListAdapter.pageItemCountByLoadMore
+                if ( mFirstSeq > pageCountUnit ) {
                     // PREVIE모드면 로그인창으로 유도.
                 } else {
                     getVisitorList()
@@ -99,7 +110,7 @@ class VisitorActivitykt : AppCompatActivity() , SwipeRefreshLayout.OnRefreshList
 
         }
         RCV_VISITOR_LISTVIEW.addOnScrollListener(mScrollListener)
-        mListAdapter?.pageItemCountByLoadMore = 30
+        mListAdapter.pageItemCountByLoadMore = 30
         RCV_VISITOR_LISTVIEW.itemAnimator = null
 //        val pixel = resources.getDimensionPixelSize(R.dimen.user_list_item_bottom_margin_height)
 //        RCV_VISITOR_LISTVIEW.addItemDecoration(SpacesItemDecoration(pixel))
@@ -138,20 +149,18 @@ class VisitorActivitykt : AppCompatActivity() , SwipeRefreshLayout.OnRefreshList
         val result = data
         val arrUserInfos = result.list
         if (arrUserInfos?.size != null && arrUserInfos.size > 0) {
-            if (mListAdapter != null) {
                 if (mFirstSeq == 0L) { // 초기화
                     //                            mListAdapter.clear();
-                    mListAdapter?.data = arrUserInfos
+                    mListAdapter.data = arrUserInfos
                 } else {
-                    mListAdapter?.addItemAll(arrUserInfos)
+                    mListAdapter.addItemAll(arrUserInfos)
                 }
-                mFirstSeq = arrUserInfos?.get(arrUserInfos.size - 1)?.seq as Long
-            }
+                mFirstSeq = arrUserInfos[arrUserInfos.size - 1].seq
         } else {
-                mListAdapter?.setVisibleFooterView(false)
+                mListAdapter.setVisibleFooterView(false)
         }
         // 데이터 없음
-        if (mUserList != null && mUserList.size == 0) {
+        if (mUserList.size == 0) {
             RL_VISITOR_NONE_BOX.visibility = View.VISIBLE
             RL_VISITOR_EXIST_BOX.visibility = View.GONE
         } else {

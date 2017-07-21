@@ -1,4 +1,4 @@
-package app.com.thetechnocafe.kotlinweather.Consts
+package app.com.thetechnocafe.kotlinweather.consts
 
 /**
  * Created by gurleensethi on 21/06/17.

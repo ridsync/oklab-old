@@ -1,4 +1,4 @@
-package app.com.thetechnocafe.kotlinweather.Home
+package app.com.thetechnocafe.kotlinweather.home
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import app.com.thetechnocafe.kotlinweather.Models.Forecast
+import app.com.thetechnocafe.kotlinweather.models.Forecast
 import app.com.thetechnocafe.kotlinweather.R
-import app.com.thetechnocafe.kotlinweather.Utils.WeatherToImage
+import app.com.thetechnocafe.kotlinweather.utils.WeatherToImage
 
 /**
  * Created by gurleensethi on 23/06/17.

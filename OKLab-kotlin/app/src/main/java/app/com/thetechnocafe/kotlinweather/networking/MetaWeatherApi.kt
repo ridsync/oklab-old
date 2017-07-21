@@ -1,6 +1,6 @@
-package app.com.thetechnocafe.kotlinweather.Networking
+package app.com.thetechnocafe.kotlinweather.networking
 
-import app.com.thetechnocafe.kotlinweather.Models.WeatherData
+import app.com.thetechnocafe.kotlinweather.models.WeatherData
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Header

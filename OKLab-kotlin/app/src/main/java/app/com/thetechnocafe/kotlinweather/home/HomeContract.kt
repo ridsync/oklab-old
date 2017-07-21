@@ -1,7 +1,7 @@
-package app.com.thetechnocafe.kotlinweather.Home
+package app.com.thetechnocafe.kotlinweather.home
 
 import android.content.Context
-import app.com.thetechnocafe.kotlinweather.Models.WeatherData
+import app.com.thetechnocafe.kotlinweather.models.WeatherData
 
 /**
  * Created by gurleensethi on 21/06/17.

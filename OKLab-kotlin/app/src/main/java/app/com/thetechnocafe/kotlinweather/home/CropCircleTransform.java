@@ -1,4 +1,4 @@
-package app.com.thetechnocafe.kotlinweather.Home;
+package app.com.thetechnocafe.kotlinweather.home;
 
 import android.content.Context;
 import android.graphics.Bitmap;

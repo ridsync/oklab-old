@@ -1,4 +1,4 @@
-package com.playcorp.sqapp.ui.fragment
+package app.com.thetechnocafe.kotlinweather.home
 
 import android.app.Fragment
 import android.os.Bundle
@@ -9,31 +9,24 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import app.com.thetechnocafe.kotlinweather.Home.BaseRecyclerExtendsAdapter
-import app.com.thetechnocafe.kotlinweather.Home.CropCircleTransform
-import app.com.thetechnocafe.kotlinweather.Home.ReloadRecyclerViewScrollListner
-import app.com.thetechnocafe.kotlinweather.Models.VisitorInfo
-import app.com.thetechnocafe.kotlinweather.Networking.NetworkService
-import app.com.thetechnocafe.kotlinweather.Networking.ResVisitorList
+import app.com.thetechnocafe.kotlinweather.models.VisitorInfo
+import app.com.thetechnocafe.kotlinweather.networking.NetworkService
+import app.com.thetechnocafe.kotlinweather.models.ResVisitorList
 import app.com.thetechnocafe.kotlinweather.R
 import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding2.view.RxView
-import com.jakewharton.rxbinding2.widget.RxCheckedTextView
-import com.jakewharton.rxbinding2.widget.RxTextView
+import com.jakewharton.rxbinding2.widget.*
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Action
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.layout_visitor.*
 import kotlinx.android.synthetic.main.item_visitor_list.view.*
-import kotlinx.android.synthetic.main.layout_visitor.view.*
-import java.util.ArrayList
-import java.util.HashMap
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
- * Created by arent on 2017. 7. 11..
- */
+* Created by arent on 2017. 7. 11..
+*/
 class VisitorFragmentkt : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     lateinit var mListAdapter: VisitorAdapter
@@ -43,6 +36,8 @@ class VisitorFragmentkt : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     private var mFirstSeq: Long = 0 // 리스트의 하단 마지막 listSeq loadMore용
     private var mIsExecuteFadeAnim = false
+
+    var compDispo: CompositeDisposable? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         Log.d("", " ++ onCreateView ++")
@@ -61,16 +56,30 @@ class VisitorFragmentkt : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                 text = "Fragment Da"
             }
         }
-        RxView.clicks(BTN_button)
+        BTN_button.text = "Close Fragment"
+        val dispo = RxView.clicks(BTN_button)
                 .throttleFirst(5000,TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    TV_text_view.text = "Click"
-                Toast.makeText(activity.applicationContext,"Click Testyoyoyo",Toast.LENGTH_SHORT).show()
+                    activity.fragmentManager.popBackStackImmediate()
+                    activity.fragment_container.visibility = View.GONE
+//                    TV_text_view.text = "Click"
+//                Toast.makeText(activity.applicationContext,"Click Testyoyoyo",Toast.LENGTH_SHORT).show()
         }
-        RxTextView.textChangeEvents(TV_text_view).skip(1).subscribe {
+        val dispo2 = RxTextView.textChangeEvents(TV_text_view).skip(1).subscribe {
 
             BTN_button.text = "ChangeText"
+        }
+
+        compDispo?.addAll(dispo,dispo2)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroy()
+        compDispo?.run {
+            if (isDisposed) {
+                dispose()
+            }
         }
     }
 
@@ -87,7 +96,7 @@ class VisitorFragmentkt : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     override fun onRefresh() {
         mFirstSeq = 0
         mIsExecuteFadeAnim = false
-        mScrollListener?.reset()
+        mScrollListener.reset()
         swipeRefreshLayout?.isEnabled = false
         getVisitorList()
     }
@@ -103,9 +112,8 @@ class VisitorFragmentkt : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         // LoadMore
         mScrollListener = object : ReloadRecyclerViewScrollListner(manager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int) {
-                if (mListAdapter == null)
-                    return
-                if ( mFirstSeq > mListAdapter?.pageItemCountByLoadMore as Long ) {
+                val pageCountUnit = mListAdapter.pageItemCountByLoadMore
+                if ( mFirstSeq > pageCountUnit ) {
                     // PREVIE모드면 로그인창으로 유도.
                 } else {
                     getVisitorList()
@@ -119,7 +127,7 @@ class VisitorFragmentkt : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
         }
         RCV_VISITOR_LISTVIEW.addOnScrollListener(mScrollListener)
-        mListAdapter?.pageItemCountByLoadMore = 30
+        mListAdapter.pageItemCountByLoadMore = 30
         RCV_VISITOR_LISTVIEW.itemAnimator = null
 //        val pixel = resources.getDimensionPixelSize(R.dimen.user_list_item_bottom_margin_height)
 //        RCV_VISITOR_LISTVIEW.addItemDecoration(SpacesItemDecoration(pixel))
@@ -158,20 +166,18 @@ class VisitorFragmentkt : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         val result = data
         val arrUserInfos = result.list
         if (arrUserInfos?.size != null && arrUserInfos.size > 0) {
-            if (mListAdapter != null) {
                 if (mFirstSeq == 0L) { // 초기화
                     //                            mListAdapter.clear();
-                    mListAdapter?.data = arrUserInfos
+                    mListAdapter.data = arrUserInfos
                 } else {
-                    mListAdapter?.addItemAll(arrUserInfos)
+                    mListAdapter.addItemAll(arrUserInfos)
                 }
-                mFirstSeq = arrUserInfos?.get(arrUserInfos.size - 1)?.seq as Long
-            }
+                mFirstSeq = arrUserInfos[arrUserInfos.size - 1].seq
         } else {
-            mListAdapter?.setVisibleFooterView(false)
+            mListAdapter.setVisibleFooterView(false)
         }
         // 데이터 없음
-        if (mUserList != null && mUserList.size == 0) {
+        if (mUserList.size == 0) {
             RL_VISITOR_NONE_BOX.visibility = View.VISIBLE
             RL_VISITOR_EXIST_BOX.visibility = View.GONE
         } else {
@@ -226,7 +232,7 @@ class VisitorFragmentkt : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
             })
 
-            viewHolder.itemView.RL_VISITOR_ITEMVIEW.setBackgroundResource(R.color.abc_search_url_text_normal)
+            viewHolder.itemView.RL_VISITOR_ITEMVIEW.setBackgroundResource(R.color.md_brown_500)
 
         }
 

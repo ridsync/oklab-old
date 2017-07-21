@@ -1,4 +1,4 @@
-package app.com.thetechnocafe.kotlinweather.Home
+package app.com.thetechnocafe.kotlinweather.home
 
 import android.content.Context
 import android.content.Intent
@@ -19,10 +19,10 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
 import android.widget.TextView
-import app.com.thetechnocafe.kotlinweather.Dialogs.ForecastDialogFragment
-import app.com.thetechnocafe.kotlinweather.Models.WeatherData
+import app.com.thetechnocafe.kotlinweather.dialogs.ForecastDialogFragment
+import app.com.thetechnocafe.kotlinweather.models.WeatherData
 import app.com.thetechnocafe.kotlinweather.R
-import app.com.thetechnocafe.kotlinweather.Utils.WeatherToImage
+import app.com.thetechnocafe.kotlinweather.utils.WeatherToImage
 
 
 class HomeActivity : AppCompatActivity(), HomeContract.View {
@@ -245,6 +245,16 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
                     checkAndAskForLocationPermissions()
                 }
             }
+        }
+    }
+
+    companion object {
+        private val INTENT_USER_ID = "user_id"
+
+        fun newIntent(context: Context, user_id: String): Intent {
+            val intent = Intent(context, HomeActivity::class.java)
+            intent.putExtra(INTENT_USER_ID, user_id)
+            return intent
         }
     }
 }

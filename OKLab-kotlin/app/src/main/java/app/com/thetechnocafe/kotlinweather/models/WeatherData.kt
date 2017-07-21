@@ -1,15 +1,13 @@
-package app.com.thetechnocafe.kotlinweather.Models
+package app.com.thetechnocafe.kotlinweather.models
 
-import android.text.method.BaseMovementMethod
-import app.com.thetechnocafe.kotlinweather.Networking.BaseModel
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 /**
- * Created by gurleensethi on 16/06/17.
- */
-open class BaseInfo {
+* Created by gurleensethi on 16/06/17.
+*/
+open class BaseInfo : Serializable {
 
     @Expose
     val idx: Int = 0
@@ -30,6 +28,22 @@ data class VisitorInfo(var user_id:Long,
     }
 }
 
+data class TimeLineInfo(var user_id:Long,
+                       var user_login_id:String,
+                       var user_photo:String,
+                       var news_type_id:Int,
+                       var is_zzim:Int,
+                       var user_gender:Int,
+                       var user_home_addr1:String,
+                       var reg_date:Long,
+                       var id:Int, var desc:String): BaseInfo() {
+
+    override fun toString(): String {
+        return super.toString()
+    }
+}
+
+
 data class WeatherData(
         @SerializedName("query") val query: Query
 ) : Serializable
@@ -47,6 +61,10 @@ data class Query(
 
     override fun toString(): String {
         return super.toString()
+    }
+
+    override fun hashCode(): Int {
+        return super.hashCode()
     }
 
 }

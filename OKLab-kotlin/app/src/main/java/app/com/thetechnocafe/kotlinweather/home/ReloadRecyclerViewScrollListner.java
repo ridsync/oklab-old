@@ -1,4 +1,4 @@
-package app.com.thetechnocafe.kotlinweather.Home;
+package app.com.thetechnocafe.kotlinweather.home;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;

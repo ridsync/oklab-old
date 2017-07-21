@@ -1,6 +1,6 @@
-package app.com.thetechnocafe.kotlinweather.Networking
+package app.com.thetechnocafe.kotlinweather.networking
 
-import app.com.thetechnocafe.kotlinweather.Consts.Constants
+import app.com.thetechnocafe.kotlinweather.consts.Constants
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory

@@ -1,4 +1,4 @@
-package app.com.thetechnocafe.kotlinweather.Utils
+package app.com.thetechnocafe.kotlinweather.utils
 
 import app.com.thetechnocafe.kotlinweather.R
 

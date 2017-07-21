@@ -10,23 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView android:id="@+id/TV_text_view"
-                  android:layout_width="200dp"
-                  android:layout_height="60dp"
-                  android:background="@color/md_white_1000"
-                  android:layout_centerHorizontal="true"
-                  android:layout_alignParentBottom="true"
-                  android:layout_marginBottom="50dp"
-                  android:text="Test"
-                  android:textSize="14sp"/>
 
-        <Button android:id="@+id/BTN_button"
-                  android:layout_width="80dp"
-                  android:layout_height="35dp"
-                  android:layout_above="@+id/TV_text_view"
-                  android:layout_alignRight="@+id/TV_text_view"
-                  android:text="Button"
-                  android:textSize="11sp"/>
 
         <RelativeLayout
             android:id="@+id/RL_VISITOR_EXIST_BOX"
@@ -40,12 +24,12 @@
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/RCV_VISITOR_LISTVIEW"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
                     android:clipChildren="false"
-                    android:scrollbars="vertical"
-                    android:scrollbarStyle="outsideOverlay"/>
+                    android:scrollbarStyle="outsideOverlay"
+                    android:scrollbars="vertical"/>
             </android.support.v4.widget.SwipeRefreshLayout>
         </RelativeLayout>
 
@@ -75,6 +59,48 @@
                 android:textSize="14sp"/>
         </RelativeLayout>
 
+        <TextView android:id="@+id/TV_text_view"
+                  android:layout_width="200dp"
+                  android:layout_height="60dp"
+                  android:background="@color/md_white_1000"
+                  android:layout_above="@+id/TV_text_view_2"
+                  android:layout_centerHorizontal="true"
+                  android:text="Test"
+                  android:textSize="14sp"/>
+
+        <TextView android:id="@+id/TV_text_view_2"
+                  android:layout_width="200dp"
+                  android:layout_height="60dp"
+                  android:background="@color/md_amber_50"
+                  android:layout_above="@+id/BTN_button"
+                  android:layout_centerHorizontal="true"
+                  android:text="Test"
+                  android:textSize="14sp"/>
+
+        <Button android:id="@+id/BTN_start_home_activity"
+                android:layout_width="80dp"
+                android:layout_height="35dp"
+                android:layout_above="@+id/TV_text_view"
+                android:layout_alignLeft="@+id/TV_text_view"
+                android:text="Go Home"
+                android:textSize="12sp"/>
+
+        <Button android:id="@+id/BTN_start_time_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_above="@+id/TV_text_view"
+                android:layout_alignRight="@+id/TV_text_view"
+                android:text="Go TimeLine"
+                android:textSize="12sp"/>
+
+        <Button android:id="@+id/BTN_button"
+                android:layout_width="80dp"
+                android:layout_height="35dp"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:text="Fragment Push"
+                android:textSize="12sp"/>
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -103,7 +129,8 @@
                  android:id="@+id/fragment_container"
                  android:layout_width="match_parent"
                  android:layout_height="match_parent"
-                 android:orientation="vertical">
+                 android:background="@color/md_white_1000"
+                 android:orientation="vertical" android:visibility="gone">
     </FrameLayout>
 
 </RelativeLayout>

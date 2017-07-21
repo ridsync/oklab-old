@@ -1,13 +1,13 @@
-package app.com.thetechnocafe.kotlinweather.Dialogs
+package app.com.thetechnocafe.kotlinweather.dialogs
 
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
-import app.com.thetechnocafe.kotlinweather.Models.Forecast
+import app.com.thetechnocafe.kotlinweather.models.Forecast
 import app.com.thetechnocafe.kotlinweather.R
-import app.com.thetechnocafe.kotlinweather.Utils.WeatherToImage
+import app.com.thetechnocafe.kotlinweather.utils.WeatherToImage
 
 /**
  * Created by gurleensethi on 28/06/17.

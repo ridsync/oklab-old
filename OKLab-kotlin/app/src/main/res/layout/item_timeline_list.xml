@@ -8,7 +8,7 @@
 
 
     <RelativeLayout
-        android:id="@+id/LL_TIMELINE_ITEM_BOX"
+        android:id="@+id/LL_item_box"
         android:layout_width="match_parent"
         android:layout_height="119dp"
         android:layout_marginLeft="5dp"
@@ -27,12 +27,12 @@
             android:padding="0dp">
 
             <RelativeLayout
-                android:id="@+id/RL_TIMELINE_ITEM_BG"
+                android:id="@+id/RL_item_bg"
                 android:layout_width="match_parent"
                 android:layout_height="76dp">
 
                 <ImageView
-                    android:id="@+id/IV_TIMELINE_PROFILE_IMAGE"
+                    android:id="@+id/IV_profile_image"
                     android:layout_width="52dp"
                     android:layout_height="52dp"
                     android:layout_centerVertical="true"
@@ -41,36 +41,36 @@
                     />
 
                 <ImageView
-                    android:id="@+id/IV_TIMELINE_ONLINE_ICON"
+                    android:id="@+id/IV_online_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/IV_TIMELINE_PROFILE_IMAGE"
+                    android:layout_alignTop="@id/IV_profile_image"
                     android:layout_marginLeft="8dp"
                     android:contentDescription="online"
                     android:visibility="gone" />
 
                 <ImageView
-                    android:id="@+id/IV_TIMELINE_HOT_ICON"
+                    android:id="@+id/IV_hot_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/IV_TIMELINE_PROFILE_IMAGE"
+                    android:layout_alignTop="@id/IV_profile_image"
                     android:layout_marginLeft="-15dp"
                     android:layout_marginTop="-5dp"
-                    android:layout_toRightOf="@+id/IV_TIMELINE_PROFILE_IMAGE"
+                    android:layout_toRightOf="@+id/IV_profile_image"
                     android:contentDescription="hot"
                     android:visibility="gone" />
 
                 <LinearLayout
-                    android:id="@+id/LL_TIMELINE_INFO_BOX"
+                    android:id="@+id/LL_info_box"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_alignLeft="@+id/IV_TIMELINE_PROFILE_IMAGE"
+                    android:layout_alignLeft="@+id/IV_profile_image"
                     android:layout_marginLeft="65dp"
                     android:layout_marginRight="16dp"
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/LL_TIMELINE_USERINFO_BOX"
+                        android:id="@+id/LL_userinfobox"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -82,7 +82,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/TV_TIMELINE_USERINFO_UNSERNAME"
+                                android:id="@+id/TV_userinfo_username"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:ellipsize="end"
@@ -92,7 +92,7 @@
                                 android:textSize="15sp" />
 
                             <TextView
-                                android:id="@+id/IV_TIMELINE_USERINFO_TAIL"
+                                android:id="@+id/TV_userinfo_username_tail"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:maxLines="1"
@@ -102,7 +102,7 @@
                         </LinearLayout>
 
                         <TextView
-                            android:id="@+id/IV_TIMELINE_USERINFO_PURPOSE"
+                            android:id="@+id/TV_userinfo_purpose"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="1dp"
@@ -118,13 +118,13 @@
             </RelativeLayout>
 
             <View
-                android:id="@+id/IV_TIMELINE_HORIZONTAL_LINE"
+                android:id="@+id/IV_horizontal_line"
                 android:layout_width="match_parent"
                 android:layout_height="0.6dp"
                 android:background="@color/md_grey_400" />
 
             <LinearLayout
-                android:id="@+id/LL_TIMELINE_ACTION_BOX"
+                android:id="@+id/LL_action_box"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -134,7 +134,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/TV_TIMELINE_TIME_ELAPSED"
+                    android:id="@+id/TV_time_elapsed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="16dp"
@@ -148,13 +148,13 @@
                     android:layout_weight="1" />
 
                 <RelativeLayout
-                    android:id="@+id/RL_TIMELINE_BTN_CHAT"
+                    android:id="@+id/RL_btn_chat"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:gravity="center">
 
                     <ImageView
-                        android:id="@+id/IV_TIMELINE_BTN_CHAT"
+                        android:id="@+id/IV_btn_chat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/chat_c_nomal" />
@@ -162,14 +162,14 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/RL_TIMELINE_BTN_LIKE"
+                    android:id="@+id/RL_btn_like"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:gravity="center"
                     android:layout_marginRight="10dp">
 
                     <ImageView
-                        android:id="@+id/IV_TIMELINE_BTN_LIKE"
+                        android:id="@+id/IV_btn_like"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/likedyou_m_nomal" />

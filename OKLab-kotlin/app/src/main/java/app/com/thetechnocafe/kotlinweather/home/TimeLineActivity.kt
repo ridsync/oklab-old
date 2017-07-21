@@ -15,11 +15,13 @@ import app.com.thetechnocafe.kotlinweather.models.ResTimeLineList
 import app.com.thetechnocafe.kotlinweather.models.TimeLineInfo
 import app.com.thetechnocafe.kotlinweather.networking.NetworkService
 import app.com.thetechnocafe.kotlinweather.R
+import app.com.thetechnocafe.kotlinweather.models.VisitorInfo
 import com.bumptech.glide.Glide
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.layout_timeline.*
 import kotlinx.android.synthetic.main.item_timeline_list.view.*
+import kotlinx.android.synthetic.main.layout_timeline.view.*
 import java.util.ArrayList
 import java.util.HashMap
 
@@ -30,8 +32,6 @@ class TimeLineActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshListe
 
 //    var binding: LayoutTimelineBinding? = null
     private var mIsExecuteFadeAnim: Boolean = false
-    private var mFirstSeq: Long = 0
-    private var mUserList = ArrayList<TimeLineInfo>()
 
     lateinit var mListAdapter: TimeLineAdapter
     lateinit var mScrollListener: ReloadRecyclerViewScrollListner
@@ -49,8 +49,11 @@ class TimeLineActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshListe
 
     fun initFirst (){
 
-        SWC_SETTING_NOTIFY_NEW_MESSAGE.setOnCheckedChangeListener { buttonView, isChecked ->
+        SWC_setting_notify_info.setOnCheckedChangeListener { buttonView, isChecked ->
             Log.d("TimeLineActivity","onClickGoTop isChecked $isChecked")
+        }
+        BTN_newfeed_top.setOnClickListener {
+            RCV_timeline.smoothScrollToPosition(0)
         }
         setSwipeToRefresh()
         setRecyclerView()
@@ -59,27 +62,25 @@ class TimeLineActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshListe
     }
 
     override fun onRefresh() {
-        mFirstSeq = 0
+        mListAdapter.mFirstSeq = 0
         mIsExecuteFadeAnim = false
         mScrollListener.reset()
-        swipeRefreshLayout?.isEnabled = false
+        SRL_swipeRefresh?.isEnabled = false
         getTimeLineList()
     }
 
     private fun setRecyclerView() {
         val manager = LinearLayoutManager(applicationContext)
                 .apply { orientation = LinearLayoutManager.VERTICAL }
-        RCV_TIMELINE_LISTVIEW.layoutManager = manager
-        RCV_TIMELINE_LISTVIEW.setHasFixedSize(true)
-        mListAdapter = TimeLineAdapter(mUserList)
-
+        RCV_timeline.layoutManager = manager
+        RCV_timeline.setHasFixedSize(true)
+        mListAdapter = TimeLineAdapter()
+        mListAdapter.pageItemCountByLoadMore = 30
         // LoadMore
         mScrollListener = object : ReloadRecyclerViewScrollListner(manager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int) {
                val pageCountUnit = mListAdapter.pageItemCountByLoadMore
-                if ( mFirstSeq > pageCountUnit ) {
-                    // PREVIE모드면 로그인창으로 유도.
-                } else {
+                if ( mListAdapter.mFirstSeq > 0 ) {
                     getTimeLineList()
                 }
             }
@@ -90,21 +91,20 @@ class TimeLineActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshListe
             }
 
         }
-        RCV_TIMELINE_LISTVIEW.addOnScrollListener(mScrollListener)
-        mListAdapter.pageItemCountByLoadMore = 30
-        RCV_TIMELINE_LISTVIEW.itemAnimator = null
+        RCV_timeline.addOnScrollListener(mScrollListener)
+        RCV_timeline.itemAnimator = null
 //        val pixel = resources.getDimensionPixelSize(R.dimen.user_list_item_bottom_margin_height)
-//        RCV_TIMELINE_LISTVIEW.addItemDecoration(SpacesItemDecoration(pixel))
+//        RCV_timeline.addItemDecoration(SpacesItemDecoration(pixel))
 //        SlideInBottomAnimationAdapter slideUpAdapter = new SlideInBottomAnimationAdapter(mListAdapter);
 //        slideUpAdapter.setFirstOnly(true);
 //        slideUpAdapter.setDuration(800);
 //        slideUpAdapter.setInterpolator(new AccelerateDecelerateInterpolator());
-        RCV_TIMELINE_LISTVIEW.adapter = mListAdapter
+        RCV_timeline.adapter = mListAdapter
     }
 
     private fun getTimeLineList(){
         val paraMap = HashMap<String,Any>()
-        paraMap.put("firstSeq",mFirstSeq)
+        paraMap.put("firstSeq",mListAdapter.mFirstSeq)
         paraMap.put("listType",1)
         paraMap.put("lastSeq",0)
         NetworkService.getSaycupidApi()
@@ -125,68 +125,62 @@ class TimeLineActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshListe
     }
 
     private fun onNetFail(){
-        swipeRefreshLayout?.isRefreshing = false  // Refresh Finished
-        swipeRefreshLayout?.isEnabled = true
+        SRL_swipeRefresh?.isRefreshing = false  // Refresh Finished
+        SRL_swipeRefresh?.isEnabled = true
     }
 
     private fun onNetSuccess(data: ResTimeLineList){
-        val result = data
-        val arrUserInfos = result.list
-        if (arrUserInfos?.size != null && arrUserInfos.size > 0) {
-                if (mFirstSeq == 0L) { // 초기화
-                    //                            mListAdapter.clear();
-                    mListAdapter.data = arrUserInfos
-                } else {
-                    mListAdapter.addItemAll(arrUserInfos)
-                }
-                mFirstSeq = arrUserInfos[arrUserInfos.size - 1].seq
-        } else {
-            mListAdapter.setVisibleFooterView(false)
-        }
 
-        swipeRefreshLayout?.isEnabled = true
-        swipeRefreshLayout?.isRefreshing = false  // Refresh Finished
+        mListAdapter.setListData(data.list)
+
+        SRL_swipeRefresh?.isEnabled = true
+        SRL_swipeRefresh?.isRefreshing = false  // Refresh Finished
 
     }
 
     private fun setSwipeToRefresh() {
-        swipeRefreshLayout.setOnRefreshListener(this)
+        SRL_swipeRefresh.setOnRefreshListener(this)
         //        mSwipeRefreshView.setProgressViewOffset(false, 0 , 300);
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+        SRL_swipeRefresh.setColorSchemeResources(R.color.colorAccent)
     }
 
-    inner class TimeLineAdapter(data: List<TimeLineInfo>): BaseRecyclerExtendsAdapter<TimeLineInfo>(data) {
+    inner class TimeLineAdapter : BaseRecyclerExtendsAdapter<TimeLineInfo> {
+
+        var mFirstSeq: Long = 0
+        var mLastSeq: Long = 0
+
+        constructor() : super(ArrayList<TimeLineInfo>())
+
+//        constructor(data: List<TimeLineInfo>) : super(data)
 
         override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
             super.onViewRecycled(holder)
-            //            Glide.clear(holder.itemView.findViewById(R.id.IV_USERLIST_PROFILE_IMAGE));
         }
 
         override fun onBindViewHolderImpl(viewHolder: RecyclerView.ViewHolder, adapter: BaseRecyclerExtendsAdapter<TimeLineInfo>, i: Int) {
             // If you're using your custom handler (as you should of course)
             // you need to cast viewHolder to it.
-            val visitorInfo = data.get(i)
+            val visitorInfo = data[i]
             visitorInfo.seq = i.toLong()
 
             // View Set
-            val strProfileURL =
-                    Glide.with(applicationContext)
+            Glide.with(applicationContext)
                             .load("http://static.saycupid.com/images/member_pic/" + visitorInfo.user_photo)
                             .bitmapTransform(CropCircleTransform(applicationContext))
                             .crossFade(300)
                             .fallback(R.drawable.ic_drop)
                             .error(R.drawable.ic_close)
-                            .into(viewHolder.itemView.IV_TIMELINE_PROFILE_IMAGE)
+                            .into(viewHolder.itemView.IV_profile_image)
 
             // regDate & Divider 처리
             setViewDateNDivider(viewHolder as MyCustomViewHolder, visitorInfo, i)
 
-            viewHolder.itemView.TV_TIMELINE_USERINFO_UNSERNAME.text = visitorInfo.user_login_id
+            viewHolder.itemView.TV_userinfo_username.text = visitorInfo.user_login_id
 
-            viewHolder.itemView.IV_TIMELINE_USERINFO_PURPOSE.text = visitorInfo.desc
+            viewHolder.itemView.TV_userinfo_purpose.text = visitorInfo.desc
 
             // Click Event
-            viewHolder.itemView.LL_TIMELINE_ITEM_BOX.setOnClickListener({
+            viewHolder.itemView.LL_item_box.setOnClickListener({
 
             })
 
@@ -203,8 +197,27 @@ class TimeLineActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshListe
             var beforeInfo: TimeLineInfo? = null
             var nextInfo: TimeLineInfo? = null
 
-            viewHolder.itemView.TV_TIMELINE_TIME_ELAPSED.visibility = View.VISIBLE
+            viewHolder.itemView.TV_time_elapsed.visibility = View.VISIBLE
 
+        }
+
+        fun setListData(items:List<TimeLineInfo>? ){
+            val itemSize = items?.size ?: 0
+
+            if (itemSize > 0) {
+                if (mFirstSeq == 0L) { // 초기화
+                    data = items
+                } else {
+                    addItemAll(items)
+                }
+                mLastSeq = data[0].seq
+                mFirstSeq = data[data.size - 1].seq
+            }
+            if (itemSize >= pageItemCountByLoadMore) {
+                setVisibleFooterView(true)
+            } else {
+                setVisibleFooterView(false)
+            }
         }
 
     }

@@ -79,14 +79,14 @@ class TimeLineActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshListe
             }
         }
 
-//        doAsync {
-//            val listTimeLine =  OKKotlin.db.timeLineDao().getAll()
-//
-//            Log.d("doAsync","list = ${listTimeLine.size} / ${listTimeLine}")
-//            uiThread {
-//
-//            }
-//        }
+        doAsync {
+            val listTimeLine =  OKKotlin.db.timeLineDao().getAll()
+
+            Log.d("doAsync","list = ${listTimeLine.size} / ${listTimeLine}")
+            uiThread {
+
+            }
+        }
 
     }
 
@@ -165,9 +165,7 @@ class TimeLineActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshListe
 
             async(UI) {
                 bg {
-                    for ( time in it ) {
-                        OKKotlin.db.timeLineDao().insertAll( time )
-                    }
+                   OKKotlin.db.timeLineDao().insertAll( it )
 
                     val listTimeLine =  OKKotlin.db.timeLineDao().getAll()
                     Log.d("async","listTimeLine list = ${listTimeLine.size} / ${listTimeLine.toString()}")
@@ -203,12 +201,12 @@ class TimeLineActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshListe
         override fun onBindViewHolderImpl(viewHolder: RecyclerView.ViewHolder, adapter: BaseRecyclerExtendsAdapter<TimeLineInfo>, i: Int) {
             // If you're using your custom handler (as you should of course)
             // you need to cast viewHolder to it.
-            val visitorInfo = data[i]
-            visitorInfo.seq = i.toLong()
+            val timelineInfo = data[i]
+            timelineInfo.seq = i.toLong()
 
             // View Set
             Glide.with(applicationContext)
-                            .load("http://static.saycupid.com/images/member_pic/" + visitorInfo.user_photo)
+                            .load("http://static.saycupid.com/images/member_pic/" + timelineInfo.user_photo)
                             .bitmapTransform(CropCircleTransform(applicationContext))
                             .crossFade(300)
                             .fallback(R.drawable.ic_drop)
@@ -216,11 +214,11 @@ class TimeLineActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshListe
                             .into(viewHolder.itemView.IV_profile_image)
 
             // regDate & Divider 처리
-            setViewDateNDivider(viewHolder as MyCustomViewHolder, visitorInfo, i)
+            setViewDateNDivider(viewHolder as MyCustomViewHolder, timelineInfo, i)
 
-            viewHolder.itemView.TV_userinfo_username.text = visitorInfo.user_login_id
+            viewHolder.itemView.TV_userinfo_username.text = timelineInfo.user_login_id
 
-            viewHolder.itemView.TV_userinfo_purpose.text = visitorInfo.desc
+            viewHolder.itemView.TV_userinfo_purpose.text = timelineInfo.desc
 
             // Click Event
             viewHolder.itemView.LL_item_box.setOnClickListener({

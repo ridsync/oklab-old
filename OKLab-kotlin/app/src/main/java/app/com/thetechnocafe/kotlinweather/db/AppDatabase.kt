@@ -10,11 +10,11 @@ import app.com.thetechnocafe.kotlinweather.models.VisitorInfo
 /**
  * Created by arent on 2017. 7. 24..
  */
-@Database(entities = arrayOf(VisitorInfo::class, TimeLineInfo::class), version = 2)
+@Database(entities = arrayOf(VisitorInfo::class, TimeLineInfo::class), version = 1)
 abstract class AppDatabase: RoomDatabase() {
 
     companion object {
-        val DATABASE_NAME = "basic-sample-db"
+        val DATABASE_NAME = "basic-room-db"
     }
 
     abstract fun visitorDao(): VisitorInfoDao

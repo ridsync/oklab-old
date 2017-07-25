@@ -14,24 +14,26 @@ import java.io.Serializable
 open class BaseInfo : Serializable {
 
     @Expose
-    @ColumnInfo(name = "idx")var idx: Int = 0
-    @ColumnInfo(name = "seq")var seq: Long = 0
-    @SerializedName("age") @ColumnInfo(name = "user_age") var user_age:Int = 0
+    @Ignore var idx: Int = 0
+    @Ignore var seq: Long = 0
+    @SerializedName("age") @Ignore var user_age:Int = 0
 }
 @Entity(tableName = "VisitorInfo")
-data class VisitorInfo(@ColumnInfo(name = "user_id") var user_id:Long = 0,
+data class VisitorInfo(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "uid") var uid:Int,
+                       @ColumnInfo(name = "user_id") var user_id:Long = 0,
                        @ColumnInfo(name = "user_login_id") var user_login_id:String = "",
                        @ColumnInfo(name = "user_photo") var user_photo:String? = null,
                        @ColumnInfo(name = "user_gender") var user_gender:Int = 0,
-                       @Ignore var user_home_addr1:String? = null,
                        @ColumnInfo(name = "reg_date") var reg_date:Long = 0): BaseInfo() {
+
+    var user_home_addr1:String? = null
 
     override fun toString(): String {
         return super.toString()
     }
 }
 @Entity(tableName = "TimelineInfo")
-data class TimeLineInfo(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var id:Int,
+data class TimeLineInfo(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "uid") var uid:Int,
                         @ColumnInfo(name = "user_id") var user_id:Long = 0,
                         @ColumnInfo(name = "user_login_id") var user_login_id:String = "",
                         @ColumnInfo(name = "user_photo") var user_photo:String? = null,
@@ -39,6 +41,8 @@ data class TimeLineInfo(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id"
                         @ColumnInfo(name = "user_gender") var user_gender:Int = 0,
                         @ColumnInfo(name = "reg_date") var reg_date:Long = 0,
                         @ColumnInfo(name = "desc") var desc:String? = null): BaseInfo() {
+
+    @Ignore var user_home_addr1:String? = null
 
     override fun toString(): String {
         return super.toString()

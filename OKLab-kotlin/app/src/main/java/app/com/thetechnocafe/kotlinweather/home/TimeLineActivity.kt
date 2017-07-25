@@ -11,19 +11,24 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import app.com.thetechnocafe.kotlinweather.OKKotlin
 import app.com.thetechnocafe.kotlinweather.models.ResTimeLineList
 import app.com.thetechnocafe.kotlinweather.models.TimeLineInfo
 import app.com.thetechnocafe.kotlinweather.networking.NetworkService
 import app.com.thetechnocafe.kotlinweather.R
-import app.com.thetechnocafe.kotlinweather.models.VisitorInfo
 import com.bumptech.glide.Glide
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.layout_timeline.*
 import kotlinx.android.synthetic.main.item_timeline_list.view.*
 import kotlinx.android.synthetic.main.layout_timeline.view.*
-import java.util.ArrayList
-import java.util.HashMap
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.android.UI
+import org.jetbrains.anko.coroutines.experimental.bg
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
+import java.util.*
 
 /**
  * Created by arent on 2017. 7. 20..
@@ -59,6 +64,30 @@ class TimeLineActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshListe
         setRecyclerView()
 
         getTimeLineList()
+
+        initDb()
+
+    }
+
+    private fun initDb() {
+
+        async(UI) {
+            bg {
+                val listTimeLine =  OKKotlin.db.timeLineDao().getAll()
+
+                Log.d("async","list = ${listTimeLine.size} / ${listTimeLine}")
+            }
+        }
+
+//        doAsync {
+//            val listTimeLine =  OKKotlin.db.timeLineDao().getAll()
+//
+//            Log.d("doAsync","list = ${listTimeLine.size} / ${listTimeLine}")
+//            uiThread {
+//
+//            }
+//        }
+
     }
 
     override fun onRefresh() {
@@ -132,6 +161,20 @@ class TimeLineActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshListe
     private fun onNetSuccess(data: ResTimeLineList){
 
         mListAdapter.setListData(data.list)
+        data.list?.let {
+
+            async(UI) {
+                bg {
+                    for ( time in it ) {
+                        OKKotlin.db.timeLineDao().insertAll( time )
+                    }
+
+                    val listTimeLine =  OKKotlin.db.timeLineDao().getAll()
+                    Log.d("async","listTimeLine list = ${listTimeLine.size} / ${listTimeLine.toString()}")
+                }
+            }
+
+        }
 
         SRL_swipeRefresh?.isEnabled = true
         SRL_swipeRefresh?.isRefreshing = false  // Refresh Finished

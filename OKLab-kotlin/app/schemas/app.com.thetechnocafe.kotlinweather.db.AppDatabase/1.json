@@ -1,0 +1,136 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "20ad9b41f76ba169fff444de00b8d059",
+    "entities": [
+      {
+        "tableName": "VisitorInfo",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`user_id` INTEGER PRIMARY KEY AUTOINCREMENT, `user_login_id` TEXT, `user_photo` TEXT, `user_gender` INTEGER, `reg_date` INTEGER, `idx` INTEGER, `seq` INTEGER, `user_age` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "user_id",
+            "columnName": "user_id",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "user_login_id",
+            "columnName": "user_login_id",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "user_photo",
+            "columnName": "user_photo",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "user_gender",
+            "columnName": "user_gender",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "reg_date",
+            "columnName": "reg_date",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "idx",
+            "columnName": "idx",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "seq",
+            "columnName": "seq",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "user_age",
+            "columnName": "user_age",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "user_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Timelineinfo",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`user_id` INTEGER PRIMARY KEY AUTOINCREMENT, `user_login_id` TEXT, `user_photo` TEXT, `news_type_id` INTEGER, `user_gender` INTEGER, `user_home_addr1` TEXT, `reg_date` INTEGER, `desc` TEXT, `idx` INTEGER, `seq` INTEGER, `user_age` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "user_id",
+            "columnName": "user_id",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "user_login_id",
+            "columnName": "user_login_id",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "user_photo",
+            "columnName": "user_photo",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "news_type_id",
+            "columnName": "news_type_id",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "user_gender",
+            "columnName": "user_gender",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "user_home_addr1",
+            "columnName": "user_home_addr1",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "reg_date",
+            "columnName": "reg_date",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "desc",
+            "columnName": "desc",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "idx",
+            "columnName": "idx",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "seq",
+            "columnName": "seq",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "user_age",
+            "columnName": "user_age",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "user_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"20ad9b41f76ba169fff444de00b8d059\")"
+    ]
+  }
+}

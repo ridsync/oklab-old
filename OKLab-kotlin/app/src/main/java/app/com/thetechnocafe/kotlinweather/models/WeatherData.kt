@@ -1,5 +1,9 @@
 package app.com.thetechnocafe.kotlinweather.models
 
+import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.Ignore
+import android.arch.persistence.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
@@ -10,33 +14,31 @@ import java.io.Serializable
 open class BaseInfo : Serializable {
 
     @Expose
-    val idx: Int = 0
-    open var seq: Long = 0
-    @SerializedName("age") var user_age:Int = 0
+    @ColumnInfo(name = "idx")var idx: Int = 0
+    @ColumnInfo(name = "seq")var seq: Long = 0
+    @SerializedName("age") @ColumnInfo(name = "user_age") var user_age:Int = 0
 }
-
-data class VisitorInfo(var user_id:Long,
-                       var user_login_id:String,
-                       var user_photo:String,
-                       var user_gender:Int,
-                       var user_home_addr1:String,
-                       var reg_date:Long): BaseInfo() {
-
+@Entity(tableName = "VisitorInfo")
+data class VisitorInfo(@ColumnInfo(name = "user_id") var user_id:Long = 0,
+                       @ColumnInfo(name = "user_login_id") var user_login_id:String = "",
+                       @ColumnInfo(name = "user_photo") var user_photo:String? = null,
+                       @ColumnInfo(name = "user_gender") var user_gender:Int = 0,
+                       @Ignore var user_home_addr1:String? = null,
+                       @ColumnInfo(name = "reg_date") var reg_date:Long = 0): BaseInfo() {
 
     override fun toString(): String {
         return super.toString()
     }
 }
-
-data class TimeLineInfo(var user_id:Long,
-                       var user_login_id:String,
-                       var user_photo:String,
-                       var news_type_id:Int,
-                       var is_zzim:Int,
-                       var user_gender:Int,
-                       var user_home_addr1:String,
-                       var reg_date:Long,
-                       var id:Int, var desc:String): BaseInfo() {
+@Entity(tableName = "TimelineInfo")
+data class TimeLineInfo(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var id:Int,
+                        @ColumnInfo(name = "user_id") var user_id:Long = 0,
+                        @ColumnInfo(name = "user_login_id") var user_login_id:String = "",
+                        @ColumnInfo(name = "user_photo") var user_photo:String? = null,
+                        @ColumnInfo(name = "news_type_id") var news_type_id:Int = 0,
+                        @ColumnInfo(name = "user_gender") var user_gender:Int = 0,
+                        @ColumnInfo(name = "reg_date") var reg_date:Long = 0,
+                        @ColumnInfo(name = "desc") var desc:String? = null): BaseInfo() {
 
     override fun toString(): String {
         return super.toString()

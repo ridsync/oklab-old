@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto">
+
+        <LinearLayout
+            android:id="@+id/ll_main_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- 장바구니 기본정보 타이틀 -->
+            <RelativeLayout
+                android:id="@+id/cv_cd_cart_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/toolbar_actionbar"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/main_white_color">
+
+                        <!-- 추가 입력 박스 -->
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="13dp">
+
+                            <Spinner
+                                style="@style/SpinnerTheme"
+                                android:id="@+id/spin_mart_filter"
+                                android:layout_width="wrap_content"
+                                android:minWidth="80dp"
+                                android:layout_height="50dp"
+                                android:textSize="13dp"/>
+
+                            <Spinner
+                                style="@style/SpinnerTheme"
+                                android:id="@+id/spin_order_filter"
+                                android:layout_width="wrap_content"
+                                android:minWidth="80dp"
+                                android:layout_height="50dp"
+                                android:layout_marginLeft="6dp"
+                                android:textSize="13dp"/>
+
+                            <EditText
+                                android:id="@+id/et_search_keyowrd"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="50dp"
+                                android:textSize="15sp"
+                                android:textColor="@color/text_color_black2"
+                                android:layout_marginLeft="3dp"
+                                android:layout_marginRight="7dp"
+                                android:hint="@string/hint_query"
+                                android:inputType="textAutoComplete"
+                                android:textColorHint="@color/edit_gray_color"
+                                android:singleLine="true"
+                                android:maxLength="30"
+                                android:imeOptions="actionSearch"
+                                android:layout_gravity="center_vertical">
+                                <requestFocus/>
+                            </EditText>
+
+                            <ImageView
+                                android:id="@+id/iv_btn_search"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/button_item_common_accent_color_3dp"
+                                android:gravity="center"
+                                android:padding="6dp"
+                                android:src="@drawable/ic_search_white_48dp" />
+
+                        </LinearLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/view_horizontal_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/cv_cd_cart_layout"
+                android:background="@color/horizontal_line" />
+
+            <!-- 카트 아이템 리스트 -->
+            <RelativeLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/main_bg_color">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rcv_productserch_listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
+                    android:scrollbarStyle="outsideOverlay"/>
+
+                <RelativeLayout
+                    android:id="@+id/rl_cart_item_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tv_cart_item_empty"
+                        android:layout_centerInParent="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible"
+                        android:text="@string/txt_search_empty"
+                        android:textColor="@color/gray12"
+                        android:textSize="15sp"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/RL_PROFILE_PROGRESS"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/PB_PROFILE_PROGRESS"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+    </RelativeLayout>

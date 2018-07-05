@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:enterFadeDuration="150"
+    android:exitFadeDuration="150">
+
+    <item android:state_pressed="true"
+          android:drawable="@drawable/ic_mic_white_24dp" /> <!-- pressed -->
+    <item android:state_checked="true"
+          android:drawable="@drawable/ic_mic_white_24dp" /> <!-- focused -->
+    <item android:drawable="@drawable/ic_mic_white_24dp" /> <!-- default -->
+</selector>

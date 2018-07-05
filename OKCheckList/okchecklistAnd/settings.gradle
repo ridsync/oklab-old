@@ -1,0 +1,2 @@
+include ':app', ':library', ':fabmenulibrary', ':tourguide'
+project(':fabmenulibrary').projectDir = new File('fablibrary')

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CardViewStyle" parent="android:Widget.TextView">
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="cardCornerRadius">4dp</item>
+        <item name="cardElevation">2dp</item>
+    </style>
+
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">?colorPrimary</item>
+        <item name="colorPrimaryDark">?colorPrimaryDark</item>
+        <item name="colorAccent">?colorAccent</item>
+    </style>
+
+    <style name="PickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorControlNormal">@color/main_primary_color</item>
+        <item name="colorControlActivated">@color/main_primary_color</item>
+        <item name="textColorAlertDialogListItem">@color/amber_600</item>
+        <item name="colorAccent">@color/main_accent_color</item>
+        <item name="android:textColorPrimary">@color/mart_rest_text_gray_6</item>
+        <!--<item name="android:windowBackground">@drawable/background_dialog</item>-->
+    </style>
+
+    <style name="RaisedEffectMainBg" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:background">@drawable/raised_button_bg_main_bg</item>
+    </style>
+
+    <style name="RaisedEffectAccentBg" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:textColor">@color/main_white_color</item>
+        <item name="android:background">@drawable/raised_button_accent_color</item>
+    </style>
+
+    <style name="PhotoUploadTheme" parent="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+        <item name="android:progressBarStyleLarge">@android:style/Widget.Material.Light.ProgressBar.Large</item>
+    </style>
+</resources>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_margin="5dp">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="6dp">
+
+    <RelativeLayout
+        android:id="@+id/ll_item_mart_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="6dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_fav_item_mart_logo"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_alignParentTop="true"
+            android:textSize="18dp"
+            android:textColor="@color/main_white_color"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="-20dp"
+            android:layout_toRightOf="@+id/tv_fav_item_mart_logo"
+            android:src="@android:drawable/star_on"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/martinfo_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_toRightOf="@id/ll_item_mart_logo"
+        android:layout_marginLeft="12dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/ll_item_mart_logo"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_fav_item_mart_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="이마트 부천점"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/iv_fav_item_mart_status"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginLeft="16dp"
+                android:padding="7dp"
+                android:gravity="center"
+                android:background="@drawable/selector_mart_open_status"
+                android:text="오픈중"
+                android:textSize="14dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_toRightOf="@id/ll_item_mart_logo"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_fav_item_mart_rest_date_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="6월 휴무일 :  5(일) 12(일) "
+                android:textSize="12sp"
+                android:textColor="@color/mart_rest_text_gray_7"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/martinfo_layout"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="6dp">
+
+        <LinearLayout
+            android:id="@+id/ll_item_mart_date_mini_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_fav_item_mart_fav"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="1dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_favorites_off"/>
+</RelativeLayout>
+
+</android.support.v7.widget.CardView>

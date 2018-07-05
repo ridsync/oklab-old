@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.MainActivity"
+    android:fitsSystemWindows="true">
+
+    <RelativeLayout
+        android:id="@+id/rl_cart_item_empty"
+        android:layout_below="@+id/ll_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/iv_cart_item_empty"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/cart_speed"
+            android:scaleType="centerInside"
+            android:visibility="visible"
+            android:background="@drawable/circular_textview_bg_gray"/>
+
+        <TextView
+            android:id="@+id/tv_cart_item_empty"
+            android:layout_below="@+id/iv_cart_item_empty"
+            android:layout_marginTop="10dp"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:text="@string/txt_fav_mart_empty"
+            android:textColor="@color/gray12"
+            android:textSize="15sp"/>
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mart_favorite_list"
+        android:layout_below="@id/ll_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:padding="5dp"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/item_mart_favorite" />
+
+    <RelativeLayout
+        android:id="@+id/rl_all_mart_notice_slidedrawer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_top_layout"
+        android:visibility="gone">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cdv_all_mart_notice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:background="#111f6ba7"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <android.support.v4.widget.Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
+                <TextView
+                    android:id="@+id/tv_notice_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OK카트 공지사항"
+                    android:textColor="@color/text_color_black2"
+                    android:textSize="19sp"/>
+
+                <TextView
+                    android:id="@+id/tv_notice_desc"
+                    android:layout_marginTop="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="명절에 따른 각 마트별 휴무일 공지사항입니다."
+                    android:textColor="@color/text_color_black2"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_notice_desc_2"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/text_color_black2"
+                    android:textSize="13sp"/>
+
+                <android.support.v4.widget.Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_emart_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:paddingLeft="9dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/iv_emart_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_emart"
+                    android:scaleType="centerInside"
+                    android:background="@drawable/circular_textview_bg_gray"/>
+
+                <TextView
+                    android:id="@+id/tv_emart_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:visibility="visible"
+                    android:text="이마트          :      "
+                    android:textColor="@color/text_color_black2"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/tv_emart_notice_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:text="공지사항 바로가기"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:autoLink="web"
+                    android:textColor="@color/main_primary_color"
+                    android:textSize="15sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+            android:id="@+id/ll_homeplus_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:paddingLeft="9dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+             android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/iv_homeplus_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_homeplus"
+                android:scaleType="centerInside"
+                android:background="@drawable/circular_textview_bg_gray"/>
+
+            <TextView
+                android:id="@+id/tv_homeplus_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:visibility="visible"
+                android:text="홈플러스       :      "
+                android:textColor="@color/text_color_black2"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_homeplus_notice_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:text="공지사항 바로가기"
+                android:textColor="@color/main_primary_color"
+                android:autoLink="web"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_lottemart_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:paddingLeft="9dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/iv_lottemart_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_lotte"
+                android:scaleType="centerInside"
+                android:background="@drawable/circular_textview_bg_gray"/>
+
+            <TextView
+                android:id="@+id/tv_lottemart_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:visibility="visible"
+                android:text="롯데마트       :      "
+                android:textColor="@color/text_color_black2"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_lottemart_notice_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:text="공지사항 바로가기"
+                android:textColor="@color/main_primary_color"
+                android:autoLink="web"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_costco_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:paddingLeft="9dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/iv_costco_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_costco"
+                android:scaleType="centerInside"
+                android:background="@drawable/circular_textview_bg_gray"/>
+
+            <TextView
+                android:id="@+id/tv_costco_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:visibility="visible"
+                android:text="코스트코       :      "
+                android:textColor="@color/text_color_black2"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_costco_notice_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:text="공지사항 바로가기"
+                android:textColor="@color/main_primary_color"
+                android:autoLink="web"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+            
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="26dp" />
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_btn_close"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="-20dp"
+            android:background="@drawable/circular_textview_btn_close"
+            android:gravity="center"
+            android:text="닫기"
+            android:textColor="@color/text_color_white"
+            android:textStyle="bold"
+            android:translationZ="5dp"
+            android:layout_below="@id/cdv_all_mart_notice"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_white_color"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="0.5dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:background="@color/Gray"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="6dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:textSize="21sp"
+                    android:textColor="#333333"
+                    android:gravity="center"
+                    android:text="TODAY"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tv_today_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#666666"
+                    android:gravity="center"
+                    android:text="2016.7.30(월)"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="0.5dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:background="@color/Gray"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="1dp" />
+            <ImageButton
+                android:id="@+id/tv_mart_icon_emart"
+                android:layout_width="86dp"
+                android:layout_height="86dp"
+                android:background="@drawable/ic_emart"/>
+            <Space
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="1dp" />
+            <ImageButton
+                android:id="@+id/tv_mart_icon_homplus"
+                android:layout_width="86dp"
+                android:layout_height="86dp"
+                android:background="@drawable/ic_homeplus"/>
+            <Space
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="1dp" />
+            <ImageButton
+                android:id="@+id/tv_mart_icon_lottemart"
+                android:layout_width="86dp"
+                android:layout_height="86dp"
+                android:background="@drawable/ic_lotte"/>
+            <Space
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="1dp" />
+            <ImageButton
+                android:id="@+id/tv_mart_icon_costco"
+                android:layout_width="86dp"
+                android:layout_height="86dp"
+                android:background="@drawable/ic_costco"/>
+            <Space
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="1dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:background="#fafafa">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_crosshairs_gps_grey600_48dp"/>
+            <TextView
+                android:id="@+id/btn_search"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:text="내 주변 마트 검색"
+                android:gravity="center"
+                android:textColor="#777777"
+                android:textSize="13sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/horizontal_line"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

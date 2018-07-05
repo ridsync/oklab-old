@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/cart_add_itemview_height"
+    android:orientation="vertical"
+    android:layout_marginTop="@dimen/cart_main_cardview_margin"
+    android:layout_marginLeft="@dimen/cart_itemview_side_margin"
+    android:layout_marginBottom="@dimen/cart_main_cardview_margin">
+
+        <LinearLayout
+            android:id="@+id/ll_main_layout"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:weightSum="10"
+            android:paddingBottom="@dimen/cart_itemview_margin"
+            android:paddingTop="@dimen/cart_itemview_margin">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_weight="6"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content">
+
+                <com.rey.material.widget.CheckBox
+                    android:id="@+id/cb_item_checkbox"
+                    style="@style/Material.Drawable.CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:paddingLeft="@dimen/widget_padding_default"/>
+
+                <EditText
+                    android:id="@+id/et_item_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:paddingLeft="7dp"
+                    android:paddingRight="@dimen/widget_padding_default"
+                    android:text=""
+                    android:textSize="14dp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_item_count_label"
+                    android:text="수량  :    "
+                    android:textSize="14dp"
+                    android:textStyle="bold"/>
+                
+                <Spinner
+                    android:id="@+id/sp_item_count_spinner"
+                    android:layout_width="wrap_content"
+                    android:minWidth="40dp"
+                    android:layout_height="35dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    <View
+        android:id="@+id/view_horizontal_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="32dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/gray13" />
+
+</RelativeLayout>
+
+<View
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/cart_main_cardview_margin"
+    android:background="?android:attr/selectableItemBackground" />
+</FrameLayout >

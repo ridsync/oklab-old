@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">OK체크리스트</string>
+    <string name="app_main_title">OK체크리스트</string>
+    <string name="drawer_open">Menu opened</string>
+    <string name="drawer_close">Menu closed</string>
+    <string name="send_to">Send To</string>
+    <string name="fab_fav_add">빠른추가</string>
+    <string name="fab_nomral_add">매물추가</string>
+    <string name="btn_confirm">확인</string>
+    <string name="fab_back">취소</string>
+    <string name="btn_later">나중에</string>
+    <string name="btn_move">이동하기</string>
+    <string name="detail_purchase_ask_comepleted">구매완료 하시겠습니까?</string>
+    <string name="detail_purchase_comepleted">모든 아이템 구매완료 하였습니다.</string>
+    <string name="detail_btn_purchase_comepleted">구매완료</string>
+    <string name="cart_add_title_default_txt">OK장보기</string>
+    <string name="cart_add_title_hint">카트명</string>
+    <string name="cart_add_item_name_hint">아이템명</string>
+    <string name="dialog_msg_modify_cancel">수정중인 정보가 삭제됩니다. \n이동 하시겠습니까?</string>
+    <string name="dialog_msg_delete_cartinfo">장바구니 정보가 삭제됩니다. \n계속 하시겠습니까?</string>
+    <string name="dialog_msg_ask_update_app_version">새로운 버전이 업데이트 되었습니다.\n지금 바로 플레이스토어로 이동합니다.</string>
+    <string name="txt_cart_empty">등록된 카트가 아직 없습니다.</string>
+    <string name="txt_cart_item_empty">등록된 아이템이 아직 없습니다.</string>
+    <string name="txt_fav_mart_empty">자주 방문하는 마트들을 등록하세요</string>
+    <string name="txt_search_empty">검색 결과 없음.</string>
+    <string name="alert_title">알림</string>
+    <string name="alert_title_ver">업데이트 알림</string>
+    <string name="fav_mart_open">정상영업</string>
+    <string name="fav_mart_open_2">정상\n영업</string>
+    <string name="fav_mart_closed">휴무일</string>
+    <string name="btn_perm_request_setting">설정이동</string>
+
+    <!-- Navigation Drawer -->
+    <string name="nav_menu_name_1">메인 화면</string>
+    <string name="nav_menu_name_2">매물 추가 </string>
+    <string name="nav_menu_name_3">최저가 검색</string>
+    <string name="nav_menu_name_4">마트 할인정보</string>
+    <string name="nav_menu_name_5">설정</string>
+    <string name="nav_menu_name_6">[$1] 상세페이지</string>
+    <!-- Menu -->
+    <string name="menu_mode_delete">삭제</string>
+    <string name="menu_align">정렬</string>
+    <string name="menu_mode_modify">수정</string>
+    <string name="menu_mode_save">저장</string>
+    <string name="menu_mode_add">매물추가</string>
+    <string name="menu_mode_detaillist">체크리스트</string>
+    <string name="menu_mode_product_search">상품정보검색</string>
+    <string name="menu_mode_favadd">빠른추가</string>
+    <string name="menu_mode_deselect">체크해제</string>
+    <string name="menu_mode_region_select">지역선택</string>
+    <string name="menu_mode_mart_search">내주변 마트검색</string>
+
+    <string name="transition_title">com.stylingandroid.materialrss.transition.TITLE</string>
+    <string name="transition_date">com.stylingandroid.materialrss.transition.DATE</string>
+    <string name="transition_body">com.stylingandroid.materialrss.transition.BODY</string>
+    <string name="hint_query">검색어(최소2자리)</string>
+    <string name="input_search_empty">검색어를 먼저 입력하세요.</string>
+
+    <string name="network_error">서버접속에 실패했습니다. 다시 시도해주세요.</string>
+    <string name="menu_close">닫기</string>
+    <string name="tab_txt_near">마트 휴무일</string>
+    <string name="tab_txt_popular">체크리스트</string>
+    <string name="tab_txt_recent">최저가검색</string>
+    <string name="transition_star">com.stylingandroid.materialrss.transition.STAR</string>
+</resources>

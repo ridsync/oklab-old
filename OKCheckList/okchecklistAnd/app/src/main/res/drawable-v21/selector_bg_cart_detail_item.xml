@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?attr/colorControlHighlight" >
+    <item>
+        <selector>
+            <item android:state_checked="true">
+                <shape android:shape="rectangle" android:visible="true">
+                    <solid android:width="1dp" android:color="@color/item_selector_selected" />
+                    <stroke android:width="0.6dp" android:color="@color/item_accent_color" />
+                    <corners android:radius="3dp" />
+                </shape>
+            </item><!-- focused -->
+            <item android:state_selected="true">
+                <shape android:shape="rectangle" android:visible="true">
+                    <solid android:width="1dp" android:color="@color/item_selector_selected" />
+                    <stroke android:width="0.6dp" android:color="@color/item_accent_color" />
+                    <corners android:radius="3dp" />
+                </shape>/>
+            </item> <!-- focused -->
+            <item android:drawable="@color/main_white_color" >
+            </item><!-- default -->
+        </selector>
+    </item>
+</ripple>

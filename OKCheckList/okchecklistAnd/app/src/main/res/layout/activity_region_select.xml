@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+    android:layout_above="@+id/ad_view"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar_actionbar"
+        layout="@layout/toolbar_default"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_item_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_actionbar"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/main_white_color">
+
+            <LinearLayout
+                android:id="@+id/ll_item_layout"
+                android:orientation="vertical"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_cart_favorite_add_desc"
+                    android:text="찾고자하는 마트의 지역을 선택하세요."
+                    android:textSize="13dp"
+                    android:textColor="@android:color/black"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_cart_stt_move"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="10dp"
+                android:layout_toLeftOf="@+id/iv_cart_modify"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:background="@color/button_material_light"
+                android:src="@android:drawable/ic_menu_delete"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view_horizontal_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/rl_item_layout"
+        android:background="@color/horizontal_line" />
+
+    <!-- 카트 아이템 리스트 -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/view_horizontal_line"
+        android:background="@color/main_bg_color"
+        android:paddingTop="7dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcv_cf_mart_listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:scrollbars="vertical"
+            android:scrollbarStyle="outsideOverlay"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+    <!--<com.google.android.gms.ads.AdView-->
+        <!--android:id="@+id/ad_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--ads:adSize="SMART_BANNER"-->
+        <!--ads:adUnitId="@string/banner_ad_unit_id3"-->
+        <!--android:visibility="gone"/>-->
+
+</RelativeLayout>

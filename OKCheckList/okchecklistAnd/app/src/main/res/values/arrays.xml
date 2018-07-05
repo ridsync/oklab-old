@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="mart_list">
+        <item>전체검색</item>
+        <item>이마트몰</item>
+        <item>홈플러스</item>
+        <item>롯데마트</item>
+        <item>GSSHOP</item>
+    </array>
+
+    <array name="order_list">
+        <item>정확도순</item>
+        <item>최저가순</item>
+        <item>최고가순</item>
+        <item>날짜순</item>
+    </array>
+
+    <array name="mart_gps_list">
+        <item>이마트</item>
+        <item>홈플러스</item>
+        <item>롯데마트</item>
+        <item>코스트코</item>
+    </array>
+</resources>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:id="@+id/ll_item_foreground"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cart_product_itemvieW_height"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/main_white_color"
+        android:padding="@dimen/cart_itemview_margin"
+        android:weightSum="10">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_product_image"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="3dp"
+                android:src="@drawable/cart_speed"
+                android:backgroundTint="@color/gray1"
+                android:background="@color/main_white_color"
+                android:scaleType="centerCrop" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/widget_padding_default">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="21dp"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/iv_item_mart_logo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center_vertical"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/naver"
+                        android:layout_marginRight="5dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_item_mart_name"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="그린농장"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/green_300"/>
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"/>
+
+                <TextView
+                    android:id="@+id/tv_item_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textColor="@color/text_color_black"
+                    android:textSize="@dimen/small_text_size" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_item_low_price"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/horizontal_line"
+        android:layout_alignParentBottom="true"
+        />
+</RelativeLayout>

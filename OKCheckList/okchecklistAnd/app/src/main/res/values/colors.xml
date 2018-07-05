@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- App Theme -->
+    <color name="main_primary_dark_color">#1f6ba7</color>
+    <color name="main_primary_color">#228ee2</color>
+    <color name="main_accent_color">#228ee2</color>
+    <color name="main_bg_color">#f2f2f2</color>
+    <color name="main_white_color">#ffffff</color>
+    <color name="intro_bg_color">#ee228ee2</color>
+    <color name="red_color">#f23939</color>
+    <color name="text_color_white">#ffffff</color>
+    <color name="text_color_black">#1d1d1d</color>
+    <color name="text_color_black2">#2d2d2d</color>
+    <color name="text_color_gray_59">#595959</color>
+    <color name="horizontal_line">#ececec</color>
+    <color name="main_item_completed_color">#6ca8ac</color>
+    <color name="detail_completed_bg">#cc232323</color>
+    <color name="edit_gray_color">#b1b1b1</color>
+    <color name="item_accent_color">#cc228ee2</color>
+    <color name="item_higglight_color">#43228ee2</color>
+
+    <color name="all_horizontal_line">@color/transparent_black_ten</color>
+
+    <!-- Button Color -->
+    <color name="main_button_gray_bg">#e0e0e0</color>
+    <color name="main_raised_button_bg_white">#ffffff</color>
+    <color name="main_selector_button_main_color_pressed">#228ee2</color>
+    <color name="main_selector_button_blue_color_normal">#67b1d6</color>
+    <color name="main_selector_button_blue_color_pressed">#57a1c6</color>
+    <color name="main_selector_button_bg_disable">#d1d1d1</color>
+    <color name="main_selector_button_bg_pressed">#808080</color>
+    <color name="profile_button_color_gray">#d9d9d9</color>
+
+    <color name="tabayout_font">#f9bdbd</color>
+    <color name="tabayout_font_selected">#ffffff</color>
+
+    <color name="calendar_bg_red">#11f23939</color>
+    <color name="calendar_bg_blue">#11228ee2</color>
+
+    <color name="mart_color_lotte">#00ab00</color>
+
+    <color name="mart_rest_text_gray_7">#999999</color>
+    <color name="mart_rest_text_gray_6">#666666</color>
+
+    <color name="fab_green_color">#39bb39</color>
+    <color name="fab_green_press_color">#aa39bb39</color>
+    <color name="fab_red_color">#f23939</color>
+    <color name="fab_red_press_color">#ddf23939</color>
+    <color name="fab_blue_color">#228ee2</color>
+    <color name="fab_blue_press_color">#598deb</color>
+    <color name="fab_gray_color">#818181</color>
+    <color name="fab_gray_press_color">#BDBDBD</color>
+
+    <color name="item_selector_selected">#5581bdeb</color>
+    <color name="item_selector_default">#0281bdeb</color>
+
+    <!-- Facebook Theme -->
+    <color name="facebook_primary">#3b5988</color>
+    <!--<color name="control_highlight">#1f8755</color>-->
+    <color name="facebook_primary_dark">#293E5F</color>
+    <color name="facebook_accent">@color/green_500</color>
+    <color name="facebook_bg">#dcdee3</color>
+    <color name="dark_slate_blue">#3c5896</color>
+    <color name="transparent_dark_slate_blue_ninty">#E63c5896</color>
+    <color name="new_posts_start">#5b93fc</color>
+    <color name="new_posts_end">#6ca8fc</color>
+
+    <color name="transparent_gray24_fifty">#80ededed</color>
+    <color name="whitesmoke">#f5f5f5</color>
+    <color name="cornflower_blue">#598deb</color>
+    <color name="bulgarian_blue">#4771BC</color>
+
+    <!-- Grays -->
+    <color name="gray1">#f1f2f1</color>
+    <color name="gray2">#F2F2F2</color>
+    <color name="gray3">#ededed</color>
+    <color name="gray4">#ebeceb</color>
+    <color name="gray5">#EAEAEA</color>
+    <color name="gray6">#e4e4e4</color>
+    <color name="gray7">#d5d5d5</color>
+    <color name="gray8">#D2D2D2</color> //
+    <color name="gray9">#cecece</color>
+    <color name="gray10">#C2C2C2</color>
+    <color name="gray11">#C9C9C9</color> //
+    <color name="gray12">#c8c8c8</color> //
+    <color name="gray13">#BEBEBE</color>
+    <color name="gray14">#BDBDBD</color>
+    <color name="gray15">#A4A4A4</color>
+    <color name="gray16">#818181</color>
+    <color name="gray17">#7A7A7A</color> //
+    <color name="gray18">#767676</color> //
+    <color name="gray19">#666666</color> //
+    <color name="gray20">#656565</color> //
+    <color name="gray21">#464646</color> //
+
+    <!-- Transparent colors -->
+    <color name="transparent_white_five">#0Dffffff</color>
+    <color name="transparent_white_ten">#1Affffff</color>
+    <color name="transparent_white_twenty">#33ffffff</color>
+    <color name="transparent_white_thirty">#4Dffffff</color>
+    <color name="transparent_white_fifty">#80ffffff</color>
+    <color name="transparent_white_sixty">#99ffffff</color>
+    <color name="transparent_white_eighty">#CCffffff</color>
+    <color name="transparent_white_ninty">#E6ffffff</color>
+    <color name="transparent_white_ninty_five">#F2ffffff</color>
+
+    <color name="transparent_black_five">#0D000000</color>
+    <color name="transparent_black_ten">#1A000000</color>
+    <color name="transparent_black_twenty">#33000000</color>
+    <color name="transparent_black_thirty">#4D000000</color>
+    <color name="transparent_black_forty">#66000000</color>
+    <color name="transparent_black_fifty">#80000000</color>
+    <color name="transparent_black_sixty">#99000000</color>
+    <color name="transparent_black_eighty">#CC000000</color>
+    <color name="transparent_black_ninty">#E6000000</color>
+    <color name="transparent_black_ninty_five">#F2000000</color>
+
+    <!-- Material drawer Color define -->
+    <color name="myPrimaryColor">#3F51B5</color>
+    <color name="myPrimaryDarkColor">#3F51B5</color>
+    <color name="myAccentColor">#3F51B5</color>
+    <color name="myDrawerBackground">#F2F2F2</color>
+    <color name="myWindowBackground">#DEDEDE</color>
+    <color name="myTextPrimaryColor">#FFFFFF</color>
+    <color name="myNavigationColor">#000000</color>
+
+    <color name="selected_gray">#ffdbdbdb</color>
+    <color name="drawer_text">#000000</color>
+
+    <!-- FAB -->
+    <color name="black_semi_transparent">#99000000</color>
+    <color name="half_black">#808080</color>
+    <color name="white">#fafafa</color>
+    <color name="white_pressed">#f1f1f1</color>
+    <color name="ticket">#DBAE00</color>
+    <color name="ticket_press">#fBEE20</color>
+    <color name="remainder">#5473FB</color>
+    <color name="remainder_press">#7493FB</color>
+
+    <color name="app_primary">#dd4b39</color>
+    <color name="app_primary_pressed">#994b39</color>
+    <color name="app_ripple">#ffffff</color>
+
+    <!-- Google Brand Colors -->
+    <color name="google_red">#dd4b39</color>
+    <color name="google_white">#ffffff</color>
+    <color name="google_text_disabled">#737373</color>
+    <color name="google_text">#ffffff</color>
+
+    <color name="quick_return_primary">#4688f1</color>
+    <!--<color name="control_highlight">#1f8755</color>-->
+    <color name="quick_return_primary_dark">#386DC1</color>
+    <color name="quick_return_accent">#386DC1</color>
+
+</resources>

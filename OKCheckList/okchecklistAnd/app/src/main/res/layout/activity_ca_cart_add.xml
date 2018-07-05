@@ -1,0 +1,1584 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        android:id="@+id/toolbar_actionbar"
+        layout="@layout/toolbar_default"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ScrollView android:id="@+id/ll_main_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/toolbar_actionbar">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- 장바구니 기본정보 타이틀 -->
+            <RelativeLayout
+                android:id="@+id/cv_cd_cart_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f2f2f2"
+                android:layout_below="@+id/toolbar_actionbar"
+                android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll_item_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="15dp"
+                                android:gravity="center"
+                                android:text="중요정보"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/main_accent_color"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_picture"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="사진"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/main_accent_color"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <LinearLayout
+                                android:id="@+id/myRecyclerLayout"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent"
+                                android:background="@color/main_white_color"
+                                android:layout_marginLeft="10dp"
+                                android:orientation="horizontal">
+
+                                <android.support.v7.widget.RecyclerView
+                                    android:id="@+id/myRecycler"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"/>
+
+                            </LinearLayout>
+
+                            <Button
+                                    android:id="@+id/btn_add_photo"
+                                    android:layout_width="70dp"
+                                    android:layout_height="43dp"
+                                    style="@style/Widget.AppCompat.Button.Colored"
+                                    android:textColor="#ffffff"
+                                    android:textSize="11dp"
+                                    android:textStyle="bold"
+                                    android:text="사진추가"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_goods_name"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="매물명 "
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/main_accent_color"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/et_goods_name"
+                                android:textColorHint="@color/gray9"
+                                android:textSize="15dp"
+                                android:hint="아파트명or빌라명"
+                                android:singleLine="true"
+                                android:imeOptions="actionNext"
+                                android:textColor="@android:color/black"/>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_prices"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="분양가/매매가 "
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="#ee3434"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/et_prices"
+                                android:textColorHint="@color/gray9"
+                                android:textSize="15dp"
+                                android:hint="0억 00천"
+                                android:singleLine="true"
+                                android:imeOptions="actionNext"
+                                android:textColor="@android:color/black"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_area"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="공급/전용면적"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="#ee3434"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/et_area"
+                                android:textColorHint="@color/gray9"
+                                android:textSize="15dp"
+                                android:hint="m2이나 평수 기재."
+                                android:singleLine="true"
+                                android:imeOptions="actionNext"
+                                android:textColor="@android:color/black"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_migrateDate"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="이사예상날짜"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="#ee3434"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <android.support.v7.widget.AppCompatCheckBox
+                                android:id="@+id/cb_mijung"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:text="미정"
+                                android:textColor="#676767"
+                                android:layout_marginRight="5dp"/>
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/et_migrateDate"
+                                android:textColorHint="@color/gray9"
+                                android:textSize="15dp"
+                                android:hint="01월 02일"
+                                android:singleLine="true"
+                                android:imeOptions="actionNext"
+                                android:textColor="@android:color/black"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="15dp"
+                                android:gravity="center"
+                                android:text="외부요소 체크항목"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/main_accent_color"/>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_location"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="매물위치(동호수)"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/main_accent_color"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/et_location"
+                                android:textColorHint="@color/gray9"
+                                android:textSize="15dp"
+                                android:hint="0동 0호"
+                                android:singleLine="true"
+                                android:imeOptions="actionNext"
+                                android:textColor="@android:color/black"/>
+
+                            <ImageView
+                                android:id="@+id/iv_add_gps"
+                                        android:layout_width="35dp"
+                                       android:layout_height="35dp"
+                                        android:visibility="gone"
+                                       android:src="@drawable/ic_crosshairs_gps_grey600_48dp"/>
+                            <Button
+                                android:id="@+id/btn_add_gps"
+                                android:layout_width="60dp"
+                                android:layout_height="43dp"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:textColor="#ffffff"
+                                android:textSize="11dp"
+                                android:textStyle="bold"
+                                android:text="GPS"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_address"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="상세주소"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/main_accent_color"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/et_address"
+                                android:textColorHint="@color/gray9"
+                                android:textSize="15dp"
+                                android:hint="경기도 부천시"
+                                android:singleLine="true"
+                                android:imeOptions="actionNext"
+                                android:textColor="@android:color/black"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_school"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="학군 점수"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="#ee3434"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <RadioGroup
+                                    android:id="@+id/rg_school_score"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+                                        android:id="@+id/rb_school_1"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="0"
+                                        android:text="1" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_school_2"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="2"
+                                        android:text="2" />
+                                    <RadioButton
+                                        android:id="@+id/rb_school_3"
+                                        android:layout_width="45dp"
+                                        android:tag="2"
+                                        android:layout_height="wrap_content"
+                                        android:text="3" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_school_4"
+                                        android:layout_width="45dp"
+                                        android:tag="3"
+                                        android:layout_height="wrap_content"
+                                        android:text="4" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_school_5"
+                                        android:tag="4"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:text="5" />
+                                </RadioGroup>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_traffic_score"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="교통 점수"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="#ee3434"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <RadioGroup
+                                    android:id="@+id/rg_traffic_score"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+                                        android:id="@+id/rb_traffic_1"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="0"
+                                        android:text="1" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_traffic_2"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="1"
+                                        android:text="2" />
+                                    <RadioButton
+                                        android:id="@+id/rb_traffic_3"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="2"
+                                        android:text="3" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_traffic_4"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="3"
+                                        android:text="4" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_traffic_5"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="4"
+                                        android:text="5" />
+                                </RadioGroup>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_address_score"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="위치 점수"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/main_accent_color"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <RadioGroup
+                                    android:id="@+id/rg_address_score"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+                                        android:id="@+id/rb_score_1"
+                                        android:tag="0"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:text="1" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_score_2"
+                                        android:tag="1"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:text="2" />
+                                    <RadioButton
+                                        android:id="@+id/rb_score_3"
+                                        android:tag="2"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:text="3" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_score_4"
+                                        android:tag="3"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:text="4" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_score_5"
+                                        android:tag="4"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:text="5" />
+                                </RadioGroup>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_around_status_score"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="집주변환경점수"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/main_accent_color"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <RadioGroup
+                                    android:id="@+id/rg_around_status_score"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+                                        android:id="@+id/rb_around_status_score_1"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="0"
+                                        android:text="1" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_around_status_score_2"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="1"
+                                        android:text="2" />
+                                    <RadioButton
+                                        android:id="@+id/rb_around_status_score_3"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="2"
+                                        android:text="3" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_around_status_score_4"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="3"
+                                        android:text="4" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_around_status_score_5"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="4"
+                                        android:text="5" />
+                                </RadioGroup>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_around_status"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="집주변환경상태"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/main_accent_color"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/et_around_status"
+                                android:textColorHint="@color/gray9"
+                                android:textSize="15dp"
+                                android:hint="인접환경,주요시설기재"
+                                android:singleLine="true"
+                                android:imeOptions="actionNext"
+                                android:textColor="@android:color/black"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="15dp"
+                                android:gravity="center"
+                                android:text="내부요소 체크항목"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/main_accent_color"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_sunshine_score"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="일조권/조망권 점수"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="#ee3434"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <RadioGroup
+                                    android:id="@+id/rg_sunshine_score"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+                                        android:id="@+id/rb_sunshine_1"
+                                        android:layout_width="45dp"
+                                        android:tag="0"
+                                        android:layout_height="wrap_content"
+                                        android:text="1" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_sunshine_2"
+                                        android:layout_width="45dp"
+                                        android:tag="1"
+                                        android:layout_height="wrap_content"
+                                        android:text="2" />
+                                    <RadioButton
+                                        android:id="@+id/rb_sunshine_3"
+                                        android:tag="2"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:text="3" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_sunshine_4"
+                                        android:layout_width="45dp"
+                                        android:tag="3"
+                                        android:layout_height="wrap_content"
+                                        android:text="4" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_sunshine_5"
+                                        android:layout_width="45dp"
+                                        android:tag="4"
+                                        android:layout_height="wrap_content"
+                                        android:text="5" />
+                                </RadioGroup>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_interior_score"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="인테리어점수"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="#ee3434"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <RadioGroup
+                                    android:id="@+id/rg_interior_score"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+                                        android:id="@+id/rb_interior_1"
+                                        android:layout_width="45dp"
+                                        android:tag="0"
+                                        android:layout_height="wrap_content"
+                                        android:text="1" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_interior_2"
+                                        android:layout_width="45dp"
+                                        android:tag="1"
+                                        android:layout_height="wrap_content"
+                                        android:text="2" />
+                                    <RadioButton
+                                        android:id="@+id/rb_interior_3"
+                                        android:layout_width="45dp"
+                                        android:tag="2"
+                                        android:layout_height="wrap_content"
+                                        android:text="3" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_interior_4"
+                                        android:layout_width="45dp"
+                                        android:tag="3"
+                                        android:layout_height="wrap_content"
+                                        android:text="4" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_interior_5"
+                                        android:layout_width="45dp"
+                                        android:tag="4"
+                                        android:layout_height="wrap_content"
+                                        android:text="5" />
+                                </RadioGroup>
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_roomcnt"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="방 수"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/main_accent_color"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <RadioGroup
+                                    android:id="@+id/rg_roomcnt_score"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+                                        android:id="@+id/rb_roomcnt_1"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="0"
+                                        android:text="1" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_roomcnt_2"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="1"
+                                        android:text="2" />
+                                    <RadioButton
+                                        android:id="@+id/rb_roomcnt_3"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="2"
+                                        android:text="3" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_roomcnt_4"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="3"
+                                        android:text="4" />
+
+                                </RadioGroup>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_bathroomcnt"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="화장실 수"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/main_accent_color"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <RadioGroup
+                                    android:id="@+id/rg_bathroomcnt_score"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+                                        android:id="@+id/rb_bathroomcnt_1"
+                                        android:layout_width="45dp"
+                                        android:tag="0"
+                                        android:layout_height="wrap_content"
+                                        android:text="1" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_bathroomcnt_2"
+                                        android:layout_width="45dp"
+                                        android:tag="1"
+                                        android:layout_height="wrap_content"
+                                        android:text="2" />
+
+                                </RadioGroup>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_facility"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="내부시설동작점수"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/main_accent_color"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <RadioGroup
+                                    android:id="@+id/rg_facility_score"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+                                        android:id="@+id/rb_facility_score_1"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="0"
+                                        android:text="1" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_facility_score_2"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="1"
+                                        android:text="2" />
+                                    <RadioButton
+                                        android:id="@+id/rb_facility_score_3"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="2"
+                                        android:text="3" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_facility_score_4"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="3"
+                                       android:text="4" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_facility_score_5"
+                                        android:layout_width="45dp"
+                                        android:layout_height="wrap_content"
+                                        android:tag="4"
+                                        android:text="5" />
+                                </RadioGroup>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:text="욕실/싱크대 급배수, 보일러, 문, 도어락, 전기, 전등, 환풍기, \n기타 빌트인장치등"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="#3f3f3f"/>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_noise"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="건물구조상위치"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/main_accent_color"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/et_noise"
+                                android:textColorHint="@color/gray9"
+                                android:textSize="15dp"
+                                android:hint="건물상 위치 및 내부구조"
+                                android:singleLine="true"
+                                android:imeOptions="actionNext"
+                                android:textColor="@android:color/black"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="환기구조, 바닥상태, 소음상태문의"
+                                android:layout_marginLeft="7dp"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="#3f3f3f"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="17dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="15dp"
+                                android:gravity="center"
+                                android:text="기타 항목"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/main_accent_color"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_fee"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="관리비"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/main_accent_color"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/et_fee"
+                                android:textColorHint="@color/gray9"
+                                android:textSize="15dp"
+                                android:hint="관리비얼마?"
+                                android:singleLine="true"
+                                android:imeOptions="actionNext"
+                                android:textColor="@android:color/black"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_parking"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="주차장상태"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/main_accent_color"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/et_parking"
+                                android:textColorHint="@color/gray9"
+                                android:textSize="15dp"
+                                android:hint="주차100%? 공간은?"
+                                android:singleLine="true"
+                                android:imeOptions="actionNext"
+                                android:textColor="@android:color/black"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_usage"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:lines="2"
+                                android:text="건물용도\n등본서류상태"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/main_accent_color"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/et_usage"
+                                android:textColorHint="@color/gray9"
+                                android:textSize="15dp"
+                                android:hint="주거용? 근저당? 기타특이사항있나?"
+                                android:singleLine="true"
+                                android:imeOptions="actionNext"
+                                android:textColor="@android:color/black"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:background="@color/main_white_color"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_label_etc"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="기타사항"
+                                android:textSize="13dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/main_accent_color"/>
+
+                            <TextView
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="#f2f2f2"/>
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/et_etc"
+                                android:textColorHint="@color/gray9"
+                                android:textSize="15dp"
+                                android:hint="기타 특징등 기재"
+                                android:singleLine="false"
+                                android:lineSpacingExtra="6dp"
+                                android:minLines="5"
+                                android:gravity="top"
+                                android:imeOptions="actionDone"
+                                android:textColor="@android:color/black"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+            <Button android:id="@+id/btn_delete"
+                android:layout_width="80dp"
+                    android:layout_height="43dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="매물삭제"
+                    android:textColor="#ffffff"/>
+
+        </LinearLayout>
+    </ScrollView>
+    <!-- Mart ICoon Layout -->
+    <!-- Mart Info  http://bit.ly/1NNC9uK -->
+
+    <RelativeLayout
+        android:id="@+id/ll_icon_layout_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent_black_sixty"
+        android:visibility="gone"
+        android:layout_centerInParent="true">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/ll_icon_layout"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            card_view:cardCornerRadius="5dp"
+            card_view:cardUseCompatPadding="false">
+
+            <RelativeLayout
+                android:layout_width="290dp"
+                android:layout_height="match_parent"
+                android:layout_margin="7dp"
+                android:background="@color/main_white_color">
+
+            <TextView
+                android:id="@+id/tv_mart_icon1"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/circular_textview_bg_emart"
+                android:layout_alignParentTop="true"
+                android:text="E"
+                android:textSize="18dp"
+                android:textColor="@color/main_white_color"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/tv_mart_text1"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/tv_mart_icon1"
+                android:gravity="center_vertical"
+                android:text="이마트"
+                android:textSize="18dp"
+                android:textColor="@color/transparent_black_eighty"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_mart_icon2"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_below="@+id/tv_mart_icon1"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/circular_textview_bg_hom"
+                android:text="H"
+                android:textSize="18dp"
+                android:textColor="@color/main_white_color"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/tv_mart_text2"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@id/tv_mart_text1"
+                android:layout_toRightOf="@+id/tv_mart_icon2"
+                android:gravity="center_vertical"
+                android:text="홈플러스"
+                android:textSize="18dp"
+                android:textColor="@color/transparent_black_eighty"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_mart_icon3"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_below="@+id/tv_mart_icon2"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/circular_textview_bg_lotte"
+                android:text="L"
+                android:textSize="18dp"
+                android:textColor="@color/main_white_color"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/tv_mart_text3"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@id/tv_mart_text2"
+                android:layout_toRightOf="@+id/tv_mart_icon3"
+                android:gravity="center_vertical"
+                android:text="롯데마트"
+                android:textSize="18dp"
+                android:textColor="@color/transparent_black_eighty"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_mart_icon4"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_below="@+id/tv_mart_icon3"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/circular_textview_bg_gs"
+                android:text="GS"
+                android:textSize="18dp"
+                android:textColor="@color/main_white_color"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/tv_mart_text4"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@id/tv_mart_text3"
+                android:layout_toRightOf="@+id/tv_mart_icon4"
+                android:gravity="center_vertical"
+                android:text="GS수퍼마켓"
+                android:textSize="18dp"
+                android:textColor="@color/transparent_black_eighty"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_mart_icon5"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_below="@+id/tv_mart_icon4"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/circular_textview_bg_red_costco"
+                android:text="C"
+                android:textSize="18dp"
+                android:textColor="@color/main_white_color"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/tv_mart_text5"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@id/tv_mart_text4"
+                android:layout_toRightOf="@+id/tv_mart_icon5"
+                android:gravity="center_vertical"
+                android:text="COSTCO"
+                android:textSize="18dp"
+                android:textColor="@color/transparent_black_eighty"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_mart_icon6"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_below="@+id/tv_mart_icon5"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/circular_textview_bg_normal"
+                android:text="M"
+                android:textSize="18dp"
+                android:textColor="@color/main_white_color"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/tv_mart_text6"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@id/tv_mart_text5"
+                android:layout_toRightOf="@+id/tv_mart_icon6"
+                android:gravity="center_vertical"
+                android:text="일반마트"
+                android:textSize="18dp"
+                android:textColor="@color/transparent_black_eighty"
+                android:textStyle="bold"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
+
+    </RelativeLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- START xml_defaults -->
+<defaultsMap>
+    <entry>
+        <key>holiday_notice_all_show</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>holiday_notice_emart_show</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>holiday_notice_homeplus_show</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>holiday_notice_lottemart_show</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>holiday_notice_costco_show</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>holiday_notice_desc</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>holiday_notice_desc_2</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>holiday_notice_emart_link</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>holiday_notice_lottemart_link</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>holiday_notice_homeplus_link</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>holiday_notice_costco_link</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>holiday_alert_message</key>
+        <value>등록한 마트의 휴무일 %d일 전입니다. 지금 바로 확인하세요.</value>
+    </entry>
+</defaultsMap>
+    <!-- END xml_defaults -->

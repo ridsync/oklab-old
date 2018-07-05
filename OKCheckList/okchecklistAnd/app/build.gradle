@@ -1,0 +1,255 @@
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+
+apply plugin: 'android'
+apply plugin: 'android-apt'
+def AAVersion = '3.3.2'
+
+def getDateTime(Date date) {
+    DateFormat df = new SimpleDateFormat("YYYYMMddHHmm");
+    return df.format(date);
+}
+
+def mVersionCode = 82
+def mVersionName = '0.0.82'
+def String fileName;
+
+/**
+ * Check Version On QA , Release
+ */
+def runTasks = gradle.startParameter.taskNames
+if ('installRelease' in runTasks) {
+
+    String[] versionNames = mVersionName.split("\\.")
+
+    println ':oka:Gradle Version Setting Checking...'
+    println ':oka:appmVersionCode = ' + mVersionCode.toString()
+    println ':oka:appmVersionName = ' + versionNames[2]
+
+    if (!versionNames[2].equalsIgnoreCase(mVersionCode.toString())) {
+        throw new GradleException('[Warning] versionCode is different versionName !( Current BuildType : Release )')
+    }
+    println ':oka:Gradle Version Value CheckSum Finished !!'
+}
+
+/**
+ * File Copy to Server
+ */
+//task copyToPublishFolder(type: Copy) {
+//    description = "Copies APKs and Proguard mappings to the deploy directory"
+//    def targetFileName = "MyApp-debug-" + android.defaultConfig.versionCode + ".apk"
+//    println 'copyToPublishFolder execute!fileName = ' + fileName
+//    from 'build/outputs/apk/Comet-qa_0.0.78_QA_201512101744.apk'
+//    into 'build/outputs'
+//}
+//assembleQa.finalizedBy('copyToPublishFolder')
+//assembleQa.doLast {
+//    copyToPublishFolder
+//}
+
+//def publish = project.tasks.create("publishAll")
+//android.applicationVariants.all { variant ->
+//
+//    if (variant.buildType.name.equals("debug") ){
+//        return;
+//    }
+//
+//    def task = project.tasks.create("publish${variant.name}Apk", Copy)
+//    task.from(variant.outputs.outputFile)
+//    task.into(buildDir)
+//
+//    task.dependsOn variant.assemble
+//    publish.dependsOn task
+//}
+
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        // replace with the current version of the Android plugin
+        classpath 'com.android.tools.build:gradle:2.2.0'
+        // the latest version of the android-apt plugin
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+    }
+}
+
+apt {
+    arguments {
+//        androidManifestFile variant.processResources.manifestFile
+        androidManifestFile variant.outputs[0].processResources.manifestFile
+        resourcePackageName 'com.okitoki.checklist'
+    }
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '23.0.1'
+
+//    dataBinding {
+//        enabled = true
+//    }
+
+    defaultConfig {
+        archivesBaseName = "checklist"
+        applicationId 'com.okitoki.checklist'
+        minSdkVersion 16
+        targetSdkVersion 22
+        versionCode 12
+        versionName '1.7.1'
+
+        multiDexEnabled true
+
+    }
+    signingConfigs {
+        release {
+            storeFile file('okcart_keystore.jks')
+            storePassword 'ok4012'
+            keyAlias 'okcart'
+            keyPassword 'ok4012'
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            debuggable false
+            zipAlignEnabled true
+//            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            debuggable true
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            if (variant.buildType.name.equals("release")) {
+                fileName = "_" + defaultConfig.versionName + "_" + variant.buildType.name + "_" + getDateTime(new Date()) + ".apk"
+            } else if (variant.buildType.name.equals("qa")) {
+                fileName = "_" + defaultConfig.versionName + "_QA_" + getDateTime(new Date()) + ".apk"
+            } else {
+                fileName = "_" + defaultConfig.versionName + "_" + variant.buildType.name + ".apk"
+            }
+
+            output.outputFile = new File(output.outputFile.parent, output.outputFile.name.replace(".apk", fileName))
+        }
+    }
+//    productFlavors {
+//        dev {
+//            minSdkVersion 16
+//        }
+//        prod {
+//            minSdkVersion 16
+//        }
+//    }
+    lintOptions {
+        checkReleaseBuilds true
+        abortOnError false
+        disable 'InvalidPackage'
+    }
+    dexOptions {
+//        incremental true
+        javaMaxHeapSize "2g"
+    }
+
+//    useLibrary 'org.apache.http.legacy'
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor' // butterknife
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url "https://jitpack.io" }
+    jcenter()
+    flatDir {
+        dirs 'libs' //이렇게 해야 libs 폴더에서 aar 파일을 찾을 수 있다
+    }
+}
+
+dependencies {
+
+    //    compile 'com.naver.maps.open:naver-map-api:2.1.2@aar'
+
+    //    compile files('libs/libDaumMapAndroid.jar')
+    compile project(':library')
+    compile project(':fabmenulibrary')
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:multidex:1.0.0'
+    compile 'com.android.support:design:23.3.0'
+    compile 'com.android.support:support-v13:23.3.0'
+    compile 'com.android.support:cardview-v7:23.3.0'
+    compile 'com.android.support:recyclerview-v7:23.3.0'
+    compile 'com.android.support:palette-v7:23.3.0'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    //    compile 'com.google.android.gms:play-services-maps:9.0.2'
+    compile 'com.firebaseui:firebase-ui-database:0.6.0'
+    compile 'com.google.firebase:firebase-core:9.6.1'
+    compile 'com.google.firebase:firebase-auth:9.6.1'
+    compile 'com.google.firebase:firebase-database:9.6.1'
+    compile 'com.google.firebase:firebase-messaging:9.6.1'
+    compile 'com.google.firebase:firebase-config:9.6.1'
+    //    compile 'com.daimajia.androidanimations:library:1.0.6@aar'
+
+    // Dependency Injections
+    compile 'com.jakewharton:butterknife:7.0.1'
+    apt "org.androidannotations:androidannotations:$AAVersion"
+    compile "org.androidannotations:androidannotations-api:$AAVersion"
+    compile 'com.j256.ormlite:ormlite-android:4.48'
+    compile 'com.squareup:otto:1.3.8'
+    compile 'de.greenrobot:eventbus:3.0.0-beta1'
+    provided 'de.greenrobot:eventbus-annotation-processor:3.0.0-beta1'
+    compile 'jp.wasabeef:recyclerview-animators:1.3.0'
+    compile 'com.github.traex.rippleeffect:library:1.3'
+    compile 'com.balysv:material-ripple:1.0.2'
+    compile 'com.github.rey5137:material:1.2.2'
+    // Material Widgets Livrary
+    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
+    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
+    compile('com.squareup.retrofit:converter-simplexml:2.0.0-beta2') {
+        exclude group: 'stax', module: 'stax-api'//important
+        exclude group: 'stax', module: 'stax'//important
+        exclude group: 'xpp3', module: 'xpp3'//important
+    }
+    compile 'com.squareup.okhttp:okhttp:2.7.0'
+    compile 'com.squareup.okhttp:logging-interceptor:2.6.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.github.clans:fab:1.6.2'
+    compile 'com.wang.avi:library:1.0.3'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.prolificinteractive:material-calendarview:1.4.0'
+    //    compile (name:'fabmenu', ext:'aar') // aar 사용
+
+    //    compile (name:'fab', ext:'aar') // aar 사용
+
+    //    compile 'com.getbase.floatingactionbutton:fab:1.0@aar' // aar 사용 위 지정과 동일
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:1.10.19'
+    testCompile 'org.hamcrest:hamcrest-library:1.3'
+    //    compile('com.github.worker8:tourguide:1.0.16-SNAPSHOT@aar') {
+    compile project(':tourguide')
+    //        transitive = true;
+
+    //    }
+    compile 'org.projectlombok:lombok:1.16.8'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile 'de.psdev.licensesdialog:licensesdialog:1.8.0'
+    compile 'org.jsoup:jsoup:1.9.1'
+
+    compile 'com.commit451:PhotoView:1.2.4'
+}
+
+// Extract signing info into a properties file
+//def props = new Properties()
+//props.load(new FileInputStream(project.file("signing.properties")))
+
+//android.signingConfigs.release.storeFile project.file(props.keyStore)
+//android.signingConfigs.release.storePassword props.keyStorePassword
+//android.signingConfigs.release.keyAlias props.keyAlias
+//android.signingConfigs.release.keyPassword props.keyAliasPassword

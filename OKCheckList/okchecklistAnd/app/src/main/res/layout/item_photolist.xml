@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:clipChildren="false"
+    android:layout_width="45dp"
+    android:layout_height="45dp">
+
+    <RelativeLayout
+        android:id="@+id/RL_USERLIST_ITEM_BOX"
+        android:clipChildren="false"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/IV_USERLIST_PROFILE_IMAGE"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

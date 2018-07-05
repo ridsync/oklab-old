@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">OKChecklist</string>
+    <string name="drawer_open">Menu opened</string>
+    <string name="drawer_close">Menu closed</string>
+    <string name="send_to">Send To</string>
+    <string name="fab_fav_add">Templete Add</string>
+    <string name="fab_nomral_add">Card Add</string>
+    <string name="fab_back">Cancel</string>
+    <string name="facebook_app_id"  translatable="false" >540512962801137</string>
+
+    <!-- tablayout  -->
+    <string name="tab_txt_popular">체크리스트</string>
+    <string name="tab_txt_recent">최저가검색</string>
+    <string name="tab_txt_near">마트 휴무일</string>
+
+    <!-- admob unit ids -->
+    <string name="banner_ad_unit_id1" translatable="false">ca-app-pub-2838345650473010/5824005081</string>
+    <string name="banner_ad_unit_id2" translatable="false">ca-app-pub-2838345650473010/8777471484</string>
+    <string name="banner_ad_unit_id3" translatable="false">ca-app-pub-2838345650473010/9416599884</string>
+    <string name="banner_ad_unit_id4" translatable="false" >ca-app-pub-2838345650473010/8134683082</string>
+    <string name="banner_ad_unit_id5" translatable="false" >ca-app-pub-2838345650473010/2360220689</string>
+    <string name="full_ad_unit_id1" translatable="false" >ca-app-pub-2838345650473010/4442716287</string>
+    <string name="full_ad_unit_id2" translatable="false" >ca-app-pub-2838345650473010/7895710286</string>
+    <string name="full_ad_unit_id3" translatable="false" >ca-app-pub-2838345650473010/9232842686</string>
+    <string name="full_ad_unit_id4" translatable="false" >ca-app-pub-2838345650473010/1709575889</string>
+    <string name="full_ad_unit_id5" translatable="false" >ca-app-pub-2838345650473010/3088577485</string>
+    <string name="native_ad_unit_id2" translatable="false" >ca-app-pub-2838345650473010/9930846684</string>
+    <string name="native_ad_unit_id3" translatable="false" >ca-app-pub-2838345650473010/1302289889</string>
+
+    <!-- Navigation Drawer -->
+    <string name="nav_menu_name_1">Main</string>
+    <string name="nav_menu_name_2">Cart Add </string>
+    <string name="nav_menu_name_3">Market Search</string>
+    <string name="nav_menu_name_4">Mart DC Infos</string>
+    <string name="nav_menu_name_5">Setting</string>
+    <string name="detail_btn_purchase_comepleted">Purchase Successful</string>
+    <string name="fav_mart_open">Open</string>
+    <string name="fav_mart_closed">Closed</string>
+
+    <!-- Menu -->
+    <string name="menu_mode_delete">DELETE</string>
+    <string name="menu_align">ARRANGE</string>
+    <string name="menu_mode_modify">EDIT</string>
+    <string name="menu_mode_add">ADD</string>
+
+    <string name="transition_title">com.stylingandroid.materialrss.transition.TITLE</string>
+    <string name="transition_date">com.stylingandroid.materialrss.transition.DATE</string>
+    <string name="transition_body">com.stylingandroid.materialrss.transition.BODY</string>
+    <string name="transition_star">com.stylingandroid.materialrss.transition.STAR</string>
+
+    <string name="menu_mode_detaillist">CheckList</string>
+    <string name="menu_mode_favadd">QuickAdd</string>
+    <string name="menu_mode_deselect">Uncheck</string>
+    <string name="menu_mode_save">Save</string>
+    <string name="app_main_title">OKCart</string>
+    <string name="cart_add_title_default_txt">Mart Shopping</string>
+    <string name="cart_add_title_hint">Title</string>
+    <string name="detail_purchase_ask_comepleted">Do you want to buy complete?</string>
+    <string name="detail_purchase_comepleted">All items have completed a purchase.</string>
+    <string name="cart_add_item_name_hint">Item Name</string>
+    <string name="btn_confirm">OK</string>
+    <string name="txt_cart_empty">No Registed Cart Data.</string>
+    <string name="txt_cart_item_empty">No Registed Cart Item Datas.</string>
+    <string name="txt_fav_mart_empty">No Registed Mart Item Datas.</string>
+    <string name="menu_mode_product_search">Search Product Info</string>
+    <string name="menu_mode_mart_search">Search Near MArt</string>
+    <string name="dialog_msg_modify_cancel">The information is being modified will be deleted. \n Would you like to go back?</string>
+    <string name="input_search_empty">Please enter a query.</string>
+    <string name="network_error">Netowrk Error Occrued. Retry Please.</string>
+    <string name="hint_query">your query here.</string>
+    <string name="txt_search_empty">No Data</string>
+    <string name="menu_close">Close.</string>
+    <string name="nav_menu_name_6">[$1] Product Details</string>
+    <string name="alert_title">Alert</string>
+    <string name="dialog_msg_delete_cartinfo">This information will be deleted. \n Would you like to go back?</string>
+    <string name="dialog_msg_ask_update_app_version">This new version has been updated.\n Now go directly to the Play Store.</string>
+    <string name="btn_later">Later</string>
+    <string name="btn_move">OK</string>
+    <string name="alert_title_ver">New Version</string>
+    <string name="menu_mode_region_select">Select Mart Region</string>
+    <string name="btn_perm_request_setting">Setting</string>
+    <string name="fav_mart_open_2">Open</string>
+
+</resources>

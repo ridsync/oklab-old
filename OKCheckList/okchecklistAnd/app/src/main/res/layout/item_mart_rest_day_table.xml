@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="0dp"
+android:layout_weight="1"
+android:layout_height="wrap_content"
+android:id="@+id/item_calendar_bg"
+android:orientation="vertical">
+
+<TextView
+    android:id="@+id/item_calendar_row_date"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:gravity="center"
+    android:textColor="@color/mart_rest_text_gray_6"
+    android:text=""
+    android:textSize="14sp" />
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="#e8e8e8"/>
+<TextView
+    android:id="@+id/item_calendar_row_status"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:gravity="center"
+    android:text=""
+    android:textSize="12sp"
+    android:textColor="@color/mart_rest_text_gray_7"/>
+</LinearLayout>

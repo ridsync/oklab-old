@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="OKCartTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/main_primary_color</item>
+        <item name="colorPrimaryDark">@color/main_primary_dark_color</item>
+        <item name="colorAccent">@color/main_accent_color</item>
+        <item name="actionBarStyle">@style/ActionBar.Dark</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:textColorPrimary">@color/gray14</item>
+        <item name="android:textColorSecondary">@color/gray14</item>
+        <item name="android:dialogTheme">@style/DialogTheme</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+        <!--<item name="android:windowTranslucentNavigation">true</item>-->
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/change_text_trans</item>
+        <item name="android:windowSharedElementExitTransition">@transition/change_text_trans</item>
+        <item name="android:actionMenuTextAppearance">@style/TextAppearance.Holo.Widget.ActionBar.Menu</item>
+    </style>
+
+    <style name="SpinnerTheme" parent="Widget.AppCompat.Spinner">
+        <item name="colorAccent">@color/main_accent_color</item>
+    </style>
+
+</resources>

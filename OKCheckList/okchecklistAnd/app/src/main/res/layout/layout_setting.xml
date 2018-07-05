@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/main_bg_color"
+                android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/RL_SETTING_MAIN"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_actionbar">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    style="@style/RaisedEffectMainBg"
+                    android:id="@+id/RL_SETTING_VERSION"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/setting_menu_item_version_height"
+                    android:layout_marginTop="6dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true">
+
+                        <TextView
+                            android:id="@+id/TV_SETTING_VERSION_LABEL"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_color_black"
+                            android:text="버젼정보"
+                            android:textSize="@dimen/setting_menu_title_text_size"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="39dp"
+                            android:layout_centerVertical="true"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true">
+
+                        <TextView
+                                android:id="@+id/TV_CURRENT_VERSION"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginLeft="10dp"
+                                android:text="현재 버젼 : V"
+                                android:textColor="@color/text_color_gray_59"
+                                android:textSize="13sp"/>
+
+                            <TextView
+                                android:id="@+id/TV_NEW_VERSION"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginLeft="10dp"
+                                android:text="최신 버젼 : V"
+                                android:textColor="@color/text_color_gray_59"
+                                android:textSize="13sp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/BTN_SETTING_VER_UPDATE"
+                        android:layout_width="60dp"
+                        android:layout_height="33dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/selector_button_main_color_bg_rounded_3dp_corners"
+                        android:text="업데이트"
+                        android:textColor="@color/text_color_white"
+                        android:textSize="13sp"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/all_horizontal_line"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    style="@style/RaisedEffectMainBg"
+                    android:id="@+id/RL_SETTING_MAIN_DEFAULT"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/TV_SETTING_MAIN_DEFAULT_LABEL"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:textColor="@color/text_color_black"
+                                android:text="메인화면 설정"
+                                android:textSize="@dimen/setting_menu_title_text_size"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="6dp"
+                                android:text="앱 실행시 기본화면을 선택합니다."
+                                android:textColor="@color/text_color_gray_59"
+                                android:textSize="12sp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="52dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/BTN_SETTING_MAIN_CART_LISTVIEW"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="30dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="16dp"
+                                android:background="@drawable/selector_button_main_color_bg_rounded_3dp_corners"
+                                android:text="카트리스트"
+                                android:textColor="@color/text_color_white"
+                                android:textSize="13sp"/>
+
+                            <Button
+                                android:id="@+id/BTN_SETTING_MAIN_MART_HOLIDAY"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="30dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="16dp"
+                                android:background="@drawable/selector_button_main_color_bg_rounded_3dp_corners"
+                                android:text="마트휴무일"
+                                android:textColor="@color/text_color_white"
+                                android:textSize="13sp"/>
+
+                            <Button
+                                android:id="@+id/BTN_SETTING_MAIN_SEARCH"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="30dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="16dp"
+                                android:background="@drawable/selector_button_main_color_bg_rounded_3dp_corners"
+                                android:text="최저가검색"
+                                android:textColor="@color/text_color_white"
+                                android:textSize="13sp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/all_horizontal_line"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    style="@style/RaisedEffectMainBg"
+                    android:id="@+id/RL_SETTING_PUSH_ALERT"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/RL_SETTING_PUSH_ALERT_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/setting_menu_item_height"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:layout_alignParentTop="true" >
+
+                        <TextView
+                            android:id="@+id/TV_SETTING_PUSH_ALERT_LABEL"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:textColor="@color/text_color_black"
+                            android:text="휴무일 알림"
+                            android:textSize="@dimen/setting_menu_title_text_size"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="16dp"
+                            android:layout_centerVertical="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_alert_desc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:lineSpacingExtra="3dp"
+                                android:text="즐겨찾기한 마트의 휴무일을\n푸시알림으로 미리 알려드립니다."
+                                android:textColor="@color/text_color_gray_59"
+                                android:textSize="12sp"/>
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content" />
+                            <android.support.v7.widget.SwitchCompat
+                                android:id="@+id/SWC_SETTING_NOTIFY_TOGGLE"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="true"
+                                android:layout_marginRight="16dp"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/RL_SETTING_PUSH_ALERT_group2"
+                        android:layout_below="@id/RL_SETTING_PUSH_ALERT_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <Button
+                            android:id="@+id/BTN_SETTING_PUSH_ALERT_7_DAY"
+                            android:layout_width="55dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="12dp"
+                            android:background="@drawable/selector_button_main_color_bg_rounded_3dp_corners"
+                            android:text="6일전"
+                            android:textColor="@color/text_color_white"
+                            android:textSize="13sp"/>
+
+                        <Button
+                            android:id="@+id/BTN_SETTING_PUSH_ALERT_3_DAY"
+                            android:layout_width="55dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="12dp"
+                            android:background="@drawable/selector_button_main_color_bg_rounded_3dp_corners"
+                            android:text="3일전"
+                            android:textColor="@color/text_color_white"
+                            android:textSize="13sp"/>
+
+                        <Button
+                            android:id="@+id/BTN_SETTING_PUSH_ALERT_1_DAY"
+                            android:layout_width="55dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="12dp"
+                            android:background="@drawable/selector_button_main_color_bg_rounded_3dp_corners"
+                            android:text="1일전"
+                            android:textColor="@color/text_color_white"
+                            android:textSize="13sp"/>
+
+
+                        <Button
+                            android:id="@+id/BTN_SETTING_PUSH_ALERT_TIME"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="16dp"
+                            android:background="@drawable/selector_button_main_color_bg_rounded_3dp_corners"
+                            android:text="알림시각    00 : 00 "
+                            android:textColor="@color/text_color_white"
+                            android:textSize="13sp"/>
+
+                        </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/LL_SETTING_PUSH_ALERT_SAVE"
+                        android:layout_below="@id/RL_SETTING_PUSH_ALERT_group2"
+                        android:layout_width="match_parent"
+                        android:layout_height="65dp"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center">
+
+                        <Button
+                            android:id="@+id/BTN_SETTING_PUSH_ALERT_SAVE"
+                            android:layout_width="80dp"
+                            android:layout_height="34dp"
+                            android:background="@drawable/selector_button_save_btn_color_bg_rounded_3dp_corners"
+                            android:text="저장하기"
+                            android:textColor="@color/text_color_white"
+                            android:textSize="14sp"/>
+
+                        </LinearLayout>
+
+                    <ImageView
+                        android:layout_below="@id/LL_SETTING_PUSH_ALERT_SAVE"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="11dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/all_horizontal_line"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    style="@style/RaisedEffectMainBg"
+                    android:id="@+id/RL_SETTING_BACKUP"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/setting_menu_item_height"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="16dp"
+                        android:text="데이터 백업하기"
+                        android:textColor="@color/transparent_black_eighty"
+                        android:textSize="@dimen/setting_menu_title_text_size"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/arrow_left"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/all_horizontal_line"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    style="@style/RaisedEffectMainBg"
+                    android:id="@+id/RL_SETTING_OPEN_LICENSE"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/setting_menu_item_height">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="16dp"
+                        android:gravity="center_vertical"
+                        android:text="오픈 라이센스"
+                        android:textColor="@color/transparent_black_eighty"
+                        android:textSize="@dimen/setting_menu_title_text_size"/>
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/arrow_left"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/all_horizontal_line"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    style="@style/RaisedEffectMainBg"
+                    android:id="@+id/RL_SETTING_SEND_EMAIL"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/setting_menu_item_height">
+
+                    <TextView
+                        android:id="@+id/TV_SETTING_OPENLICENSE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="16dp"
+                        android:text="문의 메일 보내기"
+                        android:textColor="@color/transparent_black_eighty"
+                        android:textSize="@dimen/setting_menu_title_text_size"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/arrow_left"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/all_horizontal_line"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    style="@style/RaisedEffectMainBg"
+                    android:id="@+id/RL_SETTING_RATE"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/setting_menu_item_height">
+
+                    <TextView
+                        android:id="@+id/TV_SETTING_RATE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="16dp"
+                        android:gravity="center_vertical"
+                        android:text="앱 평가하기"
+                        android:textColor="@color/transparent_black_eighty"
+                        android:textSize="@dimen/setting_menu_title_text_size"/>
+
+                    <ImageView
+                        android:id="@+id/start_1"
+                        android:layout_toRightOf="@id/TV_SETTING_RATE"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="17dp"
+                        android:src="@drawable/ic_favorites_on"
+                        android:scaleType="fitCenter"/>
+
+                    <ImageView
+                        android:id="@+id/start_2"
+                        android:layout_toRightOf="@id/start_1"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="7dp"
+                        android:src="@drawable/ic_favorites_on"
+                        android:scaleType="fitCenter"/>
+
+                    <ImageView
+                        android:id="@+id/start_3"
+                        android:layout_toRightOf="@id/start_2"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="7dp"
+                        android:src="@drawable/ic_favorites_on"
+                        android:scaleType="fitCenter"/>
+
+                    <ImageView
+                        android:id="@+id/start_4"
+                        android:layout_toRightOf="@id/start_3"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="7dp"
+                        android:src="@drawable/ic_favorites_on"
+                        android:scaleType="fitCenter"/>
+
+                    <ImageView
+                        android:id="@+id/start_5"
+                        android:layout_toRightOf="@id/start_4"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="7dp"
+                        android:src="@drawable/ic_favorites_on"
+                        android:scaleType="fitCenter"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/all_horizontal_line"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    style="@style/RaisedEffectMainBg"
+                    android:id="@+id/RL_SETTING_DONATE_PURCHASE"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/setting_menu_item_height"
+                    android:visibility="invisible">
+
+                    <TextView
+                        android:id="@+id/TV_SETTING_PRIVACY"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="16dp"
+                        android:gravity="center_vertical"
+                        android:text="기부하기 (2000)"
+                        android:textColor="@color/transparent_black_eighty"
+                        android:textSize="@dimen/setting_menu_title_text_size"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="16dp"
+                        android:gravity="center_vertical"
+                        android:text="개발자에겐 작은 힘이됩니다 ^^; "
+                        android:textColor="@color/transparent_black_eighty"
+                        android:textSize="12sp"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/all_horizontal_line"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/RL_SETTING_GROUP_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:gravity="left"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginBottom="3dp"
+                        android:textColor="@color/main_accent_color"
+                        android:textSize="12sp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    style="@style/RaisedEffectMainBg"
+                    android:id="@+id/RL_SETTING_LOGOUT"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/setting_menu_item_height"
+                    android:gravity="center_vertical"
+                    android:visibility="invisible">
+
+                    <TextView
+                        android:id="@+id/TV_SETTING_LOGOUT"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:gravity="center_vertical"
+                        android:text="로그아웃"
+                        android:textColor="@color/transparent_black_eighty"
+                        android:textSize="@dimen/setting_menu_title_text_size"/>
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <RelativeLayout
+                    android:id="@+id/RL_SETTING_DELETE_ACCOUNT"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:layout_height="68dp">
+
+                    <TextView
+                        android:id="@+id/TvDeleteAccount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text=""
+                        android:textColor="@color/transparent_black_thirty"
+                        android:textSize="12sp"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+    <include
+    android:id="@+id/toolbar_actionbar"
+    layout="@layout/toolbar_default"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"/>
+
+    <ImageView
+        android:id="@+id/IV_ACTIONBAR_SHADOW"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_actionbar"
+        android:background="@drawable/shadow_top_25"/>
+</RelativeLayout>

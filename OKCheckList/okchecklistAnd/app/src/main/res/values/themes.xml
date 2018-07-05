@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. -->
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+        <!--<item name="colorPrimary">@color/quick_return_primary</item>-->
+        <!--<item name="colorPrimaryDark">@color/quick_return_primary_dark</item>-->
+        <!--<item name="colorAccent">@color/quick_return_accent</item>-->
+        <!--<item name="actionBarStyle">@style/ActionBar.Dark</item>-->
+        <!--<item name="android:windowBackground">@android:color/white</item>-->
+        <!--<item name="android:textColorPrimary">@color/gray14</item>-->
+        <!--<item name="android:textColorSecondary">@color/gray14</item>-->
+        <!--<item name="android:dialogTheme">@style/DialogTheme</item>-->
+        <!--<item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>-->
+    <!--</style>-->
+
+    <style name="OKCartTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/main_primary_color</item>
+        <item name="colorPrimaryDark">@color/main_primary_dark_color</item>
+        <item name="colorAccent">@color/main_accent_color</item>
+        <item name="actionBarStyle">@style/ActionBar.Dark</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:textColorPrimary">@color/gray14</item>
+        <item name="android:textColorSecondary">@color/gray14</item>
+        <item name="android:dialogTheme">@style/DialogTheme</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="android:actionMenuTextAppearance">@style/TextAppearance.Holo.Widget.ActionBar.Menu</item>
+    </style>
+
+    <style name="IntroTheme" parent="OKCartTheme">
+        <item name="android:windowBackground">@color/intro_bg_color</item>
+    </style>
+
+</resources>

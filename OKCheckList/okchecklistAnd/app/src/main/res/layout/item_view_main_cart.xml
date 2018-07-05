@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_citem_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:orientation="vertical"
+        card_view:cardCornerRadius="5dp"
+        card_view:cardElevation="2.5dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardBackgroundColor="@color/main_white_color">
+        <!-- style="@style/CardView" 카드뷰에 스타일 적용하여 Ripple 효과 by V21 Style Res -->
+
+
+        <RelativeLayout
+            android:id="@+id/rl_item_layout"
+            android:layout_width="match_parent"
+            android:background="@drawable/ripple_layout"
+            android:layout_height="120dp">
+
+                <!--<com.okitoki.okcart.ui.widget.RoundedImageView-->
+                <!--android:id="@+id/iv_mart_icon"-->
+                <!--android:layout_width="52dp"-->
+                <!--android:layout_height="52dp"-->
+                <!--android:layout_marginTop="20dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:src="@drawable/mikey"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:gravity="center"/>-->
+
+                <LinearLayout
+                    android:id="@+id/ll_item_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/iv_mart_icon"
+                        android:transitionName="@string/transition_body"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="5dp"
+                        android:textSize="23dp"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color_white"
+                        android:background="@drawable/circular_textview_bg_normal"
+                        android:gravity="center" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_toRightOf="@id/iv_mart_icon"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_item_title"
+                            android:transitionName="@string/transition_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="리첸시아"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:textColor="@android:color/black"
+                            android:textSize="19dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_item_location"
+                            android:transitionName="@string/transition_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="1001동 1201호"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:textColor="#5f5f5f"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_item_address"
+                            android:transitionName="@string/transition_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="주소:경기도 부천시 원미동"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:textColor="#5f5f5f"
+                            android:textSize="11dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_item_price"
+                            android:transitionName="@string/transition_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="2억 3천"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:textColor="#5f5f5f"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/tv_item_date"
+                            android:transitionName="@string/transition_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:text="2017.11.12"
+                            android:textColor="@color/text_color_gray_59"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_share"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_share_black_24dp" />
+
+            <TextView
+                android:id="@+id/tv_item_total_score"
+                android:transitionName="@string/transition_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="14dp"
+                android:layout_marginTop="12dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="TOTAL : 15"
+                android:textColor="@color/main_accent_color"
+                android:textStyle="bold"
+                android:textSize="17sp" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <!-- Material Ripple -->
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="?android:attr/selectableItemBackground" />-->
+</FrameLayout>

@@ -1,0 +1,6 @@
+framework module Pods_OKHouseCheck {
+  umbrella header "Pods-OKHouseCheck-umbrella.h"
+
+  export *
+  module * { export * }
+}

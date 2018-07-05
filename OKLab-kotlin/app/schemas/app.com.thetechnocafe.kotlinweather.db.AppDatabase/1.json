@@ -1,0 +1,116 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "6bd1ad5e643f6248229a8ca4a6faf5f3",
+    "entities": [
+      {
+        "tableName": "VisitorInfo",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`user_home_addr1` TEXT, `uid` INTEGER PRIMARY KEY AUTOINCREMENT, `user_id` INTEGER, `user_login_id` TEXT, `user_photo` TEXT, `user_gender` INTEGER, `reg_date` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "user_home_addr1",
+            "columnName": "user_home_addr1",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "uid",
+            "columnName": "uid",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "user_id",
+            "columnName": "user_id",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "user_login_id",
+            "columnName": "user_login_id",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "user_photo",
+            "columnName": "user_photo",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "user_gender",
+            "columnName": "user_gender",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "reg_date",
+            "columnName": "reg_date",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "uid"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "TimelineInfo",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT, `user_id` INTEGER, `user_login_id` TEXT, `user_photo` TEXT, `news_type_id` INTEGER, `user_gender` INTEGER, `reg_date` INTEGER, `desc` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "uid",
+            "columnName": "uid",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "user_id",
+            "columnName": "user_id",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "user_login_id",
+            "columnName": "user_login_id",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "user_photo",
+            "columnName": "user_photo",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "news_type_id",
+            "columnName": "news_type_id",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "user_gender",
+            "columnName": "user_gender",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "reg_date",
+            "columnName": "reg_date",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "desc",
+            "columnName": "desc",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "uid"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"6bd1ad5e643f6248229a8ca4a6faf5f3\")"
+    ]
+  }
+}
